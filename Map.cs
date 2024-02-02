@@ -16,6 +16,9 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static char[,] map;
 
+        public static string breaker = "------------------------";
+
+        public static string healthStatus;
 
         public static int[] up = {-1, 0};
         public static int[] left = {0, -1};
@@ -42,6 +45,8 @@ namespace FirstPlayable_CalebWolthers_22012024
             MakeMap();
 
             map[Player.playerPosX, Player.playerPosY] = Player.gameChar;
+
+            map[Enemy.enemyPosX, Enemy.enemyPosY] = Enemy.enemyChar;
 
             DisplayMap();
         }
@@ -124,6 +129,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Console.CursorVisible = !true;
 
+            ShowHUD();
         }
 
 
@@ -163,6 +169,54 @@ namespace FirstPlayable_CalebWolthers_22012024
             }
 
             Console.Write(map[currentRow, currentCol]);
+        }
+
+        static void ShowHUD()
+        {
+            if (Player.health >= 100)
+            { healthStatus = "Perfect Health"; }
+
+            else if (Player.health < 99 && Player.health >= 90)
+            { healthStatus = "Healthy"; }
+
+            else if (Player.health < 89 && Player.health >= 75)
+            { healthStatus = "Hurt"; }
+
+            else if (Player.health < 74 && Player.health >= 50)
+            { healthStatus = "Badly Hurt"; }
+
+            else if (Player.health < 49 && Player.health >= 20)
+            { healthStatus = "Danger"; }
+
+            else if (Player.health < 19 && Player.health > 0)
+            { healthStatus = "ALMOST DEAD"; }
+
+            else { healthStatus = "Dead"; }
+
+
+            Console.SetCursorPosition(0, height + 2);
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.SetCursorPosition(0, height + 2
+                );
+
+
+
+            Console.WriteLine("");
+            Console.WriteLine(breaker);
+            Console.WriteLine("Health: " + Player.health);
+            Console.WriteLine("Health Status: " + healthStatus);
+            Console.WriteLine(breaker);
+            Console.WriteLine("");
+
+            Console.CursorVisible = !true;
         }
 
 
