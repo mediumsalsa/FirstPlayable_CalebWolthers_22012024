@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,8 +15,8 @@ namespace FirstPlayable_CalebWolthers_22012024
         public int level;
         public int score;
 
-        public static int startPosX = 10;
-        public static int startPosY = 10;
+        public static int playerPosX;
+        public static int playerPosY;
 
         public static int nextPosX;
         public static int nextPosY;
@@ -23,11 +24,16 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static int lastPosX;
         public static int lastPosY;
 
+        public static int oldPosX;
+        public static int oldPosY;
+
 
         public static void SetPlayer()
         {
             gameChar = 'P';
-            
+
+            playerPosX = 10;
+            playerPosY = 10;
         }
 
 
@@ -49,20 +55,19 @@ namespace FirstPlayable_CalebWolthers_22012024
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.W:
-                        Console.WriteLine(gameChar);
-                        Console.WriteLine("W");
+                        KeyW();
                         break;
 
                     case ConsoleKey.A:
-                        Console.WriteLine("A");
+                        KeyA();
                         break;
 
                     case ConsoleKey.S:
-                        Console.WriteLine("S");
+                        KeyS();
                         break;
 
                     case ConsoleKey.D:
-                        Console.WriteLine("D");
+                        KeyD();
                         break;
 
                     case ConsoleKey.Escape:
@@ -81,5 +86,143 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         }
 
+        static void KeyW()
+        {
+            nextPosY = playerPosY - 1;
+
+            lastPosY = playerPosY;
+            lastPosX = playerPosX;
+
+            if (playerPosY != 0 && Map.map[nextPosY, playerPosX] != '#' && Map.map[nextPosY, playerPosX] != '~')
+            {
+                    oldPosY = playerPosY;
+
+                    playerPosY = nextPosY;
+
+                    CheckNextMove();
+
+                    PlayerMoved();
+
+                    Console.WriteLine("W");
+            }
+
+            Map.DisplayMap();
+
+        }
+
+
+        static void KeyA()
+        {
+            nextPosX = playerPosX - 1;
+
+            lastPosY = playerPosY;
+            lastPosX = playerPosX;
+
+            if (playerPosX != 0 && Map.map[playerPosY, nextPosX] != '#' && Map.map[playerPosY, nextPosX] != '~')
+            {
+
+                    oldPosX = playerPosX;
+
+                    playerPosX = nextPosX;
+
+                    CheckNextMove();
+
+                    PlayerMoved();
+
+                    Console.WriteLine("A");
+                }
+
+            Map.DisplayMap();
+
+        }
+
+        static void KeyS()
+        {
+            nextPosY = playerPosY + 1;
+
+            lastPosY = playerPosY;
+            lastPosX = playerPosX;
+
+            if (playerPosY != Map.height - 1 && Map.map[nextPosY, playerPosX] != '#' && Map.map[nextPosY, playerPosX] != '~')
+            {
+
+                    oldPosY = playerPosY;
+
+                    playerPosY = nextPosY;
+
+                    CheckNextMove();
+
+                    PlayerMoved();
+
+                    Console.WriteLine("S");
+                }
+
+            Map.DisplayMap();
+
+        }
+
+
+        static void KeyD()
+        {
+            nextPosX = playerPosX + 1;
+
+            lastPosY = playerPosY;
+            lastPosX = playerPosX;
+
+            if (playerPosX != Map.width - 1 && Map.map[playerPosY, nextPosX] != '#' && Map.map[playerPosY, nextPosX] != '~')
+            {
+
+                    oldPosX = playerPosX;
+
+                    playerPosX = nextPosX;
+
+                    CheckNextMove();
+
+                    PlayerMoved();
+
+                    Console.WriteLine("D");
+                }
+
+            Map.DisplayMap();
+
+        }
+
+
+
+        public static void CheckNextMove()
+        {
+            if (nextPosX == '^' || nextPosY == '^')
+            {
+                nextPosX = oldPosX;
+                nextPosY = oldPosY;
+            }
+        }
+
+
+
+
+
+
+
+
+        static void PlayerMoved()
+        {
+            Map.map[lastPosY, lastPosX] = '`';
+
+
+            Map.map[playerPosY, playerPosX] = Player.gameChar;
+
+        }
+
+
+
+
+
     }
+
+
+
+
 }
+
+

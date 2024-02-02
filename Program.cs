@@ -54,6 +54,13 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         static void StartGame()
         {
+            Console.Clear();
+
+            Console.SetCursorPosition(0, 0);
+
+            Console.CursorVisible = !true;
+
+
             Console.WriteLine("");
 
             Player.SetPlayer();

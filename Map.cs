@@ -41,7 +41,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             MakeMap();
 
-            map[Player.startPosX, Player.startPosY] = Player.gameChar;
+            map[Player.playerPosX, Player.playerPosY] = Player.gameChar;
 
             DisplayMap();
         }
