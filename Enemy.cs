@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+using System.Xml.Linq;
 
 namespace FirstPlayable_CalebWolthers_22012024
 {
@@ -19,8 +21,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static int health;
         
-        public static int enemyPosX;
-        public static int enemyPosY;
+        public static int enemyPosX { get; set; }
+        public static int enemyPosY { get; set; }
 
         public static bool enemyUp = true;
         public static int enemyHealth = 100;
@@ -32,14 +34,23 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static int enemyLastPosY;
 
 
-        public static void SetEnemy()
+        public Enemy(int posX = 0, int posY = 0, char icon = '0')
         {
+            enemyPosX = posX;
+            enemyPosY = posY;
+            enemyChar = icon;
             Enemy.health = 100;
+        }
 
-            enemyChar = '0';
 
-            enemyPosX = 12;
-            enemyPosY = 12;
+
+
+
+
+        public static void SetEnemy(Enemy enemy)
+        {
+            enemyPosX = enemy.enemyPosX;
+            enemyPosY = enemy.enemyPosY;
         }
 
 
@@ -59,7 +70,10 @@ namespace FirstPlayable_CalebWolthers_22012024
                     {
                         if (Map.map[enemyNextPosY, CenemyPosX] == 'P' && enemy != '`')
                         {
-                            //TakeDamage(goblinDamage);
+                            if (health > 0)
+                            {
+                                HealthSystem.TakeDamage("player", 20, ref Player.health);
+                            }
                         }
                         else
                         {
@@ -85,7 +99,10 @@ namespace FirstPlayable_CalebWolthers_22012024
                     {
                         if (Map.map[enemyNextPosY, CenemyPosX] == 'P' && enemy != '`')
                         {
-                            //TakeDamage(goblinDamage);
+                            if (health >= 0)
+                            {
+                                HealthSystem.TakeDamage("player", 20, ref Player.health);
+                            }
                         }
                         else
                         {

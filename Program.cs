@@ -17,7 +17,7 @@ namespace FirstPlayable_CalebWolthers_22012024
     {
 
         static Player player = new Player();
-        static Enemy slime = new Enemy();
+        static Enemy slime = new Enemy(12, 12, '0');
         static Item sword = new Item();
 
 
@@ -27,15 +27,6 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine("Start Game");
             Console.WriteLine("");
 
-            //player.gameChar = 'P';
-
-
-            slime.position.x = 10;
-            slime.position.y = 10;
-
-
-            
-
 
 
             Console.WriteLine("Player x position is " + player.position.x);
@@ -43,6 +34,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
             StartGame();
+            Enemy.SetEnemy(slime);
 
             Console.WriteLine("");
             Console.WriteLine("Press any key to quit...");
@@ -63,7 +55,6 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine("");
 
             Player.SetPlayer();
-            Enemy.SetEnemy();
             Map.StartMap();
             Player.GetInput();
 

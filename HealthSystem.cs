@@ -24,7 +24,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 else
                 {
                     Map.map[Enemy.enemyPosY, Enemy.enemyPosX] = '`';
-                    Enemy.enemyChar = '`';
+                    Program.enemyChar = '`';
                     Map.DisplayMap();
                 }
             }
