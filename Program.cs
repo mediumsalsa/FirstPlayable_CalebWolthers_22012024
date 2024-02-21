@@ -17,12 +17,11 @@ namespace FirstPlayable_CalebWolthers_22012024
     {
 
 
-
-
-        static Player player = new Player();
         static Enemy slime = new Enemy();
         static Enemy goblin = new Enemy();
-        static Item sword = new Item();
+
+        static Enemy bat = new Enemy();
+
 
 
         static void Main(string[] args)
@@ -65,14 +64,23 @@ namespace FirstPlayable_CalebWolthers_22012024
             goblin.enemyDamage = 20;
             goblin.enemyUp = false;
 
+            bat.enemyName = "Hell Bat";
+            bat.enemyPosX = 16;
+            bat.enemyPosY = 16;
+            bat.enemyChar = 'B';
+            bat.health = 100;
+            bat.enemyDamage = 40;
+
 
             Player.SetPlayer();
             Enemy.SetEnemy(slime.enemyName, slime.enemyPosX, slime.enemyPosY, slime.enemyChar, slime.health, slime.enemyUp, slime.enemyDamage);
             Enemy.SetEnemy(goblin.enemyName, goblin.enemyPosX, goblin.enemyPosY, goblin.enemyChar, goblin.health, goblin.enemyUp, goblin.enemyDamage);
+            Enemy.SetEnemy(bat.enemyName, bat.enemyPosX, bat.enemyPosY, bat.enemyChar, bat.health, bat.enemyUp, bat.enemyDamage);
             Map.StartMap();
 
-            Map.map[slime.enemyPosX, slime.enemyPosY] = slime.enemyChar;
-            Map.map[goblin.enemyPosX, goblin.enemyPosY] = goblin.enemyChar;
+            Map.map[slime.enemyPosY, slime.enemyPosX] = slime.enemyChar;
+            Map.map[goblin.enemyPosY, goblin.enemyPosX] = goblin.enemyChar;
+            Map.map[bat.enemyPosY, bat.enemyPosX] = bat.enemyChar;
 
             GetInput();
 
@@ -125,6 +133,17 @@ namespace FirstPlayable_CalebWolthers_22012024
                         HealthSystem.TakeDamage("enemy", 50, ref goblin.health, goblin);
 
                         Map.UpdateHUD(goblin);
+                    }
+                }
+                else if (Map.map[Player.playerPosY, Player.nextPosX] == Map.map[bat.enemyPosY, bat.enemyPosX] || Map.map[Player.nextPosY, Player.playerPosX] == Map.map[bat.enemyPosY, bat.enemyPosX])
+                {
+                    if (bat.health > 0)
+                    {
+                        Player.CantMove();
+
+                        HealthSystem.TakeDamage("enemy", 50, ref bat.health, bat);
+
+                        Map.UpdateHUD(bat);
                     }
                 }
 
@@ -199,6 +218,8 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             Enemy.MoveEnemyVert(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar, slime);
             Enemy.MoveEnemyVert(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar, goblin);
+            Enemy.MoveEnemyRandom(ref bat.enemyPosX, ref bat.enemyPosY, bat.enemyChar, bat);
+            Map.DisplayMap();
         }
 
 

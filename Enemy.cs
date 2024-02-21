@@ -55,6 +55,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
+
+
         public static void MoveEnemyVert(ref int CenemyPosX, ref int CenemyPosY, ref bool CenemyUp, char enemyIcon, Enemy enemy)
         {
             if (enemyIcon != '`')
@@ -121,7 +123,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
             }
 
-            Map.DisplayMap();
+
         }
 
         public static void MoveEnemyRandom(ref int CenemyPosX, ref int CenemyPosY, char enemyIcon, Enemy enemy)
@@ -132,17 +134,124 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
                 var rd = new Random();
-                int dir = rd.Next(1, 4);
+                int dir = rd.Next(0, 400);
+
+
+                //Up
+                if (dir <= 100)
+                {
+                    enemyNextPosY = CenemyPosY - 1;
+
+                    enemyLastPosY = CenemyPosY;
+                    enemyLastPosX = CenemyPosX;
+
+                    if (Map.map[enemyNextPosY, CenemyPosX] == '`')
+                    {
+                        CenemyPosY--;
+
+                        Map.map[enemyLastPosY, enemyLastPosX] = '`';
+
+                        Map.map[CenemyPosY, CenemyPosX] = enemyIcon;
+                    }
+                    else if (Map.map[enemyNextPosY, CenemyPosX] == 'P' && enemyIcon != '`')
+                    {
+                        if (enemy.health >= 0)
+                        {
+                            HealthSystem.TakeDamage("player", enemy.enemyDamage, ref Player.health, null);
+                            Map.UpdateHUD(enemy);
+                        }
+                    }
+
+                }
+
+                //Left
+                else if (dir > 100 && dir <= 200)
+                {
+                    enemyNextPosX = CenemyPosX - 1;
+
+                    enemyLastPosY = CenemyPosY;
+                    enemyLastPosX = CenemyPosX;
+
+                    if (Map.map[CenemyPosY, enemyNextPosX] == '`')
+                    {
+                        CenemyPosX--;
+
+                        Map.map[enemyLastPosY, enemyLastPosX] = '`';
+
+                        Map.map[CenemyPosY, CenemyPosX] = enemyIcon;
+                    }
+                    else if (Map.map[CenemyPosY, enemyNextPosX] == 'P' && enemyIcon != '`')
+                    {
+                        if (enemy.health >= 0)
+                        {
+                            HealthSystem.TakeDamage("player", enemy.enemyDamage, ref Player.health, null);
+                            Map.UpdateHUD(enemy);
+                        }
+                    }
+
+                }
+
+                //Down
+                else if (dir > 200 && dir <= 300)
+                {
+                    enemyNextPosY = CenemyPosY + 1;
+
+                    enemyLastPosY = CenemyPosY;
+                    enemyLastPosX = CenemyPosX;
+
+                    if (Map.map[enemyNextPosY, CenemyPosX] == '`')
+                    {
+                        CenemyPosY++;
+
+                        Map.map[enemyLastPosY, enemyLastPosX] = '`';
+
+                        Map.map[CenemyPosY, CenemyPosX] = enemyIcon;
+                    }
+                    else if (Map.map[enemyNextPosY, CenemyPosX] == 'P' && enemyIcon != '`')
+                    {
+                        if (enemy.health >= 0)
+                        {
+                            HealthSystem.TakeDamage("player", enemy.enemyDamage, ref Player.health, null);
+                            Map.UpdateHUD(enemy);
+                        }
+                    }
+
+                }
+
+                //Right
+                else if (dir > 300)
+                {
+                    enemyNextPosX = CenemyPosX + 1;
+
+                    enemyLastPosY = CenemyPosY;
+                    enemyLastPosX = CenemyPosX;
+
+                    if (Map.map[CenemyPosY, enemyNextPosX] == '`')
+                    {
+                        CenemyPosX++;
+
+                        Map.map[enemyLastPosY, enemyLastPosX] = '`';
+
+                        Map.map[CenemyPosY, CenemyPosX] = enemyIcon;
+                    }
+                    else if (Map.map[CenemyPosY, enemyNextPosX] == 'P' && enemyIcon != '`')
+                    {
+                        if (enemy.health >= 0)
+                        {
+                            HealthSystem.TakeDamage("player", enemy.enemyDamage, ref Player.health, null);
+                            Map.UpdateHUD(enemy);
+                        }
+                    }
+                }
+
+
+
 
 
             }
 
 
-            Map.DisplayMap();
         }
-
-
-
 
 
     }
