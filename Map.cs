@@ -46,8 +46,6 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             map[Player.playerPosX, Player.playerPosY] = Player.gameChar;
 
-            map[Enemy.enemyPosX, Enemy.enemyPosY] = Enemy.enemyChar;
-
             DisplayMap();
         }
 
@@ -158,6 +156,10 @@ namespace FirstPlayable_CalebWolthers_22012024
             else if (map[currentRow, currentCol] == 'G')
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
+            }
+            else if (map[currentRow, currentCol] == 'G')
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
             }
             else if (map[currentRow, currentCol] == 'O')
             {

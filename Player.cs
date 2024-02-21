@@ -40,66 +40,12 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
-        public static void GetInput()
+
+
+
+        public static void KeyW()
         {
-                var exit = false;
-
-                ConsoleKeyInfo keyInfo;
-
-                do
-                {
-
-                    keyInfo = Console.ReadKey(true);
-
-                    Console.WriteLine();
-
-                    switch (keyInfo.Key)
-                    {
-                        case ConsoleKey.W:
-                            KeyW();
-
-                            break;
-
-                        case ConsoleKey.A:
-                            KeyA();
-
-                            break;
-
-                        case ConsoleKey.S:
-                            KeyS();
-
-                            break;
-
-                        case ConsoleKey.D:
-                            KeyD();
-
-                            break;
-
-                        case ConsoleKey.Escape:
-                            Environment.Exit(0);
-                            break;
-
-                        case ConsoleKey.R:
-                            Program.StartGame();
-                            break;
-
-                        default:
-                            //ExitProgram();
-                            break;
-
-                    }
-
-                }
-
-
-                while (exit == false);
-
-        }
-
-
-
-        static void KeyW()
-        {
+            var ey = new Enemy();
             nextPosY = playerPosY - 1;
 
             lastPosY = playerPosY;
@@ -110,7 +56,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                 if (Map.map[nextPosY, playerPosX] == '0')
                 {
-                    HealthSystem.TakeDamage("enemy", 60, ref Enemy.health);
+                    HealthSystem.TakeDamage("enemy", 60, ref ey.health);
                 }
                 else if (Map.map[nextPosY, playerPosX] == '^')
                 {
@@ -133,16 +79,15 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                     Console.WriteLine("W");
                 }
-                Enemy.MoveEnemy(ref Enemy.enemyPosX, ref Enemy.enemyPosY, ref Enemy.enemyUp, Enemy.enemyChar);
             }
-
-            Map.DisplayMap();
 
         }
 
 
-        static void KeyA()
+        public static void KeyA()
         {
+            var ey = new Enemy();
+
             nextPosX = playerPosX - 1;
 
             lastPosY = playerPosY;
@@ -154,7 +99,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                 if (Map.map[playerPosY, nextPosX] == '0')
                 {
-                    HealthSystem.TakeDamage("enemy", 60, ref Enemy.health);
+                    HealthSystem.TakeDamage("enemy", 60, ref ey.health);
                 }
                 else if (Map.map[playerPosY, nextPosX] == '^')
                 {
@@ -177,15 +122,14 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                     Console.WriteLine("A");
                 }
-                Enemy.MoveEnemy(ref Enemy.enemyPosX, ref Enemy.enemyPosY, ref Enemy.enemyUp, Enemy.enemyChar);
             }
-
-            Map.DisplayMap();
 
         }
 
-        static void KeyS()
+        public static void KeyS()
         {
+            var ey = new Enemy();
+
             nextPosY = playerPosY + 1;
 
             lastPosY = playerPosY;
@@ -196,7 +140,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                 if (Map.map[nextPosY, playerPosX] == '0')
                 {
-                    HealthSystem.TakeDamage("enemy", 60, ref Enemy.health);
+                    HealthSystem.TakeDamage("enemy", 60, ref ey.health);
                 }
                 else if (Map.map[nextPosY, playerPosX] == '^')
                 {
@@ -220,16 +164,15 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                     Console.WriteLine("S");
                 }
-                Enemy.MoveEnemy(ref Enemy.enemyPosX, ref Enemy.enemyPosY, ref Enemy.enemyUp, Enemy.enemyChar);
             }
-
-            Map.DisplayMap();
 
         }
 
 
-        static void KeyD()
+        public static void KeyD()
         {
+            var ey = new Enemy();
+
             nextPosX = playerPosX + 1;
 
             lastPosY = playerPosY;
@@ -240,7 +183,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                 if (Map.map[playerPosY, nextPosX] == '0')
                 {
-                    HealthSystem.TakeDamage("enemy", 40, ref Enemy.health);
+                    HealthSystem.TakeDamage("enemy", 40, ref ey.health);
                 }
                 else if (Map.map[playerPosY, nextPosX] == '^')
                 {
@@ -263,10 +206,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                     Console.WriteLine("D");
                 }
-                Enemy.MoveEnemy(ref Enemy.enemyPosX, ref Enemy.enemyPosY, ref Enemy.enemyUp, Enemy.enemyChar);
             }
 
-            Map.DisplayMap();
 
         }
 

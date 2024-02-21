@@ -17,14 +17,14 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static int goblinDamage = 20;
 
-        public static char enemyChar;
+        public char enemyChar;
 
-        public static int health;
-        
-        public static int enemyPosX { get; set; }
-        public static int enemyPosY { get; set; }
+        public int health;
 
-        public static bool enemyUp = true;
+        public int enemyPosX;
+        public int enemyPosY;
+
+        public bool enemyUp = true;
         public static int enemyHealth = 100;
 
         public static int enemyNextPosX;
@@ -34,29 +34,24 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static int enemyLastPosY;
 
 
-        public Enemy(int posX = 0, int posY = 0, char icon = '0')
+
+
+        public static void SetEnemy(int posX, int posY, char icon, int health, bool dir)
         {
-            enemyPosX = posX;
-            enemyPosY = posY;
-            enemyChar = icon;
-            Enemy.health = 100;
-        }
+            var ey = new Enemy();
+            ey.enemyUp = dir;
+            ey.enemyPosX = posX;
+            ey.enemyPosY = posY;
+            ey.enemyChar = icon;
+            ey.health = health;
 
-
-
-
-
-
-        public static void SetEnemy(Enemy enemy)
-        {
-            enemyPosX = enemy.enemyPosX;
-            enemyPosY = enemy.enemyPosY;
         }
 
 
 
         public static void MoveEnemy(ref int CenemyPosX, ref int CenemyPosY, ref bool CenemyUp, char enemy)
         {
+            var ey = new Enemy();
             if (enemy != '`')
             {
                 if (CenemyUp == true)
@@ -70,7 +65,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                     {
                         if (Map.map[enemyNextPosY, CenemyPosX] == 'P' && enemy != '`')
                         {
-                            if (health > 0)
+                            if (ey.health > 0)
                             {
                                 HealthSystem.TakeDamage("player", 20, ref Player.health);
                             }
@@ -99,7 +94,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                     {
                         if (Map.map[enemyNextPosY, CenemyPosX] == 'P' && enemy != '`')
                         {
-                            if (health >= 0)
+                            if (ey.health >= 0)
                             {
                                 HealthSystem.TakeDamage("player", 20, ref Player.health);
                             }
@@ -118,7 +113,13 @@ namespace FirstPlayable_CalebWolthers_22012024
                     else { CenemyUp = true; }
                 }
             }
+
+            Map.DisplayMap();
         }
+
+
+
+
 
 
     }

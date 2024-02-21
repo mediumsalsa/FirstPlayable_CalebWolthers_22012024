@@ -11,6 +11,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void TakeDamage(string entity, int damage, ref int health)
         {
+            var ey = new Enemy();
+
             health -= damage;
 
             if (health <= 0)
@@ -23,8 +25,8 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
                 else
                 {
-                    Map.map[Enemy.enemyPosY, Enemy.enemyPosX] = '`';
-                    Program.enemyChar = '`';
+                    Map.map[ey.enemyPosY, ey.enemyPosX] = '`';
+                    ey.enemyChar = '`';
                     Map.DisplayMap();
                 }
             }
