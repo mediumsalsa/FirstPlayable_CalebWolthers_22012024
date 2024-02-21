@@ -258,9 +258,10 @@ namespace FirstPlayable_CalebWolthers_22012024
             {
 
                 Console.WriteLine(Map.breaker);
-                Console.WriteLine("Last enemy hit: " + enemy.enemyName);
+                Console.WriteLine("Last enemy encountered: " + enemy.enemyName);
                 Console.WriteLine("");
                 Console.WriteLine("Health: " + enemy.health);
+                Console.WriteLine("Attack power: " + enemy.enemyDamage);
                 Console.WriteLine(Map.breaker);
                 Console.WriteLine("");
 

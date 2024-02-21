@@ -21,6 +21,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public int health;
 
+        public int enemyDamage;
+
         public int enemyPosX;
         public int enemyPosY;
 
@@ -38,7 +40,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
-        public static void SetEnemy(string name, int posX, int posY, char icon, int health, bool dir)
+        public static void SetEnemy(string name, int posX, int posY, char icon, int health, bool dir, int dmg)
         {
             var ey = new Enemy();
             ey.enemyName = name;
@@ -47,6 +49,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             ey.enemyPosY = posY;
             ey.enemyChar = icon;
             ey.health = health;
+            ey.enemyDamage = dmg;
 
         }
 
@@ -69,7 +72,8 @@ namespace FirstPlayable_CalebWolthers_22012024
                         {
                             if (enemy.health > 0)
                             {
-                                HealthSystem.TakeDamage("player", 20, ref Player.health, null);
+                                HealthSystem.TakeDamage("player", enemy.enemyDamage, ref Player.health, null);
+                                Map.UpdateHUD(enemy);
                             }
                         }
                         else
@@ -98,7 +102,8 @@ namespace FirstPlayable_CalebWolthers_22012024
                         {
                             if (enemy.health >= 0)
                             {
-                                HealthSystem.TakeDamage("player", 20, ref Player.health, null);
+                                HealthSystem.TakeDamage("player", enemy.enemyDamage, ref Player.health, null);
+                                Map.UpdateHUD(enemy);
                             }
                         }
                         else

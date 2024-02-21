@@ -54,6 +54,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             slime.enemyPosY = 12;
             slime.enemyChar = '0';
             slime.health = 100;
+            slime.enemyDamage = 10;
             slime.enemyUp = true;
 
             goblin.enemyName = "Goblin";
@@ -61,12 +62,13 @@ namespace FirstPlayable_CalebWolthers_22012024
             goblin.enemyPosY = 5;
             goblin.enemyChar = 'G';
             goblin.health = 150;
-            slime.enemyUp = false;
+            goblin.enemyDamage = 20;
+            goblin.enemyUp = false;
 
 
             Player.SetPlayer();
-            Enemy.SetEnemy(slime.enemyName, slime.enemyPosX, slime.enemyPosY, slime.enemyChar, slime.health, slime.enemyUp);
-            Enemy.SetEnemy(goblin.enemyName, goblin.enemyPosX, goblin.enemyPosY, goblin.enemyChar, goblin.health, goblin.enemyUp);
+            Enemy.SetEnemy(slime.enemyName, slime.enemyPosX, slime.enemyPosY, slime.enemyChar, slime.health, slime.enemyUp, slime.enemyDamage);
+            Enemy.SetEnemy(goblin.enemyName, goblin.enemyPosX, goblin.enemyPosY, goblin.enemyChar, goblin.health, goblin.enemyUp, goblin.enemyDamage);
             Map.StartMap();
 
             Map.map[slime.enemyPosX, slime.enemyPosY] = slime.enemyChar;
