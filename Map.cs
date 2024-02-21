@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 using System.Reflection.Emit;
+using System.Security.Policy;
 
 namespace FirstPlayable_CalebWolthers_22012024
 {
@@ -30,6 +31,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static int width;
         public static int height;
+
+        public static Enemy ey = new Enemy();
 
 
         public static void StartMap()
@@ -177,6 +180,12 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.Write(map[currentRow, currentCol]);
         }
 
+        public static void UpdateHUD(Enemy enemy)
+        {
+            ey = enemy;
+        }
+
+
         static void ShowHUD()
         {
             if (Player.health >= 100)
@@ -210,6 +219,19 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine("                                                ");
             Console.WriteLine("                                                ");
             Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
             Console.SetCursorPosition(0, height + 2
                 );
 
@@ -217,15 +239,33 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Console.WriteLine("");
             Console.WriteLine(breaker);
+            Console.WriteLine("Player Stats");
+            Console.WriteLine("");
             Console.WriteLine("Health: " + Player.health);
             Console.WriteLine("Health Status: " + healthStatus);
+            Console.WriteLine("Attack Power: " + Player.playerAttack);
             Console.WriteLine(breaker);
             Console.WriteLine("");
+            ShowEnemyHUD(ey);
 
             Console.CursorVisible = !true;
         }
 
+        public static void ShowEnemyHUD(Enemy enemy)
+        {
 
+            if (enemy != null)
+            {
+
+                Console.WriteLine(Map.breaker);
+                Console.WriteLine("Last enemy hit: " + enemy.enemyName);
+                Console.WriteLine("");
+                Console.WriteLine("Health: " + enemy.health);
+                Console.WriteLine(Map.breaker);
+                Console.WriteLine("");
+
+            }
+        }
 
 
 

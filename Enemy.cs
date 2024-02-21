@@ -24,6 +24,8 @@ namespace FirstPlayable_CalebWolthers_22012024
         public int enemyPosX;
         public int enemyPosY;
 
+        public string enemyName;
+
         public bool enemyUp = true;
         public static int enemyHealth = 100;
 
@@ -36,9 +38,10 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
-        public static void SetEnemy(int posX, int posY, char icon, int health, bool dir)
+        public static void SetEnemy(string name, int posX, int posY, char icon, int health, bool dir)
         {
             var ey = new Enemy();
+            ey.enemyName = name;
             ey.enemyUp = dir;
             ey.enemyPosX = posX;
             ey.enemyPosY = posY;
@@ -49,7 +52,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
-        public static void MoveEnemy(ref int CenemyPosX, ref int CenemyPosY, ref bool CenemyUp, char enemyIcon, Enemy enemy)
+        public static void MoveEnemyVert(ref int CenemyPosX, ref int CenemyPosY, ref bool CenemyUp, char enemyIcon, Enemy enemy)
         {
             if (enemyIcon != '`')
             {
@@ -116,6 +119,22 @@ namespace FirstPlayable_CalebWolthers_22012024
             Map.DisplayMap();
         }
 
+        public static void MoveEnemyRandom(ref int CenemyPosX, ref int CenemyPosY, char enemyIcon, Enemy enemy)
+        {
+
+            if (enemyIcon != '`')
+            {
+
+
+                var rd = new Random();
+                int dir = rd.Next(1, 4);
+
+
+            }
+
+
+            Map.DisplayMap();
+        }
 
 
 

@@ -14,6 +14,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static int health = 100;
 
+        public static int playerAttack = 50;
+
         public int xp;
         public int level;
         public int score;
@@ -35,6 +37,8 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static void SetPlayer()
         {
             Player.health = 100;
+
+            Player.playerAttack = 50;
 
             Player.gameChar = 'P';
 
@@ -161,42 +165,6 @@ namespace FirstPlayable_CalebWolthers_22012024
                 nextPosX = oldPosX;
             }
         }
-
-       /* public static void CheckNextMove()
-        {
-            var ey = new Enemy();
-
-            if (playerPosX != Map.width - 1 && playerPosY != Map.height - 1 && playerPosX != 0 && playerPosY != 0)
-            {
-
-                if (Map.map[playerPosY, nextPosX] == '^' || Map.map[nextPosY, playerPosX] == '^')
-                {
-                    CantMove();
-
-                    HealthSystem.TakeDamage("player", 60, ref Player.health, null);
-                }
-                else if (Map.map[playerPosY, nextPosX] == '~' || Map.map[nextPosY, playerPosX] == '~')
-                {
-                    CantMove();
-                }
-                else if (Map.map[playerPosY, nextPosX] == '#' || Map.map[nextPosY, playerPosX] == '#')
-                {
-                    CantMove();
-                }
-                else if (Map.map[playerPosY, nextPosX] == '@' || Map.map[nextPosY, playerPosX] == '@')
-                {
-                    HealthSystem.Heal(40, ref Player.health);
-                }
-                else if (Map.map[playerPosY, nextPosX] == '0' || Map.map[nextPosY, playerPosX] == '0')
-                {
-                    CantMove();
-
-                    HealthSystem.TakeDamage("enemy", 40, ref ey.health, null);
-                }
-
-            }
-
-        }*/
 
 
         public static void PlayerMoved()

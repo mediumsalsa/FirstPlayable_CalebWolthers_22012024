@@ -31,18 +31,6 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine("Start Game");
             Console.WriteLine("");
 
-            slime.enemyPosX = 12;
-            slime.enemyPosY = 12;
-            slime.enemyChar = '0';
-            slime.health = 100;
-            slime.enemyUp = true;
-
-            goblin.enemyPosX = 5;
-            goblin.enemyPosY = 5;
-            goblin.enemyChar = 'G';
-            goblin.health = 100;
-            slime.enemyUp = false;
-
             StartGame();
 
             Console.WriteLine("");
@@ -61,9 +49,24 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Console.WriteLine("");
 
+            slime.enemyName = "Slime";
+            slime.enemyPosX = 12;
+            slime.enemyPosY = 12;
+            slime.enemyChar = '0';
+            slime.health = 100;
+            slime.enemyUp = true;
+
+            goblin.enemyName = "Goblin";
+            goblin.enemyPosX = 5;
+            goblin.enemyPosY = 5;
+            goblin.enemyChar = 'G';
+            goblin.health = 150;
+            slime.enemyUp = false;
+
+
             Player.SetPlayer();
-            Enemy.SetEnemy(slime.enemyPosX, slime.enemyPosY, slime.enemyChar, slime.health, slime.enemyUp);
-            Enemy.SetEnemy(goblin.enemyPosX, goblin.enemyPosY, goblin.enemyChar, goblin.health, goblin.enemyUp);
+            Enemy.SetEnemy(slime.enemyName, slime.enemyPosX, slime.enemyPosY, slime.enemyChar, slime.health, slime.enemyUp);
+            Enemy.SetEnemy(goblin.enemyName, goblin.enemyPosX, goblin.enemyPosY, goblin.enemyChar, goblin.health, goblin.enemyUp);
             Map.StartMap();
 
             Map.map[slime.enemyPosX, slime.enemyPosY] = slime.enemyChar;
@@ -106,7 +109,9 @@ namespace FirstPlayable_CalebWolthers_22012024
                     { 
                         Player.CantMove();
 
-                        HealthSystem.TakeDamage("enemy", 60, ref slime.health, slime);
+                        HealthSystem.TakeDamage("enemy", 50, ref slime.health, slime);
+
+                        Map.UpdateHUD(slime);
                     }
                 }
                 else if (Map.map[Player.playerPosY, Player.nextPosX] == Map.map[goblin.enemyPosY, goblin.enemyPosX] || Map.map[Player.nextPosY, Player.playerPosX] == Map.map[goblin.enemyPosY, goblin.enemyPosX])
@@ -115,7 +120,9 @@ namespace FirstPlayable_CalebWolthers_22012024
                     {
                         Player.CantMove();
 
-                        HealthSystem.TakeDamage("enemy", 60, ref goblin.health, goblin);
+                        HealthSystem.TakeDamage("enemy", 50, ref goblin.health, goblin);
+
+                        Map.UpdateHUD(goblin);
                     }
                 }
 
@@ -142,26 +149,22 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     case ConsoleKey.W:
                         Player.KeyW();
-                        Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar, slime);
-                        Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar, goblin);
+
                         break;
 
                     case ConsoleKey.A:
                         Player.KeyA();
-                        Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar, slime);
-                        Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar, goblin);
+
                         break;
 
                     case ConsoleKey.S:
                         Player.KeyS();
-                        Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar, slime);
-                        Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar, goblin);
+
                         break;
 
                     case ConsoleKey.D:
                         Player.KeyD();
-                        Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar, slime);
-                        Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar, goblin);
+
                         break;
 
                     case ConsoleKey.Escape:
@@ -177,6 +180,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                         break;
 
                 }
+                MoveAllEnemies();
 
 
             }
@@ -189,194 +193,12 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
-
-
-
-       /* public static void KeyW()
-        {
-            var ey = new Enemy();
-            Player.nextPosY = Player.playerPosY - 1;
-
-            Player.lastPosY = Player.playerPosY;
-            Player.lastPosX = Player.playerPosX;
-
-            if (Player.playerPosY != 0 && Map.map[Player.nextPosY, Player.playerPosX] != '#' && Map.map[Player.nextPosY, Player.playerPosX] != '~')
-            {
-
-                if (Map.map[Player.nextPosY, Player.playerPosX] == Map.map[slime.enemyPosY, slime.enemyPosX] && slime.health > 0)
-                {
-                    HealthSystem.TakeDamage("enemy", 60, ref slime.health, slime);
-                }
-                else if (Map.map[Player.nextPosY, Player.playerPosX] == '^')
-                {
-                    HealthSystem.TakeDamage("player", 60, ref Player.health, null);
-                }
-                else
-                {
-                    if (Map.map[Player.nextPosY, Player.playerPosX] == '@')
-                    {
-                        HealthSystem.Heal(40, ref Player.health);
-                    }
-
-                    Player.oldPosY = Player.playerPosY;
-
-                    Player.playerPosY = Player.nextPosY;
-
-                    Player.CheckNextMove();
-
-                    Player.PlayerMoved();
-
-                    Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar);
-                    Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar);
-
-                    Console.WriteLine("W");
-                }
-            }
-
-        }
-
-
-        public static void KeyA()
-        {
-            var ey = new Enemy();
-
-            Player.nextPosX = Player.playerPosX - 1;
-
-            Player.lastPosY = Player.playerPosY;
-            Player.lastPosX = Player.playerPosX;
-
-            if (Player.playerPosX != 0 && Map.map[Player.playerPosY, Player.nextPosX] != '#' && Map.map[Player.playerPosY, Player.nextPosX] != '~')
-            {
-
-
-                if (Map.map[Player.playerPosY, Player.nextPosX] == Map.map[slime.enemyPosY, slime.enemyPosX] && slime.health > 0)
-                {
-                    HealthSystem.TakeDamage("enemy", 60, ref ey.health, slime);
-                }
-                else if (Map.map[Player.playerPosY, Player.nextPosX] == '^')
-                {
-                    HealthSystem.TakeDamage("player", 60, ref Player.health, null);
-                }
-                else
-                {
-                    if (Map.map[Player.playerPosY, Player.nextPosX] == '@')
-                    {
-                        HealthSystem.Heal(40, ref Player.health);
-                    }
-
-                    Player.oldPosX = Player.playerPosX;
-
-                    Player.playerPosX = Player.nextPosX;
-
-                    Player.CheckNextMove();
-
-                    Player.PlayerMoved();
-
-                    Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar);
-                    Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar);
-
-                    Console.WriteLine("A");
-                }
-            }
-
-        }
-
-        public static void KeyS()
-        {
-            var ey = new Enemy();
-
-            Player.nextPosY = Player.playerPosY + 1;
-
-            Player.lastPosY = Player.playerPosY;
-            Player.lastPosX = Player.playerPosX;
-
-            if (Player.playerPosY != Map.height - 1 && Map.map[Player.nextPosY, Player.playerPosX] != '#' && Map.map[Player.nextPosY, Player.playerPosX] != '~')
-            {
-
-                if (Map.map[Player.nextPosY, Player.playerPosX] == Map.map[slime.enemyPosY, slime.enemyPosX] && slime.health > 0)
-                {
-                    HealthSystem.TakeDamage("enemy", 60, ref ey.health, slime);
-                }
-                else if (Map.map[Player.nextPosY, Player.playerPosX] == '^')
-                {
-                    HealthSystem.TakeDamage("player", 60, ref Player.health, null);
-                }
-                else
-                {
-                    if (Map.map[Player.nextPosY, Player.playerPosX] == '@')
-                    {
-                        HealthSystem.Heal(40, ref Player.health);
-                    }
-
-
-                    Player.oldPosY = Player.playerPosY;
-
-                    Player.playerPosY = Player.nextPosY;
-
-                    Player.CheckNextMove();
-
-                    Player.PlayerMoved();
-
-                    Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar);
-                    Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar);
-
-                    Console.WriteLine("S");
-                }
-            }
-
-        }
-
-
-        public static void KeyD()
-        {
-            var ey = new Enemy();
-
-            Player.nextPosX = Player.playerPosX + 1;
-
-            Player.lastPosY = Player.playerPosY;
-            Player.lastPosX = Player.playerPosX;
-
-            if (Player.playerPosX != Map.width - 1 && Map.map[Player.playerPosY, Player.nextPosX] != '#' && Map.map[Player.playerPosY, Player.nextPosX] != '~')
-            {
-
-                if (Map.map[Player.playerPosY, Player.nextPosX] == Map.map[slime.enemyPosY, slime.enemyPosX] && slime.health > 0)
-                {
-                    HealthSystem.TakeDamage("enemy", 40, ref ey.health, slime);
-                }
-                else if (Map.map[Player.playerPosY, Player.nextPosX] == '^')
-                {
-                    HealthSystem.TakeDamage("player", 60, ref Player.health, null);
-                }
-                else
-                {
-                    if (Map.map[Player.playerPosY, Player.nextPosX] == '@')
-                    {
-                        HealthSystem.Heal(40, ref Player.health);
-                    }
-
-                    Player.oldPosX = Player.playerPosX;
-
-                    Player.playerPosX = Player.nextPosX;
-
-                    Player.CheckNextMove();
-
-                    Player.PlayerMoved();
-
-                    Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar);
-                    Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar);
-
-                    Console.WriteLine("D");
-                }
-            }
-
-
-        }*/
-
-
         public static void MoveAllEnemies()
-        { 
-            
+        {
+            Enemy.MoveEnemyVert(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar, slime);
+            Enemy.MoveEnemyVert(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar, goblin);
         }
+
 
 
 
