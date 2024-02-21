@@ -42,8 +42,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Player.gameChar = 'P';
 
-            playerPosX = 10;
-            playerPosY = 10;
+            playerPosX = 4;
+            playerPosY = 20;
         }
 
 

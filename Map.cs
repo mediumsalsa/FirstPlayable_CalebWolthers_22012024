@@ -146,6 +146,12 @@ namespace FirstPlayable_CalebWolthers_22012024
             }
             else if (map[currentRow, currentCol] == 'P')
             {
+
+                if (map[currentRow, currentCol] != map[Player.playerPosY, Player.playerPosX])
+                {
+                    map[currentRow, currentCol] = '`';
+                }
+
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
             }
             else if (map[currentRow, currentCol] == '#')
@@ -210,15 +216,6 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
             Console.SetCursorPosition(0, height + 2);
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
             Console.WriteLine("                                                ");
             Console.WriteLine("                                                ");
             Console.WriteLine("                                                ");

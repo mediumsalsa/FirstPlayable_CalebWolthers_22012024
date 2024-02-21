@@ -17,12 +17,23 @@ namespace FirstPlayable_CalebWolthers_22012024
     {
 
 
-        static Enemy slime = new Enemy();
-        static Enemy goblin = new Enemy();
+        //Enemy Holding zone
+         static Enemy slime = new Enemy();
 
-        static Enemy bat = new Enemy();
+         static Enemy goblin = new Enemy();
 
+         static Enemy bat = new Enemy();
+        //
+        //Process to add enemies:
+        //  1.  Instantiate in the enemy holding zone.
+        //  2.  Give the enmy it's stats in the start game method.
+        //  3.  Update the enemy. Also in the start game method
+        //  4.  Give the enemy it's movement script in the MoveAllEnemies method.
+        //  5.  tell the player what happens when it hits the enmy in the check next move method
+        //  
+        //
 
+        
 
         static void Main(string[] args)
         {
@@ -58,7 +69,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             goblin.enemyName = "Goblin";
             goblin.enemyPosX = 5;
-            goblin.enemyPosY = 5;
+            goblin.enemyPosY = 15;
             goblin.enemyChar = 'G';
             goblin.health = 150;
             goblin.enemyDamage = 20;
@@ -73,19 +84,29 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
             Player.SetPlayer();
-            Enemy.SetEnemy(slime.enemyName, slime.enemyPosX, slime.enemyPosY, slime.enemyChar, slime.health, slime.enemyUp, slime.enemyDamage);
-            Enemy.SetEnemy(goblin.enemyName, goblin.enemyPosX, goblin.enemyPosY, goblin.enemyChar, goblin.health, goblin.enemyUp, goblin.enemyDamage);
-            Enemy.SetEnemy(bat.enemyName, bat.enemyPosX, bat.enemyPosY, bat.enemyChar, bat.health, bat.enemyUp, bat.enemyDamage);
+
             Map.StartMap();
 
-            Map.map[slime.enemyPosY, slime.enemyPosX] = slime.enemyChar;
-            Map.map[goblin.enemyPosY, goblin.enemyPosX] = goblin.enemyChar;
-            Map.map[bat.enemyPosY, bat.enemyPosX] = bat.enemyChar;
+            Enemy.UpdateEnemy(slime);
+            Enemy.UpdateEnemy(goblin);
+            Enemy.UpdateEnemy(bat);
 
             GetInput();
 
             Console.WriteLine("");
         }
+
+
+
+        public static void MoveAllEnemies()
+        {
+            Enemy.MoveEnemyVert(slime);
+            Enemy.MoveEnemyVert(goblin);
+            Enemy.MoveEnemyRandom(bat);
+            Map.DisplayMap();
+        }
+
+
 
 
         public static void CheckNextMove()
@@ -170,22 +191,22 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     case ConsoleKey.W:
                         Player.KeyW();
-
+                        MoveAllEnemies();
                         break;
 
                     case ConsoleKey.A:
                         Player.KeyA();
-
+                        MoveAllEnemies();
                         break;
 
                     case ConsoleKey.S:
                         Player.KeyS();
-
+                        MoveAllEnemies();
                         break;
 
                     case ConsoleKey.D:
                         Player.KeyD();
-
+                        MoveAllEnemies();
                         break;
 
                     case ConsoleKey.Escape:
@@ -201,7 +222,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                         break;
 
                 }
-                MoveAllEnemies();
+                
 
 
             }
@@ -210,18 +231,6 @@ namespace FirstPlayable_CalebWolthers_22012024
             while (exit == false);
 
         }
-
-
-
-
-        public static void MoveAllEnemies()
-        {
-            Enemy.MoveEnemyVert(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar, slime);
-            Enemy.MoveEnemyVert(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar, goblin);
-            Enemy.MoveEnemyRandom(ref bat.enemyPosX, ref bat.enemyPosY, bat.enemyChar, bat);
-            Map.DisplayMap();
-        }
-
 
 
 
