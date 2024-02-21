@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static int playerPosX;
         public static int playerPosY;
+
+        public static string dir;
 
         public static int nextPosX;
         public static int nextPosY;
@@ -41,44 +44,28 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
-
-
         public static void KeyW()
         {
+            dir = "up";
+
             var ey = new Enemy();
             nextPosY = playerPosY - 1;
 
             lastPosY = playerPosY;
             lastPosX = playerPosX;
 
-            if (playerPosY != 0 && Map.map[nextPosY, playerPosX] != '#' && Map.map[nextPosY, playerPosX] != '~')
-            { 
+            if (playerPosY != 0 )
+            {
 
-                if (Map.map[nextPosY, playerPosX] == '0')
-                {
-                    HealthSystem.TakeDamage("enemy", 60, ref ey.health);
-                }
-                else if (Map.map[nextPosY, playerPosX] == '^')
-                {
-                    HealthSystem.TakeDamage("player", 60, ref Player.health);
-                }
-                else
-                {
-                    if (Map.map[nextPosY, playerPosX] == '@')
-                    {
-                        HealthSystem.Heal(40, ref Player.health);
-                    }
+                oldPosY = playerPosY;
 
-                    oldPosY = playerPosY;
+                Program.CheckNextMove();
 
-                    playerPosY = nextPosY;
+                playerPosY = nextPosY;
 
-                    CheckNextMove();
+                PlayerMoved();
 
-                    PlayerMoved();
-
-                    Console.WriteLine("W");
-                }
+                Console.WriteLine("W");
             }
 
         }
@@ -86,6 +73,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void KeyA()
         {
+            dir = "left";
+
             var ey = new Enemy();
 
             nextPosX = playerPosX - 1;
@@ -93,41 +82,26 @@ namespace FirstPlayable_CalebWolthers_22012024
             lastPosY = playerPosY;
             lastPosX = playerPosX;
 
-            if (playerPosX != 0 && Map.map[playerPosY, nextPosX] != '#' && Map.map[playerPosY, nextPosX] != '~')
+            if (playerPosX != 0 )
             {
 
+                oldPosX = playerPosX;
 
-                if (Map.map[playerPosY, nextPosX] == '0')
-                {
-                    HealthSystem.TakeDamage("enemy", 60, ref ey.health);
-                }
-                else if (Map.map[playerPosY, nextPosX] == '^')
-                {
-                    HealthSystem.TakeDamage("player", 60, ref Player.health);
-                }
-                else
-                {
-                    if (Map.map[playerPosY, nextPosX] == '@')
-                    {
-                        HealthSystem.Heal(40, ref Player.health);
-                    }
+                Program.CheckNextMove();
 
-                    oldPosX = playerPosX;
+                playerPosX = nextPosX;
 
-                    playerPosX = nextPosX;
+                PlayerMoved();
 
-                    CheckNextMove();
-
-                    PlayerMoved();
-
-                    Console.WriteLine("A");
-                }
+                Console.WriteLine("A");
             }
 
         }
 
         public static void KeyS()
         {
+            dir = "down";
+
             var ey = new Enemy();
 
             nextPosY = playerPosY + 1;
@@ -135,94 +109,97 @@ namespace FirstPlayable_CalebWolthers_22012024
             lastPosY = playerPosY;
             lastPosX = playerPosX;
 
-            if (playerPosY != Map.height - 1 && Map.map[nextPosY, playerPosX] != '#' && Map.map[nextPosY, playerPosX] != '~')
+            if (playerPosY != Map.height - 1)
             {
 
-                if (Map.map[nextPosY, playerPosX] == '0')
-                {
-                    HealthSystem.TakeDamage("enemy", 60, ref ey.health);
-                }
-                else if (Map.map[nextPosY, playerPosX] == '^')
-                {
-                    HealthSystem.TakeDamage("player", 60, ref Player.health);
-                }
-                else
-                {
-                    if (Map.map[nextPosY, playerPosX] == '@')
-                    {
-                        HealthSystem.Heal(40, ref Player.health);
-                    }
+                oldPosY = playerPosY;
 
+                Program.CheckNextMove();
 
-                    oldPosY = playerPosY;
+                playerPosY = nextPosY;
 
-                    playerPosY = nextPosY;
+                PlayerMoved();
 
-                    CheckNextMove();
-
-                    PlayerMoved();
-
-                    Console.WriteLine("S");
-                }
+                Console.WriteLine("S");
             }
-
         }
 
 
         public static void KeyD()
         {
-            var ey = new Enemy();
+            dir = "right";
 
             nextPosX = playerPosX + 1;
 
             lastPosY = playerPosY;
             lastPosX = playerPosX;
 
-            if (playerPosX != Map.width - 1 && Map.map[playerPosY, nextPosX] != '#' && Map.map[playerPosY, nextPosX] != '~')
+            if (playerPosX != Map.width - 1)
             {
+                oldPosX = playerPosX;
 
-                if (Map.map[playerPosY, nextPosX] == '0')
-                {
-                    HealthSystem.TakeDamage("enemy", 40, ref ey.health);
-                }
-                else if (Map.map[playerPosY, nextPosX] == '^')
-                {
-                    HealthSystem.TakeDamage("player", 60, ref Player.health);
-                }
-                else
-                {
-                    if (Map.map[playerPosY, nextPosX] == '@')
-                    {
-                        HealthSystem.Heal(40, ref Player.health);
-                    }
+                Program.CheckNextMove();
 
-                    oldPosX = playerPosX;
+                playerPosX = nextPosX;
 
-                    playerPosX = nextPosX;
+                PlayerMoved();
 
-                    CheckNextMove();
-
-                    PlayerMoved();
-
-                    Console.WriteLine("D");
-                }
+                Console.WriteLine("D");
             }
 
 
         }
 
-
-        public static void CheckNextMove()
+        public static void CantMove()
         {
-            if (nextPosX == '^' || nextPosY == '^')
+            if (dir == "up" || dir == "down")
             {
-                nextPosX = oldPosX;
                 nextPosY = oldPosY;
             }
+            else if (dir == "left" || dir == "right")
+            {
+                nextPosX = oldPosX;
+            }
         }
 
+       /* public static void CheckNextMove()
+        {
+            var ey = new Enemy();
 
-        static void PlayerMoved()
+            if (playerPosX != Map.width - 1 && playerPosY != Map.height - 1 && playerPosX != 0 && playerPosY != 0)
+            {
+
+                if (Map.map[playerPosY, nextPosX] == '^' || Map.map[nextPosY, playerPosX] == '^')
+                {
+                    CantMove();
+
+                    HealthSystem.TakeDamage("player", 60, ref Player.health, null);
+                }
+                else if (Map.map[playerPosY, nextPosX] == '~' || Map.map[nextPosY, playerPosX] == '~')
+                {
+                    CantMove();
+                }
+                else if (Map.map[playerPosY, nextPosX] == '#' || Map.map[nextPosY, playerPosX] == '#')
+                {
+                    CantMove();
+                }
+                else if (Map.map[playerPosY, nextPosX] == '@' || Map.map[nextPosY, playerPosX] == '@')
+                {
+                    HealthSystem.Heal(40, ref Player.health);
+                }
+                else if (Map.map[playerPosY, nextPosX] == '0' || Map.map[nextPosY, playerPosX] == '0')
+                {
+                    CantMove();
+
+                    HealthSystem.TakeDamage("enemy", 40, ref ey.health, null);
+                }
+
+            }
+
+        }*/
+
+
+        public static void PlayerMoved()
         {
             Map.map[lastPosY, lastPosX] = '`';
 

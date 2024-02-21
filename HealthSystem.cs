@@ -9,9 +9,8 @@ namespace FirstPlayable_CalebWolthers_22012024
     internal class HealthSystem
     {
 
-        public static void TakeDamage(string entity, int damage, ref int health)
+        public static void TakeDamage(string entity, int damage, ref int health, Enemy enemy)
         {
-            var ey = new Enemy();
 
             health -= damage;
 
@@ -23,10 +22,10 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     Program.StartGame();
                 }
-                else
+                else 
                 {
-                    Map.map[ey.enemyPosY, ey.enemyPosX] = '`';
-                    ey.enemyChar = '`';
+                    Map.map[enemy.enemyPosY, enemy.enemyPosX] = '`';
+                    enemy.enemyChar = '`';
                     Map.DisplayMap();
                 }
             }

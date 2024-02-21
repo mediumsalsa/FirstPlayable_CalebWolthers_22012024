@@ -67,7 +67,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                         {
                             if (ey.health > 0)
                             {
-                                HealthSystem.TakeDamage("player", 20, ref Player.health);
+                                HealthSystem.TakeDamage("player", 20, ref Player.health, null);
                             }
                         }
                         else
@@ -96,7 +96,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                         {
                             if (ey.health >= 0)
                             {
-                                HealthSystem.TakeDamage("player", 20, ref Player.health);
+                                HealthSystem.TakeDamage("player", 20, ref Player.health, null);
                             }
                         }
                         else
