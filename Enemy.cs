@@ -49,10 +49,9 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
-        public static void MoveEnemy(ref int CenemyPosX, ref int CenemyPosY, ref bool CenemyUp, char enemy)
+        public static void MoveEnemy(ref int CenemyPosX, ref int CenemyPosY, ref bool CenemyUp, char enemyIcon, Enemy enemy)
         {
-            var ey = new Enemy();
-            if (enemy != '`')
+            if (enemyIcon != '`')
             {
                 if (CenemyUp == true)
                 {
@@ -63,9 +62,9 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                     if (CenemyPosY != 0 && Map.map[enemyNextPosY, CenemyPosX] != '#' && Map.map[enemyNextPosY, CenemyPosX] != '~')
                     {
-                        if (Map.map[enemyNextPosY, CenemyPosX] == 'P' && enemy != '`')
+                        if (Map.map[enemyNextPosY, CenemyPosX] == 'P' && enemyIcon != '`')
                         {
-                            if (ey.health > 0)
+                            if (enemy.health > 0)
                             {
                                 HealthSystem.TakeDamage("player", 20, ref Player.health, null);
                             }
@@ -76,7 +75,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                             Map.map[enemyLastPosY, enemyLastPosX] = '`';
 
-                            Map.map[CenemyPosY, CenemyPosX] = enemy;
+                            Map.map[CenemyPosY, CenemyPosX] = enemyIcon;
 
                         }
                     }
@@ -92,9 +91,9 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                     if (CenemyPosY != Map.height - 1 && Map.map[enemyNextPosY, CenemyPosX] != '#' && Map.map[enemyNextPosY, CenemyPosX] != '~')
                     {
-                        if (Map.map[enemyNextPosY, CenemyPosX] == 'P' && enemy != '`')
+                        if (Map.map[enemyNextPosY, CenemyPosX] == 'P' && enemyIcon != '`')
                         {
-                            if (ey.health >= 0)
+                            if (enemy.health >= 0)
                             {
                                 HealthSystem.TakeDamage("player", 20, ref Player.health, null);
                             }
@@ -106,7 +105,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                             Map.map[enemyLastPosY, enemyLastPosX] = '`';
 
-                            Map.map[CenemyPosY, CenemyPosX] = enemy;
+                            Map.map[CenemyPosY, CenemyPosX] = enemyIcon;
 
                         }
                     }

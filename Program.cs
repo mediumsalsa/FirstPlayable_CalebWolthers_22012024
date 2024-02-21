@@ -39,7 +39,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             goblin.enemyPosX = 5;
             goblin.enemyPosY = 5;
-            goblin.enemyChar = '3';
+            goblin.enemyChar = 'G';
             goblin.health = 100;
             slime.enemyUp = false;
 
@@ -109,6 +109,15 @@ namespace FirstPlayable_CalebWolthers_22012024
                         HealthSystem.TakeDamage("enemy", 60, ref slime.health, slime);
                     }
                 }
+                else if (Map.map[Player.playerPosY, Player.nextPosX] == Map.map[goblin.enemyPosY, goblin.enemyPosX] || Map.map[Player.nextPosY, Player.playerPosX] == Map.map[goblin.enemyPosY, goblin.enemyPosX])
+                {
+                    if (goblin.health > 0)
+                    {
+                        Player.CantMove();
+
+                        HealthSystem.TakeDamage("enemy", 60, ref goblin.health, goblin);
+                    }
+                }
 
             }
 
@@ -133,26 +142,26 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     case ConsoleKey.W:
                         Player.KeyW();
-                        Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar);
-                        Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar);
+                        Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar, slime);
+                        Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar, goblin);
                         break;
 
                     case ConsoleKey.A:
                         Player.KeyA();
-                        Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar);
-                        Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar);
+                        Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar, slime);
+                        Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar, goblin);
                         break;
 
                     case ConsoleKey.S:
                         Player.KeyS();
-                        Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar);
-                        Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar);
+                        Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar, slime);
+                        Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar, goblin);
                         break;
 
                     case ConsoleKey.D:
                         Player.KeyD();
-                        Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar);
-                        Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar);
+                        Enemy.MoveEnemy(ref slime.enemyPosX, ref slime.enemyPosY, ref slime.enemyUp, slime.enemyChar, slime);
+                        Enemy.MoveEnemy(ref goblin.enemyPosX, ref goblin.enemyPosY, ref goblin.enemyUp, goblin.enemyChar, goblin);
                         break;
 
                     case ConsoleKey.Escape:
