@@ -63,7 +63,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                 oldPosY = playerPosY;
 
-                Program.CheckNextMove();
+                GameManager.CheckNextMove();
 
                 playerPosY = nextPosY;
 
@@ -91,7 +91,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                 oldPosX = playerPosX;
 
-                Program.CheckNextMove();
+                GameManager.CheckNextMove();
 
                 playerPosX = nextPosX;
 
@@ -118,7 +118,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                 oldPosY = playerPosY;
 
-                Program.CheckNextMove();
+                GameManager.CheckNextMove();
 
                 playerPosY = nextPosY;
 
@@ -142,7 +142,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             {
                 oldPosX = playerPosX;
 
-                Program.CheckNextMove();
+                GameManager.CheckNextMove();
 
                 playerPosX = nextPosX;
 

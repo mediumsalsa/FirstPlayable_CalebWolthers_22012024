@@ -20,7 +20,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 health = 0;
                 if (entity == "player")
                 {
-                    Program.StartGame();
+                    GameManager.StartGame();
                 }
                 else 
                 {
