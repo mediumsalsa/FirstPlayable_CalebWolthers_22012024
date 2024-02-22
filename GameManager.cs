@@ -18,6 +18,12 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         static Enemy bat = new Enemy();
 
+        static Enemy minotaur = new Enemy();
+
+        static Enemy skele = new Enemy();
+
+        static Enemy dragon = new Enemy();
+
 
         //
         //Process to add enemies:
@@ -44,7 +50,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
             //Write your enemy stats here
-            slime.enemyName = "Slime";
+            slime.enemyName = "Useless Slime";
             slime.enemyPosX = 12;
             slime.enemyPosY = 12;
             slime.enemyChar = '0';
@@ -52,7 +58,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             slime.enemyDamage = 10;
             slime.enemyUp = true;
 
-            goblin.enemyName = "Goblin";
+            goblin.enemyName = "Tutorial Goblin";
             goblin.enemyPosX = 5;
             goblin.enemyPosY = 15;
             goblin.enemyChar = 'G';
@@ -60,19 +66,43 @@ namespace FirstPlayable_CalebWolthers_22012024
             goblin.enemyDamage = 20;
             goblin.enemyUp = false;
 
-            bat.enemyName = "Hell Bat";
+            bat.enemyName = "Bones The Twin Golem";
             bat.enemyPosX = 16;
             bat.enemyPosY = 16;
             bat.enemyChar = 'B';
             bat.health = 100;
             bat.enemyDamage = 30;
 
-            rockGolem.enemyName = "Rock Golem";
+            rockGolem.enemyName = "Rock The Other Twin Golem";
             rockGolem.enemyPosX = 24;
             rockGolem.enemyPosY = 18;
             rockGolem.enemyChar = 'O';
             rockGolem.health = 300;
             rockGolem.enemyDamage = 12;
+
+            minotaur.enemyName = "Purple Minotaur";
+            minotaur.enemyPosX = 40;
+            minotaur.enemyPosY = 9;
+            minotaur.enemyChar = '}';
+            minotaur.health = 500;
+            minotaur.enemyDamage = 30;
+            minotaur.enemyDir = "right";
+
+            skele.enemyName = "Boring Skeleton";
+            skele.enemyPosX = 6;
+            skele.enemyPosY = 4;
+            skele.enemyChar = '$';
+            skele.health = 300;
+            skele.enemyDamage = 40;
+            skele.enemyDir = "up";
+
+            dragon.enemyName = "Kinda Mighty Dragon";
+            dragon.enemyPosX = 32;
+            dragon.enemyPosY = 15;
+            dragon.enemyChar = 'D';
+            dragon.health = 1000;
+            dragon.enemyDamage = 20;
+
 
 
             Player.SetPlayer();
@@ -85,6 +115,9 @@ namespace FirstPlayable_CalebWolthers_22012024
             Enemy.UpdateEnemy(goblin);
             Enemy.UpdateEnemy(bat);
             Enemy.UpdateEnemy(rockGolem);
+            Enemy.UpdateEnemy(minotaur);
+            Enemy.UpdateEnemy(skele);
+            Enemy.UpdateEnemy(dragon);
 
 
 
@@ -102,6 +135,9 @@ namespace FirstPlayable_CalebWolthers_22012024
             Enemy.MoveEnemyVert(goblin);
             Enemy.MoveEnemyRandom(bat);
             Enemy.MoveEnemyRandom(rockGolem);
+            Enemy.MoveEnemySquare(minotaur);
+            Enemy.MoveEnemySquare(skele);
+            Enemy.MoveEnemyRandom(dragon);
 
 
 
@@ -116,6 +152,9 @@ namespace FirstPlayable_CalebWolthers_22012024
             PlayerHitEnemy(goblin);
             PlayerHitEnemy(bat);
             PlayerHitEnemy(rockGolem);
+            PlayerHitEnemy(minotaur);
+            PlayerHitEnemy(skele);
+            PlayerHitEnemy(dragon);
 
         }
 
@@ -133,7 +172,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     Player.CantMove();
 
-                    Map.lastItem = "Health Potion(+60 health)";
+                    
                     HealthSystem.TakeDamage("player", 60, ref Player.health, null);
                 }
                 else if (Map.map[Player.playerPosY, Player.nextPosX] == '~' || Map.map[Player.nextPosY, Player.playerPosX] == '~')
@@ -146,12 +185,18 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
                 else if (Map.map[Player.playerPosY, Player.nextPosX] == '@' || Map.map[Player.nextPosY, Player.playerPosX] == '@')
                 {
+                    Map.lastItem = "Health Potion(+60 health)";
                     HealthSystem.Heal(40, ref Player.health);
                 }
                 else if (Map.map[Player.playerPosY, Player.nextPosX] == '7' || Map.map[Player.nextPosY, Player.playerPosX] == '7')
                 {
                     Map.lastItem = "Golems Greatsword(+50 attack)";
                     Player.playerAttack += 50;
+                }
+                if (Map.map[Player.playerPosY, Player.nextPosX] == '*' || Map.map[Player.nextPosY, Player.playerPosX] == '*')
+                {
+                    Map.lastItem = "Helmet of immortality";
+                    HealthSystem.Heal(200, ref Player.shield);
                 }
 
 

@@ -23,7 +23,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public int enemyDamage;
 
-        public Random enemyDir = new Random();
+        public string enemyDir;
 
         public int enemyPosX;
         public int enemyPosY;
@@ -61,7 +61,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
-        public static void SetEnemy(string name, int posX, int posY, char icon, int health, bool dir, int dmg, Random randomDirection)
+        public static void SetEnemy(string name, int posX, int posY, char icon, int health, bool dir, int dmg, string direction)
         {
             var ey = new Enemy();
             ey.enemyName = name;
@@ -71,7 +71,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             ey.enemyChar = icon;
             ey.health = health;
             ey.enemyDamage = dmg;
-            ey.enemyDir = randomDirection;
+            ey.enemyDir = direction;
             Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
 
 
@@ -160,10 +160,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             if (ey.enemyChar != '`')
             {
-
-                int dir = ey.enemyDir.Next(0, 400);
-
-
+                var rd = new Random();
+                int dir = rd.Next(0, 400);
 
                 //Up
                 if (dir <= 100)
@@ -277,7 +275,144 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         }
 
-        
+
+
+
+        public static void MoveEnemySquare(Enemy ey)
+        {
+
+            if (ey.enemyChar != '`')
+            {
+
+                //Up
+                if (ey.enemyDir == "up")
+                {
+                    enemyNextPosY = ey.enemyPosY - 1;
+
+                    enemyLastPosY = ey.enemyPosY;
+                    enemyLastPosX = ey.enemyPosX;
+
+                    if (Map.map[enemyNextPosY, ey.enemyPosX] == '`')
+                    {
+                        ey.enemyPosY--;
+
+                        Map.map[enemyLastPosY, enemyLastPosX] = '`';
+
+                        Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
+                    }
+                    else if (Map.map[enemyNextPosY, ey.enemyPosX] == 'P' && ey.enemyChar != '`')
+                    {
+                        if (ey.health >= 0)
+                        {
+                            HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
+                            Map.UpdateHUD(ey);
+                        }
+                    }
+                    else 
+                    {
+                        ey.enemyDir = "left";
+                    }
+
+                }
+
+                //Left
+                else if (ey.enemyDir == "left")
+                {
+                    enemyNextPosX = ey.enemyPosX - 1;
+
+                    enemyLastPosY = ey.enemyPosY;
+                    enemyLastPosX = ey.enemyPosX;
+
+                    if (Map.map[ey.enemyPosY, enemyNextPosX] == '`')
+                    {
+                        ey.enemyPosX--;
+
+                        Map.map[enemyLastPosY, enemyLastPosX] = '`';
+
+                        Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
+                    }
+                    else if (Map.map[ey.enemyPosY, enemyNextPosX] == 'P' && ey.enemyChar != '`')
+                    {
+                        if (ey.health >= 0)
+                        {
+                            HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
+                            Map.UpdateHUD(ey);
+                        }
+                    }
+                    else
+                    {
+                        ey.enemyDir = "down";
+                    }
+
+                }
+
+                //Down
+                else if (ey.enemyDir == "down")
+                {
+                    enemyNextPosY = ey.enemyPosY + 1;
+
+                    enemyLastPosY = ey.enemyPosY;
+                    enemyLastPosX = ey.enemyPosX;
+
+                    if (Map.map[enemyNextPosY, ey.enemyPosX] == '`')
+                    {
+                        ey.enemyPosY++;
+
+                        Map.map[enemyLastPosY, enemyLastPosX] = '`';
+
+                        Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
+                    }
+                    else if (Map.map[enemyNextPosY, ey.enemyPosX] == 'P' && ey.enemyChar != '`')
+                    {
+                        if (ey.health >= 0)
+                        {
+                            HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
+                            Map.UpdateHUD(ey);
+                        }
+                    }
+                    else
+                    {
+                        ey.enemyDir = "right";
+                    }
+
+                }
+
+                //Right
+                else if (ey.enemyDir == "right")
+                {
+                    enemyNextPosX = ey.enemyPosX + 1;
+
+                    enemyLastPosY = ey.enemyPosY;
+                    enemyLastPosX = ey.enemyPosX;
+
+                    if (Map.map[ey.enemyPosY, enemyNextPosX] == '`')
+                    {
+                        ey.enemyPosX++;
+
+                        Map.map[enemyLastPosY, enemyLastPosX] = '`';
+
+                        Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
+                    }
+                    else if (Map.map[ey.enemyPosY, enemyNextPosX] == 'P' && ey.enemyChar != '`')
+                    {
+                        if (ey.health >= 0)
+                        {
+                            HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
+                            Map.UpdateHUD(ey);
+                        }
+                    }
+                    else
+                    {
+                        ey.enemyDir = "up";
+                    }
+                }
+
+            }
+
+
+        }
+
+
 
 
 

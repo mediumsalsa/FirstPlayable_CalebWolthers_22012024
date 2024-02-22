@@ -172,9 +172,21 @@ namespace FirstPlayable_CalebWolthers_22012024
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
             }
+            else if (map[currentRow, currentCol] == '*')
+            {
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+            else if (map[currentRow, currentCol] == '$')
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+            }
             else if (map[currentRow, currentCol] == 'B')
             {
                 Console.ForegroundColor = ConsoleColor.White;
+            }
+            else if (map[currentRow, currentCol] == '}')
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
             }
             else if (map[currentRow, currentCol] == '7')
             {
@@ -254,6 +266,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine(breaker);
             Console.WriteLine("Player Stats");
             Console.WriteLine("");
+            Console.WriteLine("Shield: " + Player.shield);
             Console.WriteLine("Health: " + Player.health);
             Console.WriteLine("Health Status: " + healthStatus);
             Console.WriteLine("Attack Power: " + Player.playerAttack);

@@ -13,6 +13,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
         public static int health = 100;
+        public static int shield = 0;
 
         public static int playerAttack = 50;
 
@@ -37,6 +38,8 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static void SetPlayer()
         {
             Player.health = 100;
+
+            Player.shield = 0;
 
             Player.playerAttack = 50;
 
@@ -68,8 +71,6 @@ namespace FirstPlayable_CalebWolthers_22012024
                 playerPosY = nextPosY;
 
                 PlayerMoved();
-
-                Console.WriteLine("W");
             }
 
         }
@@ -96,8 +97,6 @@ namespace FirstPlayable_CalebWolthers_22012024
                 playerPosX = nextPosX;
 
                 PlayerMoved();
-
-                Console.WriteLine("A");
             }
 
         }
@@ -123,8 +122,6 @@ namespace FirstPlayable_CalebWolthers_22012024
                 playerPosY = nextPosY;
 
                 PlayerMoved();
-
-                Console.WriteLine("S");
             }
         }
 
@@ -147,8 +144,6 @@ namespace FirstPlayable_CalebWolthers_22012024
                 playerPosX = nextPosX;
 
                 PlayerMoved();
-
-                Console.WriteLine("D");
             }
 
 
