@@ -21,6 +21,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static string healthStatus;
 
+        public static string lastItem;
+
         public static int[] up = {-1, 0};
         public static int[] left = {0, -1};
         public static int[] down = {1, 0};
@@ -166,13 +168,21 @@ namespace FirstPlayable_CalebWolthers_22012024
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
             }
+            else if (map[currentRow, currentCol] == 'D')
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+            }
             else if (map[currentRow, currentCol] == 'B')
             {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else if (map[currentRow, currentCol] == '7')
+            {
+                Console.ForegroundColor = ConsoleColor.White;
             }
             else if (map[currentRow, currentCol] == 'O')
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.ForegroundColor = ConsoleColor.DarkGray;
             }
             else if (map[currentRow, currentCol] == '^')
             {
@@ -229,6 +239,12 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine("                                                ");
             Console.WriteLine("                                                ");
             Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                ");
             Console.SetCursorPosition(0, height + 2
                 );
 
@@ -241,6 +257,8 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine("Health: " + Player.health);
             Console.WriteLine("Health Status: " + healthStatus);
             Console.WriteLine("Attack Power: " + Player.playerAttack);
+            Console.WriteLine("last Item Aquired: " + lastItem);
+
             Console.WriteLine(breaker);
             Console.WriteLine("");
             ShowEnemyHUD(ey);

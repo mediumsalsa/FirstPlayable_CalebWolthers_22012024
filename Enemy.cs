@@ -23,6 +23,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public int enemyDamage;
 
+        public Random enemyDir = new Random();
+
         public int enemyPosX;
         public int enemyPosY;
 
@@ -31,18 +33,35 @@ namespace FirstPlayable_CalebWolthers_22012024
         public bool enemyUp = true;
         public static int enemyHealth = 100;
 
+        //
         public static int enemyNextPosX;
         public static int enemyNextPosY;
-
         public static int enemyLastPosX;
         public static int enemyLastPosY;
+
+        public static int enemyNextPosX2;
+        public static int enemyNextPosY2;
+        public static int enemyLastPosX2;
+        public static int enemyLastPosY2;
+
+        public static int enemyNextPosX3;
+        public static int enemyNextPosY3;
+        public static int enemyLastPosX3;
+        public static int enemyLastPosY3;
+
+        public static int enemyNextPosX4;
+        public static int enemyNextPosY4;
+        public static int enemyLastPosX4;
+        public static int enemyLastPosY4;
+        //
+
 
         public static Enemy theEnemy = new Enemy();
 
 
 
 
-        public static void SetEnemy(string name, int posX, int posY, char icon, int health, bool dir, int dmg)
+        public static void SetEnemy(string name, int posX, int posY, char icon, int health, bool dir, int dmg, Random randomDirection)
         {
             var ey = new Enemy();
             ey.enemyName = name;
@@ -52,6 +71,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             ey.enemyChar = icon;
             ey.health = health;
             ey.enemyDamage = dmg;
+            ey.enemyDir = randomDirection;
             Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
 
 
@@ -59,84 +79,16 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void UpdateEnemy(Enemy ey)
         {
-            SetEnemy(ey.enemyName, ey.enemyPosX, ey.enemyPosY, ey.enemyChar, ey.health, ey.enemyUp, ey.enemyDamage);
+            SetEnemy(ey.enemyName, ey.enemyPosX, ey.enemyPosY, ey.enemyChar, ey.health, ey.enemyUp, ey.enemyDamage, ey.enemyDir);
         }
-
-
-        /*public static void MoveEnemyVert(ref int CenemyPosX, ref int CenemyPosY, ref bool CenemyUp, char enemyIcon, Enemy enemy)
-        {
-            if (enemyIcon != '`')
-            {
-                if (CenemyUp == true)
-                {
-                    enemyNextPosY = CenemyPosY - 1;
-
-                    enemyLastPosY = CenemyPosY;
-                    enemyLastPosX = CenemyPosX;
-
-                    if (CenemyPosY != 0 && Map.map[enemyNextPosY, CenemyPosX] != '#' && Map.map[enemyNextPosY, CenemyPosX] != '~')
-                    {
-                        if (Map.map[enemyNextPosY, CenemyPosX] == 'P' && enemyIcon != '`')
-                        {
-                            if (enemy.health > 0)
-                            {
-                                HealthSystem.TakeDamage("player", enemy.enemyDamage, ref Player.health, null);
-                                Map.UpdateHUD(enemy);
-                            }
-                        }
-                        else
-                        {
-                            CenemyPosY--;
-
-                            Map.map[enemyLastPosY, enemyLastPosX] = '`';
-
-                            Map.map[CenemyPosY, CenemyPosX] = enemyIcon;
-
-                        }
-                    }
-                    else { CenemyUp = false; }
-                }
-
-                else if (CenemyUp == false)
-                {
-                    enemyNextPosY = CenemyPosY + 1;
-
-                    enemyLastPosY = CenemyPosY;
-                    enemyLastPosX = CenemyPosX;
-
-                    if (CenemyPosY != Map.height - 1 && Map.map[enemyNextPosY, CenemyPosX] != '#' && Map.map[enemyNextPosY, CenemyPosX] != '~')
-                    {
-                        if (Map.map[enemyNextPosY, CenemyPosX] == 'P' && enemyIcon != '`')
-                        {
-                            if (enemy.health >= 0)
-                            {
-                                HealthSystem.TakeDamage("player", enemy.enemyDamage, ref Player.health, null);
-                                Map.UpdateHUD(enemy);
-                            }
-                        }
-                        else
-                        {
-
-                            CenemyPosY++;
-
-                            Map.map[enemyLastPosY, enemyLastPosX] = '`';
-
-                            Map.map[CenemyPosY, CenemyPosX] = enemyIcon;
-
-                        }
-                    }
-                    else { CenemyUp = true; }
-                }
-            }
-
-
-        }*/
 
 
         public static void MoveEnemyVert(Enemy ey)
         {
             if (ey.enemyChar != '`')
             {
+
+                //Up
                 if (ey.enemyUp == true)
                 {
                     enemyNextPosY = ey.enemyPosY - 1;
@@ -144,57 +96,53 @@ namespace FirstPlayable_CalebWolthers_22012024
                     enemyLastPosY = ey.enemyPosY;
                     enemyLastPosX = ey.enemyPosX;
 
-                    if (ey.enemyPosY != 0 && Map.map[enemyNextPosY, ey.enemyPosX] != '#' && Map.map[enemyNextPosY, ey.enemyPosX] != '~')
+                    if (Map.map[enemyNextPosY, ey.enemyPosX] == '`')
                     {
-                        if (Map.map[enemyNextPosY, ey.enemyPosX] == 'P' && ey.enemyChar != '`')
+
+                        ey.enemyPosY--;
+
+                        Map.map[enemyLastPosY, enemyLastPosX] = '`';
+
+                        Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
+                    }
+
+                    else if (Map.map[enemyNextPosY, ey.enemyPosX] == 'P' && ey.enemyChar != '`')
+                    {
+                        if (ey.health > 0)
                         {
-                            if (ey.health > 0)
-                            {
-                                HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
-                                Map.UpdateHUD(ey);
-                            }
-                        }
-                        else
-                        {
-                            ey.enemyPosY--;
-
-                            Map.map[enemyLastPosY, enemyLastPosX] = '`';
-
-                            Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
-
+                            HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
+                            Map.UpdateHUD(ey);
                         }
                     }
+
                     else { ey.enemyUp = false; }
                 }
 
+                //Down
                 else if (ey.enemyUp == false)
                 {
                     enemyNextPosY = ey.enemyPosY + 1;
 
                     enemyLastPosY = ey.enemyPosY;
                     enemyLastPosX = ey.enemyPosX;
-
-                    if (ey.enemyPosY != Map.height - 1 && Map.map[enemyNextPosY, ey.enemyPosX] != '#' && Map.map[enemyNextPosY, ey.enemyPosX] != '~')
+                    if (Map.map[enemyNextPosY, ey.enemyPosX] == '`')
                     {
-                        if (Map.map[enemyNextPosY, ey.enemyPosX] == 'P' && ey.enemyChar != '`')
+                        ey.enemyPosY++;
+
+                        Map.map[enemyLastPosY, enemyLastPosX] = '`';
+
+                        Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
+                    }
+
+                    else if (Map.map[enemyNextPosY, ey.enemyPosX] == 'P' && ey.enemyChar != '`')
+                    {
+                        if (ey.health > 0)
                         {
-                            if (ey.health >= 0)
-                            {
-                                HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
-                                Map.UpdateHUD(ey);
-                            }
-                        }
-                        else
-                        {
-
-                            ey.enemyPosY++;
-
-                            Map.map[enemyLastPosY, enemyLastPosX] = '`';
-
-                            Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
-
+                            HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
+                            Map.UpdateHUD(ey);
                         }
                     }
+
                     else { ey.enemyUp = true; }
                 }
             }
@@ -206,15 +154,15 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
+
         public static void MoveEnemyRandom(Enemy ey)
         {
 
             if (ey.enemyChar != '`')
             {
 
+                int dir = ey.enemyDir.Next(0, 400);
 
-                var rd = new Random();
-                int dir = rd.Next(0, 400);
 
 
                 //Up
@@ -324,14 +272,14 @@ namespace FirstPlayable_CalebWolthers_22012024
                     }
                 }
 
-
-
-
-
             }
 
 
         }
+
+        
+
+
 
 
     }

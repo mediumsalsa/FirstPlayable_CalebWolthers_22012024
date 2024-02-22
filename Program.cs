@@ -18,11 +18,15 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
         //Enemy Holding zone
-         static Enemy slime = new Enemy();
+        static Enemy slime = new Enemy();
 
-         static Enemy goblin = new Enemy();
+        static Enemy rockGolem = new Enemy();
 
-         static Enemy bat = new Enemy();
+        static Enemy goblin = new Enemy();
+
+        static Enemy bat = new Enemy();
+
+
         //
         //Process to add enemies:
         //  1.  Instantiate in the enemy holding zone.
@@ -30,10 +34,12 @@ namespace FirstPlayable_CalebWolthers_22012024
         //  3.  Update the enemy. Also in the start game method
         //  4.  Give the enemy it's movement script in the MoveAllEnemies method.
         //  5.  tell the player what happens when it hits the enmy in the check next move method
+        //
+        // NOTE: you do not need to go through other classes to add an enemy
         //  
         //
 
-        
+
 
         static void Main(string[] args)
         {
@@ -59,6 +65,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Console.WriteLine("");
 
+
+            //Write your enemy stats here
             slime.enemyName = "Slime";
             slime.enemyPosX = 12;
             slime.enemyPosY = 12;
@@ -80,16 +88,28 @@ namespace FirstPlayable_CalebWolthers_22012024
             bat.enemyPosY = 16;
             bat.enemyChar = 'B';
             bat.health = 100;
-            bat.enemyDamage = 40;
+            bat.enemyDamage = 30;
+
+            rockGolem.enemyName = "Rock Golem";
+            rockGolem.enemyPosX = 24;
+            rockGolem.enemyPosY = 18;
+            rockGolem.enemyChar = 'O';
+            rockGolem.health = 300;
+            rockGolem.enemyDamage = 12;
 
 
             Player.SetPlayer();
 
             Map.StartMap();
 
+
+            //ADD THIS METHOD FOR YOU'RE NEW ENEMY
             Enemy.UpdateEnemy(slime);
             Enemy.UpdateEnemy(goblin);
             Enemy.UpdateEnemy(bat);
+            Enemy.UpdateEnemy(rockGolem);
+
+
 
             GetInput();
 
@@ -97,13 +117,29 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
-
+        //AND THIS METHOD FOR YOU'RE NEW ENEMY
         public static void MoveAllEnemies()
         {
+
             Enemy.MoveEnemyVert(slime);
             Enemy.MoveEnemyVert(goblin);
             Enemy.MoveEnemyRandom(bat);
+            Enemy.MoveEnemyRandom(rockGolem);
+
+
+
             Map.DisplayMap();
+        }
+
+        //AND THIS METHOD FOR YOU'RE NEW ENEMY
+        public static void CheckForAllEnemies()
+        {
+
+            PlayerHitEnemy(slime);
+            PlayerHitEnemy(goblin);
+            PlayerHitEnemy(bat);
+            PlayerHitEnemy(rockGolem);
+
         }
 
 
@@ -120,6 +156,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     Player.CantMove();
 
+                    Map.lastItem = "Health Potion(+60 health)";
                     HealthSystem.TakeDamage("player", 60, ref Player.health, null);
                 }
                 else if (Map.map[Player.playerPosY, Player.nextPosX] == '~' || Map.map[Player.nextPosY, Player.playerPosX] == '~')
@@ -134,43 +171,36 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     HealthSystem.Heal(40, ref Player.health);
                 }
-                else if (Map.map[Player.playerPosY, Player.nextPosX] == Map.map[slime.enemyPosY, slime.enemyPosX] || Map.map[Player.nextPosY, Player.playerPosX] == Map.map[slime.enemyPosY, slime.enemyPosX])
+                else if (Map.map[Player.playerPosY, Player.nextPosX] == '7' || Map.map[Player.nextPosY, Player.playerPosX] == '7')
                 {
-                    if (slime.health > 0)
-                    { 
-                        Player.CantMove();
-
-                        HealthSystem.TakeDamage("enemy", 50, ref slime.health, slime);
-
-                        Map.UpdateHUD(slime);
-                    }
+                    Map.lastItem = "Golems Greatsword(+50 attack)";
+                    Player.playerAttack += 50;
                 }
-                else if (Map.map[Player.playerPosY, Player.nextPosX] == Map.map[goblin.enemyPosY, goblin.enemyPosX] || Map.map[Player.nextPosY, Player.playerPosX] == Map.map[goblin.enemyPosY, goblin.enemyPosX])
-                {
-                    if (goblin.health > 0)
-                    {
-                        Player.CantMove();
 
-                        HealthSystem.TakeDamage("enemy", 50, ref goblin.health, goblin);
 
-                        Map.UpdateHUD(goblin);
-                    }
-                }
-                else if (Map.map[Player.playerPosY, Player.nextPosX] == Map.map[bat.enemyPosY, bat.enemyPosX] || Map.map[Player.nextPosY, Player.playerPosX] == Map.map[bat.enemyPosY, bat.enemyPosX])
-                {
-                    if (bat.health > 0)
-                    {
-                        Player.CantMove();
-
-                        HealthSystem.TakeDamage("enemy", 50, ref bat.health, bat);
-
-                        Map.UpdateHUD(bat);
-                    }
-                }
+                CheckForAllEnemies();
+                
 
             }
 
         }
+
+        public static void PlayerHitEnemy(Enemy ey)
+        {
+            if (Map.map[Player.playerPosY, Player.nextPosX] == Map.map[ey.enemyPosY, ey.enemyPosX] || Map.map[Player.nextPosY, Player.playerPosX] == Map.map[ey.enemyPosY, ey.enemyPosX])
+            {
+                if (ey.health > 0)
+                {
+                    Player.CantMove();
+
+                    HealthSystem.TakeDamage("enemy", 50, ref ey.health, ey);
+
+                    Map.UpdateHUD(ey);
+                }
+            }
+        }
+
+
 
 
 
