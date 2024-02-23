@@ -24,6 +24,8 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine("Start Game");
             Console.WriteLine("");
 
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+
             GameManager.StartGame();
 
             Console.WriteLine("");

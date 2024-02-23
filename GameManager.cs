@@ -56,24 +56,26 @@ namespace FirstPlayable_CalebWolthers_22012024
             slime.enemyChar = '0';
             slime.health = 100;
             slime.enemyDamage = 10;
-            slime.enemyUp = true;
+            slime.enemyDir = "up";
 
-            goblin.enemyName = "Tutorial Goblin";
+
+            goblin.enemyName = "Goblin";
             goblin.enemyPosX = 5;
             goblin.enemyPosY = 15;
             goblin.enemyChar = 'G';
             goblin.health = 150;
             goblin.enemyDamage = 20;
-            goblin.enemyUp = false;
+            goblin.enemyDir = "down";
 
-            bat.enemyName = "Bones The Twin Golem";
+
+            bat.enemyName = "Bones, The Twin Golem";
             bat.enemyPosX = 16;
             bat.enemyPosY = 16;
             bat.enemyChar = 'B';
             bat.health = 100;
             bat.enemyDamage = 30;
 
-            rockGolem.enemyName = "Rock The Other Twin Golem";
+            rockGolem.enemyName = "Rock, The Other Twin Golem";
             rockGolem.enemyPosX = 24;
             rockGolem.enemyPosY = 18;
             rockGolem.enemyChar = 'O';
@@ -88,7 +90,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             minotaur.enemyDamage = 30;
             minotaur.enemyDir = "right";
 
-            skele.enemyName = "Boring Skeleton";
+            skele.enemyName = "Skeleton";
             skele.enemyPosX = 6;
             skele.enemyPosY = 4;
             skele.enemyChar = '$';
@@ -135,7 +137,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             Enemy.MoveEnemyRandom(rockGolem);
             Enemy.MoveEnemySquare(minotaur);
             Enemy.MoveEnemySquare(skele);
-            Enemy.MoveEnemyRandom(dragon);
+            Enemy.MoveEnemyRandom2(dragon);
 
 
 
@@ -226,6 +228,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void GetInput()
         {
+
+
             var exit = false;
 
             ConsoleKeyInfo keyInfo;
@@ -235,7 +239,9 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                 keyInfo = Console.ReadKey(true);
 
+
                 Console.WriteLine();
+
 
                 switch (keyInfo.Key)
                 {
@@ -268,7 +274,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                         break;
 
                     default:
-                        //ExitProgram();
+                        //Map.DisplayMap();
                         break;
 
                 }
