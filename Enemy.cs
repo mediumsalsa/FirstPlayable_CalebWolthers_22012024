@@ -25,6 +25,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public string enemyDir;
 
+        public int moveTick;
+
         public int enemyPosX;
         public int enemyPosY;
 
@@ -61,7 +63,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
-        public static void SetEnemy(string name, int posX, int posY, char icon, int health, int dmg, string direction)
+        public static void SetEnemy(string name, int posX, int posY, char icon, int health, int dmg, string direction, int tick)
         {
             var ey = new Enemy();
             ey.enemyName = name;
@@ -71,6 +73,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             ey.health = health;
             ey.enemyDamage = dmg;
             ey.enemyDir = direction;
+            ey.moveTick = tick;
             Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
 
 
@@ -78,7 +81,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void UpdateEnemy(Enemy ey)
         {
-            SetEnemy(ey.enemyName, ey.enemyPosX, ey.enemyPosY, ey.enemyChar, ey.health, ey.enemyDamage, ey.enemyDir);
+            SetEnemy(ey.enemyName, ey.enemyPosX, ey.enemyPosY, ey.enemyChar, ey.health, ey.enemyDamage, ey.enemyDir, ey.moveTick);
         }
 
 
@@ -180,6 +183,68 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
         }
+
+
+        public static void MoveEnemyPatrol(Enemy ey)
+        {
+
+
+            if (ey.enemyChar != '`')
+            {
+
+                //Up
+                if (ey.enemyDir == "up")
+                {
+                    EnemyMoveUp(ey, "right");
+                    ey.moveTick++;
+                    if (ey.moveTick >= 8)
+                    {
+                        ey.moveTick = 0;
+                        ey.enemyDir = "down";
+                    }
+                }
+
+                //Left
+                else if (ey.enemyDir == "left")
+                {
+                    EnemyMoveLeft(ey, "down");
+                    ey.moveTick++;
+                    if (ey.moveTick >= 6)
+                    {
+                        ey.moveTick = 0;
+                        ey.enemyDir = "left";
+                    }
+                }
+
+                //Down
+                else if (ey.enemyDir == "down")
+                {
+                    EnemyMoveDown(ey, "up");
+                    ey.moveTick++;
+                    if (ey.moveTick >= 4)
+                    {
+                        ey.moveTick = 0;
+                        ey.enemyDir = "right";
+                    }
+                }
+
+                //Right
+                else if (ey.enemyDir == "right")
+                {
+                    EnemyMoveRight(ey, "left");
+                    ey.moveTick++;
+                    if (ey.moveTick >= 4)
+                    {
+                        ey.moveTick = 0;
+                        ey.enemyDir = "up";
+                    }
+                }
+
+            }
+
+
+            }
+
 
 
 

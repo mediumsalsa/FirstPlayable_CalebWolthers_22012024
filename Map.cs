@@ -160,6 +160,10 @@ namespace FirstPlayable_CalebWolthers_22012024
             {
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
             }
+            else if (map[currentRow, currentCol] == '!')
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+            }
             else if (map[currentRow, currentCol] == '0')
             {
                 Console.ForegroundColor = ConsoleColor.DarkGreen;

@@ -24,6 +24,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         static Enemy dragon = new Enemy();
 
+        static Enemy guardian = new Enemy();
+
 
         //
         //Process to add enemies:
@@ -105,6 +107,13 @@ namespace FirstPlayable_CalebWolthers_22012024
             dragon.health = 1000;
             dragon.enemyDamage = 40;
 
+            guardian.enemyName = "Royal Guardian";
+            guardian.enemyPosX = 6;
+            guardian.enemyPosY = 12;
+            guardian.enemyChar = '!';
+            guardian.health = 350;
+            guardian.enemyDamage = 150;
+            guardian.enemyDir = "up";
 
 
             Player.SetPlayer();
@@ -120,6 +129,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             Enemy.UpdateEnemy(minotaur);
             Enemy.UpdateEnemy(skele);
             Enemy.UpdateEnemy(dragon);
+            Enemy.UpdateEnemy(guardian);
 
             GetInput();
 
@@ -138,6 +148,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             Enemy.MoveEnemySquare(minotaur);
             Enemy.MoveEnemySquare(skele);
             Enemy.MoveEnemyRandom2(dragon);
+            Enemy.MoveEnemyPatrol(guardian);
 
 
 
@@ -155,6 +166,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             PlayerHitEnemy(minotaur);
             PlayerHitEnemy(skele);
             PlayerHitEnemy(dragon);
+            PlayerHitEnemy(guardian);
 
         }
 
