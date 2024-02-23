@@ -47,6 +47,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             playerPosX = 4;
             playerPosY = 20;
+
+            
         }
 
 
@@ -55,7 +57,6 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             dir = "up";
 
-            var ey = new Enemy();
             nextPosY = playerPosY - 1;
 
             lastPosY = playerPosY;
@@ -80,8 +81,6 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             dir = "left";
 
-            var ey = new Enemy();
-
             nextPosX = playerPosX - 1;
 
             lastPosY = playerPosY;
@@ -104,8 +103,6 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static void KeyS()
         {
             dir = "down";
-
-            var ey = new Enemy();
 
             nextPosY = playerPosY + 1;
 

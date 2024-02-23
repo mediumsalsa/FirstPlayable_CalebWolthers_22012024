@@ -101,7 +101,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             dragon.enemyPosY = 15;
             dragon.enemyChar = 'D';
             dragon.health = 1000;
-            dragon.enemyDamage = 20;
+            dragon.enemyDamage = 40;
 
 
 
@@ -118,8 +118,6 @@ namespace FirstPlayable_CalebWolthers_22012024
             Enemy.UpdateEnemy(minotaur);
             Enemy.UpdateEnemy(skele);
             Enemy.UpdateEnemy(dragon);
-
-
 
             GetInput();
 
@@ -215,7 +213,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     Player.CantMove();
 
-                    HealthSystem.TakeDamage("enemy", 50, ref ey.health, ey);
+                    HealthSystem.TakeDamage("enemy", Player.playerAttack, ref ey.health, ey);
 
                     Map.UpdateHUD(ey);
                 }
