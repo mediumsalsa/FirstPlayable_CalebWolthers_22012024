@@ -242,25 +242,25 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
             Console.SetCursorPosition(0, height + 2);
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
-            Console.WriteLine("                                                ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
+            Console.WriteLine("                                                        ");
             Console.SetCursorPosition(0, height + 2
                 );
 
