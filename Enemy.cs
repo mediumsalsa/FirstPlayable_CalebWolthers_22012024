@@ -183,6 +183,46 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
         }
+        public static void MoveEnemyRandomDiagonol(Enemy ey)
+        {
+
+            if (ey.enemyChar != '`')
+            {
+                var rand = new Random();
+                int dir = rand.Next(0, 400);
+
+                //Up
+                if (dir > 300)
+                {
+                    EnemyMoveUp(ey, null);
+                    EnemyMoveLeft(ey, null);
+                }
+
+                //Left
+                else if (dir > 200 && dir <= 300)
+                {
+                    EnemyMoveDown(ey, null);
+                    EnemyMoveLeft(ey, null);
+                }
+
+                //Down
+                else if (dir > 100 && dir <= 200)
+                {
+                    EnemyMoveDown(ey, null);
+                    EnemyMoveRight(ey, null);
+                }
+
+                //Right
+                else if (dir <= 100)
+                {
+                    EnemyMoveUp(ey, null);
+                    EnemyMoveRight(ey, null);
+                }
+
+            }
+
+
+        }
 
 
         public static void MoveEnemyPatrol(Enemy ey)

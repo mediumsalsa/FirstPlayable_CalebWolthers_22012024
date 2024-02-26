@@ -140,7 +140,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             if (map[currentRow, currentCol] == '`')
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.Black;
             }
             else if (map[currentRow, currentCol] == '~')
             {
@@ -154,7 +154,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                     map[currentRow, currentCol] = '`';
                 }
 
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.ForegroundColor = ConsoleColor.Blue;
             }
             else if (map[currentRow, currentCol] == '#')
             {
@@ -206,7 +206,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             }
             else if (map[currentRow, currentCol] == '@')
             {
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.ForegroundColor = ConsoleColor.Blue;
             }
 
             Console.Write(map[currentRow, currentCol]);
