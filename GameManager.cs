@@ -42,13 +42,15 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void StartGame()
         {
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+
+
             Console.Clear();
 
             Console.SetCursorPosition(0, 0);
 
             Console.CursorVisible = !true;
 
-            Console.WriteLine("");
 
 
             //Write your enemy stats here
@@ -121,7 +123,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             Map.StartMap();
 
 
-            //ADD THIS METHOD FOR YOU'RE NEW ENEMY
+
             Enemy.UpdateEnemy(slime);
             Enemy.UpdateEnemy(goblin);
             Enemy.UpdateEnemy(bat);
@@ -131,13 +133,14 @@ namespace FirstPlayable_CalebWolthers_22012024
             Enemy.UpdateEnemy(dragon);
             Enemy.UpdateEnemy(guardian);
 
-            GetInput();
 
-            Console.WriteLine("");
+
+            Player.GetInput();
+
         }
 
 
-        //AND THIS METHOD FOR YOU'RE NEW ENEMY
+
         public static void MoveAllEnemies()
         {
 
@@ -155,7 +158,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             Map.DisplayMap();
         }
 
-        //AND THIS METHOD FOR YOU'RE NEW ENEMY
+
         public static void CheckForAllEnemies()
         {
 
@@ -173,51 +176,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
-        public static void CheckNextMove()
-        {
-            var ey = new Enemy();
 
-            if (Player.playerPosX != Map.width - 1 && Player.playerPosY != Map.height - 1 && Player.playerPosX != 0 && Player.playerPosY != 0)
-            {
-
-                if (Map.map[Player.playerPosY, Player.nextPosX] == '^' || Map.map[Player.nextPosY, Player.playerPosX] == '^')
-                {
-                    Player.CantMove();
-
-                    
-                    HealthSystem.TakeDamage("player", 60, ref Player.health, null);
-                }
-                else if (Map.map[Player.playerPosY, Player.nextPosX] == '~' || Map.map[Player.nextPosY, Player.playerPosX] == '~')
-                {
-                    Player.CantMove();
-                }
-                else if (Map.map[Player.playerPosY, Player.nextPosX] == '#' || Map.map[Player.nextPosY, Player.playerPosX] == '#')
-                {
-                    Player.CantMove();
-                }
-                else if (Map.map[Player.playerPosY, Player.nextPosX] == '@' || Map.map[Player.nextPosY, Player.playerPosX] == '@')
-                {
-                    Map.lastItem = "Health Potion(+60 health)";
-                    HealthSystem.Heal(40, ref Player.health);
-                }
-                else if (Map.map[Player.playerPosY, Player.nextPosX] == '7' || Map.map[Player.nextPosY, Player.playerPosX] == '7')
-                {
-                    Map.lastItem = "Golems Greatsword(+50 attack)";
-                    Player.playerAttack += 50;
-                }
-                if (Map.map[Player.playerPosY, Player.nextPosX] == '*' || Map.map[Player.nextPosY, Player.playerPosX] == '*')
-                {
-                    Map.lastItem = "Helmet of immortality";
-                    HealthSystem.Heal(200, ref Player.shield);
-                }
-
-
-                CheckForAllEnemies();
-
-
-            }
-
-        }
 
         public static void PlayerHitEnemy(Enemy ey)
         {
@@ -235,70 +194,6 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
-
-
-
-        public static void GetInput()
-        {
-
-
-            var exit = false;
-
-            ConsoleKeyInfo keyInfo;
-
-            do
-            {
-
-                keyInfo = Console.ReadKey(true);
-
-
-                Console.WriteLine();
-
-
-                switch (keyInfo.Key)
-                {
-                    case ConsoleKey.W:
-                        Player.KeyW();
-                        MoveAllEnemies();
-                        break;
-
-                    case ConsoleKey.A:
-                        Player.KeyA();
-                        MoveAllEnemies();
-                        break;
-
-                    case ConsoleKey.S:
-                        Player.KeyS();
-                        MoveAllEnemies();
-                        break;
-
-                    case ConsoleKey.D:
-                        Player.KeyD();
-                        MoveAllEnemies();
-                        break;
-
-                    case ConsoleKey.Escape:
-                        Environment.Exit(0);
-                        break;
-
-                    case ConsoleKey.R:
-                        StartGame();
-                        break;
-
-                    default:
-                       
-                        break;
-
-                }
-
-
-
-            }
-
-
-            while (exit == false);
-
-        }
 
 
     }

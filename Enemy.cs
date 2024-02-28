@@ -11,12 +11,6 @@ namespace FirstPlayable_CalebWolthers_22012024
     internal class Enemy : Entity
     {
 
-        public int scoreValue;
-        public int xpValue;
-        public int goldDrop;
-
-        public static int goblinDamage = 20;
-
         public char enemyChar;
 
         public int health;
@@ -27,39 +21,21 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public int moveTick;
 
-        public int enemyPosX;
-        public int enemyPosY;
-
         public string enemyName;
 
-        public bool enemyUp = true;
-        public static int enemyHealth = 100;
+        public static int enemyHealth;
 
+
+        //
+        public int enemyPosX;
+        public int enemyPosY;
         //
         public static int enemyNextPosX;
         public static int enemyNextPosY;
+        //
         public static int enemyLastPosX;
         public static int enemyLastPosY;
-
-        public static int enemyNextPosX2;
-        public static int enemyNextPosY2;
-        public static int enemyLastPosX2;
-        public static int enemyLastPosY2;
-
-        public static int enemyNextPosX3;
-        public static int enemyNextPosY3;
-        public static int enemyLastPosX3;
-        public static int enemyLastPosY3;
-
-        public static int enemyNextPosX4;
-        public static int enemyNextPosY4;
-        public static int enemyLastPosX4;
-        public static int enemyLastPosY4;
         //
-
-
-        public static Enemy theEnemy = new Enemy();
-
 
 
 
@@ -85,6 +61,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
+        //Bounces vertically
         public static void MoveEnemyVert(Enemy ey)
         {
             if (ey.enemyChar != '`')
@@ -102,15 +79,9 @@ namespace FirstPlayable_CalebWolthers_22012024
                     EnemyMoveDown(ey, "up");
                 }
             }
-
-
         }
 
-
-
-
-
-
+        //Moves randomly
         public static void MoveEnemyRandom(Enemy ey)
         {
 
@@ -142,11 +113,11 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     EnemyMoveRight(ey, null);
                 }
-
             }
-
-
         }
+
+
+        //Moves randomly
         public static void MoveEnemyRandom2(Enemy ey)
         {
 
@@ -180,9 +151,9 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
 
             }
-
-
         }
+
+        //Moves randomly diagnolly
         public static void MoveEnemyRandomDiagonol(Enemy ey)
         {
 
@@ -218,17 +189,12 @@ namespace FirstPlayable_CalebWolthers_22012024
                     EnemyMoveUp(ey, null);
                     EnemyMoveRight(ey, null);
                 }
-
             }
-
-
         }
 
-
+        //Moves in a chatotic patterm
         public static void MoveEnemyPatrol(Enemy ey)
         {
-
-
             if (ey.enemyChar != '`')
             {
 
@@ -279,16 +245,10 @@ namespace FirstPlayable_CalebWolthers_22012024
                         ey.enemyDir = "up";
                     }
                 }
-
             }
+        }
 
-
-            }
-
-
-
-
-
+        //Bounce in a square
         public static void MoveEnemySquare(Enemy ey)
         {
 
@@ -318,16 +278,16 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     EnemyMoveRight(ey, "up");
                 }
-
-
             }
-
         }
 
 
 
 
         //Next 4 methods make the enemy move in any of the 4 cardinal directions
+        //
+
+        //Moves enemy up
         public static void EnemyMoveUp(Enemy ey, string nextDir)
         {
             enemyNextPosY = ey.enemyPosY - 1;
@@ -338,18 +298,11 @@ namespace FirstPlayable_CalebWolthers_22012024
             if (Map.map[enemyNextPosY, ey.enemyPosX] == '`')
             {
                 ey.enemyPosY--;
-
-                Map.map[enemyLastPosY, enemyLastPosX] = '`';
-
-                Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
+                EnemyAfterMove(ey);
             }
             else if (Map.map[enemyNextPosY, ey.enemyPosX] == 'P' && ey.enemyChar != '`')
             {
-                if (ey.health >= 0)
-                {
-                    HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
-                    Map.UpdateHUD(ey);
-                }
+                EnemyHitsPlayer(ey);
             }
             else
             {
@@ -358,7 +311,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
-
+        //Moves enemy left
         public static void EnemyMoveLeft(Enemy ey, string nextDir)
         {
             enemyNextPosX = ey.enemyPosX - 1;
@@ -369,18 +322,11 @@ namespace FirstPlayable_CalebWolthers_22012024
             if (Map.map[ey.enemyPosY, enemyNextPosX] == '`')
             {
                 ey.enemyPosX--;
-
-                Map.map[enemyLastPosY, enemyLastPosX] = '`';
-
-                Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
+                EnemyAfterMove(ey);
             }
             else if (Map.map[ey.enemyPosY, enemyNextPosX] == 'P' && ey.enemyChar != '`')
             {
-                if (ey.health >= 0)
-                {
-                    HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
-                    Map.UpdateHUD(ey);
-                }
+                EnemyHitsPlayer(ey);
             }
             else
             {
@@ -389,6 +335,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
+        //Moves enemy down
         public static void EnemyMoveDown(Enemy ey, string nextDir)
         {
             enemyNextPosY = ey.enemyPosY + 1;
@@ -399,18 +346,11 @@ namespace FirstPlayable_CalebWolthers_22012024
             if (Map.map[enemyNextPosY, ey.enemyPosX] == '`')
             {
                 ey.enemyPosY++;
-
-                Map.map[enemyLastPosY, enemyLastPosX] = '`';
-
-                Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
+                EnemyAfterMove(ey);
             }
             else if (Map.map[enemyNextPosY, ey.enemyPosX] == 'P' && ey.enemyChar != '`')
             {
-                if (ey.health >= 0)
-                {
-                    HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
-                    Map.UpdateHUD(ey);
-                }
+                EnemyHitsPlayer(ey);
             }
             else
             {
@@ -419,7 +359,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
-
+        //Moves enemy right
         public static void EnemyMoveRight(Enemy ey, string nextDir)
         {
             enemyNextPosX = ey.enemyPosX + 1;
@@ -430,18 +370,11 @@ namespace FirstPlayable_CalebWolthers_22012024
             if (Map.map[ey.enemyPosY, enemyNextPosX] == '`')
             {
                 ey.enemyPosX++;
-
-                Map.map[enemyLastPosY, enemyLastPosX] = '`';
-
-                Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
+                EnemyAfterMove(ey);
             }
             else if (Map.map[ey.enemyPosY, enemyNextPosX] == 'P' && ey.enemyChar != '`')
             {
-                if (ey.health >= 0)
-                {
-                    HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
-                    Map.UpdateHUD(ey);
-                }
+                EnemyHitsPlayer(ey);
             }
             else
             {
@@ -449,6 +382,29 @@ namespace FirstPlayable_CalebWolthers_22012024
             }
         }
 
+
+
+
+
+        //If player isnt deat, hit player
+        static void EnemyHitsPlayer(Enemy ey)
+        {
+            if (ey.health >= 0)
+            {
+                HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
+                Map.UpdateHUD(ey);
+            }
+        }
+
+
+
+        //Move enemy and replace last position
+        static void EnemyAfterMove(Enemy ey)
+        {
+            Map.map[enemyLastPosY, enemyLastPosX] = '`';
+
+            Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
+        }
 
 
 
