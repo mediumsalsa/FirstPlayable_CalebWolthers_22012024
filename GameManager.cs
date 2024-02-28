@@ -16,7 +16,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         static Enemy goblin = new Enemy();
 
-        static Enemy bat = new Enemy();
+        static Enemy bones = new Enemy();
 
         static Enemy minotaur = new Enemy();
 
@@ -27,23 +27,9 @@ namespace FirstPlayable_CalebWolthers_22012024
         static Enemy guardian = new Enemy();
 
 
-        //
-        //Process to add enemies:
-        //  1.  Instantiate in the enemy holding zone.
-        //  2.  Give the enmy it's stats in the start game method.
-        //  3.  Update the enemy. Also in the start game method
-        //  4.  Give the enemy it's movement script in the MoveAllEnemies method.
-        //  5.  tell the player what happens when it hits the enmy in the check next move method
-        //
-        // NOTE: you do not need to go through other classes to add an enemy
-        //  
-        //
-
-
         public static void StartGame()
         {
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
-
 
             Console.Clear();
 
@@ -51,87 +37,28 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Console.CursorVisible = !true;
 
-
-
-            //Write your enemy stats here
-            slime.enemyName = "Useless Slime";
-            slime.enemyPosX = 12;
-            slime.enemyPosY = 12;
-            slime.enemyChar = '0';
-            slime.health = 100;
-            slime.enemyDamage = 10;
-            slime.enemyDir = "up";
-
-
-            goblin.enemyName = "Goblin";
-            goblin.enemyPosX = 5;
-            goblin.enemyPosY = 15;
-            goblin.enemyChar = 'G';
-            goblin.health = 150;
-            goblin.enemyDamage = 20;
-            goblin.enemyDir = "down";
-
-
-            bat.enemyName = "Bones, The Twin Golem";
-            bat.enemyPosX = 16;
-            bat.enemyPosY = 16;
-            bat.enemyChar = 'B';
-            bat.health = 100;
-            bat.enemyDamage = 30;
-
-            rockGolem.enemyName = "Rock, The Other Twin Golem";
-            rockGolem.enemyPosX = 24;
-            rockGolem.enemyPosY = 18;
-            rockGolem.enemyChar = 'O';
-            rockGolem.health = 300;
-            rockGolem.enemyDamage = 12;
-
-            minotaur.enemyName = "Purple Minotaur";
-            minotaur.enemyPosX = 40;
-            minotaur.enemyPosY = 9;
-            minotaur.enemyChar = '}';
-            minotaur.health = 500;
-            minotaur.enemyDamage = 30;
-            minotaur.enemyDir = "right";
-
-            skele.enemyName = "Skeleton";
-            skele.enemyPosX = 6;
-            skele.enemyPosY = 4;
-            skele.enemyChar = '$';
-            skele.health = 300;
-            skele.enemyDamage = 40;
-            skele.enemyDir = "up";
-
-            dragon.enemyName = "Kinda Mighty Dragon";
-            dragon.enemyPosX = 32;
-            dragon.enemyPosY = 15;
-            dragon.enemyChar = 'D';
-            dragon.health = 1000;
-            dragon.enemyDamage = 40;
-
-            guardian.enemyName = "Royal Guardian";
-            guardian.enemyPosX = 6;
-            guardian.enemyPosY = 12;
-            guardian.enemyChar = '!';
-            guardian.health = 350;
-            guardian.enemyDamage = 150;
-            guardian.enemyDir = "up";
-
-
             Player.SetPlayer();
 
             Map.StartMap();
 
 
+            //Give setting in order:
+            //Instance, Name, X Position, Y Position, Icon Char, Health, Damage, Current Direction(Unless enemy moves randomly)
+            Enemy.SetEnemy(slime, "Slime", 12, 12, '0', 100, 10, "down");
 
-            Enemy.UpdateEnemy(slime);
-            Enemy.UpdateEnemy(goblin);
-            Enemy.UpdateEnemy(bat);
-            Enemy.UpdateEnemy(rockGolem);
-            Enemy.UpdateEnemy(minotaur);
-            Enemy.UpdateEnemy(skele);
-            Enemy.UpdateEnemy(dragon);
-            Enemy.UpdateEnemy(guardian);
+            Enemy.SetEnemy(goblin, "Goblin", 5, 15, 'G', 150, 20, "down");
+
+            Enemy.SetEnemy(bones, "Bone Golem", 16, 16, 'B', 100, 30, null);
+
+            Enemy.SetEnemy(rockGolem, "Rock Golem", 24, 18, 'O', 300, 12, null);
+
+            Enemy.SetEnemy(minotaur, "Purple Minotaur", 40, 9, '}', 500, 30, "right");
+
+            Enemy.SetEnemy(skele, "Skeleton", 6, 4, '$', 300, 40, "up");
+
+            Enemy.SetEnemy(dragon, "Kinda Mighty Dragon", 32, 15, 'D', 1000, 40, null);
+
+            Enemy.SetEnemy(guardian, "Royal Guardian", 6, 12, '!', 350, 150, "up");
 
 
 
@@ -146,12 +73,12 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Enemy.MoveEnemyVert(slime);
             Enemy.MoveEnemyVert(goblin);
-            Enemy.MoveEnemyRandom(bat);
+            Enemy.MoveEnemyRandom(bones);
             Enemy.MoveEnemyRandom(rockGolem);
             Enemy.MoveEnemySquare(minotaur);
             Enemy.MoveEnemySquare(skele);
             Enemy.MoveEnemyRandom2(dragon);
-            Enemy.MoveEnemyPatrol(guardian);
+            Enemy.MoveEnemySquare(guardian);
 
 
 
@@ -162,36 +89,17 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static void CheckForAllEnemies()
         {
 
-            PlayerHitEnemy(slime);
-            PlayerHitEnemy(goblin);
-            PlayerHitEnemy(bat);
-            PlayerHitEnemy(rockGolem);
-            PlayerHitEnemy(minotaur);
-            PlayerHitEnemy(skele);
-            PlayerHitEnemy(dragon);
-            PlayerHitEnemy(guardian);
+            Player.PlayerHitEnemy(slime);
+            Player.PlayerHitEnemy(goblin);
+            Player.PlayerHitEnemy(bones);
+            Player.PlayerHitEnemy(rockGolem);
+            Player.PlayerHitEnemy(minotaur);
+            Player.PlayerHitEnemy(skele);
+            Player.PlayerHitEnemy(dragon);
+            Player.PlayerHitEnemy(guardian);
 
         }
 
-
-
-
-
-
-        public static void PlayerHitEnemy(Enemy ey)
-        {
-            if (Map.map[Player.playerPosY, Player.nextPosX] == Map.map[ey.enemyPosY, ey.enemyPosX] || Map.map[Player.nextPosY, Player.playerPosX] == Map.map[ey.enemyPosY, ey.enemyPosX])
-            {
-                if (ey.health > 0)
-                {
-                    Player.CantMove();
-
-                    HealthSystem.TakeDamage("enemy", Player.playerAttack, ref ey.health, ey);
-
-                    Map.UpdateHUD(ey);
-                }
-            }
-        }
 
 
 

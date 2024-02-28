@@ -28,9 +28,6 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static int lastPosX;
         public static int lastPosY;
 
-        public static int oldPosX;
-        public static int oldPosY;
-
         public static void SetPlayer()
         {
             Player.health = 100;
@@ -49,8 +46,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
         public static void GetInput()
-        {
-
+        { 
 
             var exit = false;
 
@@ -58,29 +54,30 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             do
             {
-
                 keyInfo = Console.ReadKey(true);
 
-
                 Console.WriteLine();
-
 
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.W:
-                        KeyW();
+                        dir = "up";
+                        MovePlayer(0, -1);
                         break;
 
                     case ConsoleKey.A:
-                        KeyA();
+                        dir = "left";
+                        MovePlayer(-1, 0);
                         break;
 
                     case ConsoleKey.S:
-                        KeyS();
+                        dir = "down";
+                        MovePlayer(0, 1);
                         break;
 
                     case ConsoleKey.D:
-                        KeyD();
+                        dir = "right";
+                        MovePlayer(1, 0);
                         break;
 
                     case ConsoleKey.Escape:
@@ -107,114 +104,40 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
-
-
-        public static void KeyW()
-        {
-            dir = "up";
-
-            nextPosY = playerPosY - 1;
+        public static void MovePlayer(int nextX, int nextY)
+        { 
+            nextPosX = playerPosX + nextX; 
+            nextPosY = playerPosY + nextY;
 
             lastPosY = playerPosY;
             lastPosX = playerPosX;
 
-            if (playerPosY != 0 )
-            {
+            CheckNextMove();
 
-                oldPosY = playerPosY;
+            playerPosY = nextPosY;
+            playerPosX = nextPosX;
 
-                CheckNextMove();
+            Map.map[lastPosY, lastPosX] = '`';
 
-                playerPosY = nextPosY;
+            Map.map[playerPosY, playerPosX] = Player.gameChar;
 
-                PlayerMoved();
-            }
-
+            GameManager.MoveAllEnemies();
         }
 
 
-        public static void KeyA()
-        {
-            dir = "left";
 
-            nextPosX = playerPosX - 1;
-
-            lastPosY = playerPosY;
-            lastPosX = playerPosX;
-
-            if (playerPosX != 0 )
-            {
-
-                oldPosX = playerPosX;
-
-                CheckNextMove();
-
-                playerPosX = nextPosX;
-
-                PlayerMoved();
-            }
-
-        }
-
-        public static void KeyS()
-        {
-            dir = "down";
-
-            nextPosY = playerPosY + 1;
-
-            lastPosY = playerPosY;
-            lastPosX = playerPosX;
-
-            if (playerPosY != Map.height - 1)
-            {
-
-                oldPosY = playerPosY;
-
-                CheckNextMove();
-
-                playerPosY = nextPosY;
-
-                PlayerMoved();
-            }
-        }
-
-
-        public static void KeyD()
-        {
-            dir = "right";
-
-            nextPosX = playerPosX + 1;
-
-            lastPosY = playerPosY;
-            lastPosX = playerPosX;
-
-            if (playerPosX != Map.width - 1)
-            {
-                oldPosX = playerPosX;
-
-                CheckNextMove();
-
-                playerPosX = nextPosX;
-
-                PlayerMoved();
-            }
-
-
-        }
 
         public static void CantMove()
         {
             if (dir == "up" || dir == "down")
             {
-                nextPosY = oldPosY;
+                nextPosY = lastPosY;
             }
             else if (dir == "left" || dir == "right")
             {
-                nextPosX = oldPosX;
+                nextPosX = lastPosX;
             }
         }
-
-
 
 
         public static void CheckNextMove()
@@ -262,16 +185,19 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
-
-
-
-        public static void PlayerMoved()
+        public static void PlayerHitEnemy(Enemy ey)
         {
-            Map.map[lastPosY, lastPosX] = '`';
+            if (Map.map[playerPosY, nextPosX] == Map.map[ey.enemyPosY, ey.enemyPosX] || Map.map[nextPosY, playerPosX] == Map.map[ey.enemyPosY, ey.enemyPosX])
+            {
+                if (ey.health > 0)
+                {
+                    CantMove();
 
-            Map.map[playerPosY, playerPosX] = Player.gameChar;
+                    HealthSystem.TakeDamage("enemy", Player.playerAttack, ref ey.health, ey);
 
-            GameManager.MoveAllEnemies();
+                    Map.UpdateHUD(ey);
+                }
+            }
         }
 
 
@@ -279,8 +205,4 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
     }
-
-
-
-
 }
