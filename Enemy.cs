@@ -52,56 +52,6 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
-        //Bounces vertically
-        public static void MoveEnemyVert(Enemy ey)
-        {
-            if (ey.enemyChar != '`')
-            {
-                //Up
-                if (ey.enemyDir == "up")
-                {
-                    EnemyMove(ey, 0, -1, "down");
-                }
-                //Down
-                else if (ey.enemyDir == "down")
-                {
-                    EnemyMove(ey, 0, 1, "up");
-                }
-            }
-        }
-
-        //Moves randomly
-        public static void MoveEnemyRandom(Enemy ey)
-        {
-            if (ey.enemyChar != '`')
-            {
-                
-                int dir = rd.Next(0, 400);
-
-                //Up
-                if (dir <= 100)
-                {
-                    EnemyMove(ey, 0, -1, null);
-                }
-                //Left
-                else if (dir > 100 && dir <= 200)
-                {
-                    EnemyMove(ey, -1, 0, null);
-                }
-                //Down
-                else if (dir > 200 && dir <= 300)
-                {
-                    EnemyMove(ey, 0, 1, null);
-                }
-                //Right
-                else if (dir > 300)
-                {
-                    EnemyMove(ey, 1, 0, null);
-                }
-            }
-        }
-
-
         //Bounce in a square
         public static void MoveEnemySquare(Enemy ey)
         {

@@ -12,10 +12,10 @@ namespace FirstPlayable_CalebWolthers_22012024
     {
 
 
-        public static int health = 100;
+        public static int health = 100000;
         public static int shield = 0;
 
-        public static int playerAttack = 50;
+        public static int playerAttack = 100;
 
         public static int playerPosX;
         public static int playerPosY;
@@ -113,7 +113,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Map.map[playerPosY, playerPosX] = Player.gameChar;
 
-            GameManager.MoveAllEnemies();
+            EnemyManager.MoveAllEnemies();
         }
 
 
@@ -137,7 +137,6 @@ namespace FirstPlayable_CalebWolthers_22012024
                 if (Map.map[playerPosY, nextPosX] == '^' || Map.map[nextPosY, playerPosX] == '^')
                 {
                     CantMove();
-                    HealthSystem.TakeDamage("player", 60, ref health, null);
                 }
                 else if (Map.map[playerPosY, nextPosX] == '~' || Map.map[nextPosY, playerPosX] == '~')
                 {
@@ -164,7 +163,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
 
 
-                GameManager.CheckForAllEnemies();
+                EnemyManager.CheckForAllEnemies();
 
 
             }
@@ -187,9 +186,6 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
             }
         }
-        //Map.map[playerPosY, nextPosX] == Map.map[ey.enemyPosY, ey.enemyPosX] || Map.map[nextPosY, playerPosX] == Map.map[ey.enemyPosY, ey.enemyPosX]
-
-
 
 
     }

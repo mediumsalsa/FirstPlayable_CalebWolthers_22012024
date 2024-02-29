@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enemy.cs" />
+    <Compile Include="EnemyGoblin.cs" />
+    <Compile Include="EnemyManager.cs" />
     <Compile Include="EnemyOrc.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="GameManager.cs" />

@@ -158,35 +158,27 @@ namespace FirstPlayable_CalebWolthers_22012024
             }
             else if (map[currentRow, currentCol] == '#')
             {
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-            }
-            else if (map[currentRow, currentCol] == '!')
-            {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-            }
-            else if (map[currentRow, currentCol] == '0')
-            {
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.ForegroundColor = ConsoleColor.Green;
             }
             else if (map[currentRow, currentCol] == 'G')
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.ForegroundColor = ConsoleColor.Yellow;
             }
             else if (map[currentRow, currentCol] == 'D')
             {
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
+            else if (map[currentRow, currentCol] == '§')
+            {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
+            }
+            else if (map[currentRow, currentCol] == '&')
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
             }
             else if (map[currentRow, currentCol] == '*')
             {
                 Console.ForegroundColor = ConsoleColor.Gray;
-            }
-            else if (map[currentRow, currentCol] == '$')
-            {
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-            else if (map[currentRow, currentCol] == 'B')
-            {
-                Console.ForegroundColor = ConsoleColor.White;
             }
             else if (map[currentRow, currentCol] == '}')
             {
@@ -198,11 +190,11 @@ namespace FirstPlayable_CalebWolthers_22012024
             }
             else if (map[currentRow, currentCol] == 'O')
             {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
             }
             else if (map[currentRow, currentCol] == '^')
             {
-                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.ForegroundColor = ConsoleColor.DarkGray;
             }
             else if (map[currentRow, currentCol] == '@')
             {
