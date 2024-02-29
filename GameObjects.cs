@@ -8,15 +8,6 @@ namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class GameObjects
     {
-
-        public Point2D position;
-
         public static char gameChar;
-
-        public GameObjects()
-        {
-            position = new Point2D();
-        }
-
     }
 }

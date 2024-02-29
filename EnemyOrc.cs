@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace FirstPlayable_CalebWolthers_22012024
 {
-    internal class Point2D
+    internal class EnemyOrc : Enemy
     {
-
-
-        public int x;
-        public int y;
-
-
+        
     }
 }

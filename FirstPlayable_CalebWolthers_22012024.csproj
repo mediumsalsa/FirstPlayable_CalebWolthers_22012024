@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enemy.cs" />
+    <Compile Include="EnemyOrc.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="GameObjects.cs" />
@@ -53,7 +54,6 @@
     <Compile Include="Item.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="Point2D.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
