@@ -26,30 +26,27 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static int lastPosX;
         public static int lastPosY;
 
+        //Sets the player up for the start of the game
         public static void SetPlayer()
         {
-            Player.health = 100;
+            health = 100;
 
-            Player.shield = 0;
+            shield = 0;
 
-            Player.playerAttack = 50;
+            playerAttack = 50;
 
-            Player.gameChar = 'P';
+            gameChar = 'P';
 
             playerPosX = 4;
-            playerPosY = 20;
-
-            
+            playerPosY = 20;  
         }
 
 
+        //Gets input
         public static void GetInput()
         { 
-
             var exit = false;
-
             ConsoleKeyInfo keyInfo;
-
             do
             {
                 keyInfo = Console.ReadKey(true);
@@ -98,6 +95,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
+        //Moves the player
         public static void MovePlayer(int nextX, int nextY)
         { 
             nextPosX = playerPosX + nextX; 
@@ -120,14 +118,15 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
-
+        //Makes sure the player doesnt move
         public static void CantMove()
         {
-                nextPosY = lastPosY;
-                nextPosX = lastPosX;
+            nextPosY = lastPosY;
+            nextPosX = lastPosX;
         }
 
 
+        //Checks the tile in front of the player to see whats there
         public static void CheckNextMove()
         {
             var ey = new Enemy();
@@ -173,9 +172,10 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
+        //attacks the enemy
         public static void PlayerHitEnemy(Enemy ey)
         {
-            if (Map.map[playerPosY, nextPosX] == Map.map[ey.enemyPosY, ey.enemyPosX] || Map.map[nextPosY, playerPosX] == Map.map[ey.enemyPosY, ey.enemyPosX])
+            if ((playerPosY == ey.enemyPosY && nextPosX == ey.enemyPosX) || (nextPosY == ey.enemyPosY && playerPosX == ey.enemyPosX))
             {
                 if (ey.health > 0)
                 {
@@ -187,7 +187,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
             }
         }
-
+        //Map.map[playerPosY, nextPosX] == Map.map[ey.enemyPosY, ey.enemyPosX] || Map.map[nextPosY, playerPosX] == Map.map[ey.enemyPosY, ey.enemyPosX]
 
 
 

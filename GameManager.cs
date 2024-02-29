@@ -43,7 +43,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             //Give setting in order:
             //Instance, Name, X Position, Y Position, Icon Char, Health, Damage, Current Direction(Unless enemy moves randomly)
-            Enemy.SetEnemy(slime, "Slime", 12, 12, '0', 100, 10, "down");
+            Enemy.SetEnemy(slime, "Slime", 5, 7, 'G', 100, 10, "down");
 
             Enemy.SetEnemy(goblin, "Goblin", 5, 15, 'G', 150, 20, "down");
 
@@ -68,7 +68,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static void MoveAllEnemies()
         {
             Enemy.MoveEnemyVert(slime);
-            Enemy.MoveEnemyVert(goblin);
+            Enemy.MoveEnemyVert(goblin);       
             Enemy.MoveEnemyRandom(bones);
             Enemy.MoveEnemyRandom(rockGolem);
             Enemy.MoveEnemySquare(minotaur);

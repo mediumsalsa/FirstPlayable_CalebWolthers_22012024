@@ -77,13 +77,11 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             if (ey.enemyChar != '`')
             {
-
                 //Up
                 if (ey.enemyDir == "up")
                 {
                     EnemyMove(ey, 0, -1, "down");
                 }
-
                 //Down
                 else if (ey.enemyDir == "down")
                 {
@@ -95,30 +93,25 @@ namespace FirstPlayable_CalebWolthers_22012024
         //Moves randomly
         public static void MoveEnemyRandom(Enemy ey)
         {
-
             if (ey.enemyChar != '`')
             {
                 var rd = new Random();
                 int dir = rd.Next(0, 400);
-
                 //Up
                 if (dir <= 100)
                 {
                     EnemyMove(ey, 0, -1, null);
                 }
-
                 //Left
                 else if (dir > 100 && dir <= 200)
                 {
                     EnemyMove(ey, -1, 0, null);
                 }
-
                 //Down
                 else if (dir > 200 && dir <= 300)
                 {
                     EnemyMove(ey, 0, 1, null);
                 }
-
                 //Right
                 else if (dir > 300)
                 {
@@ -136,8 +129,6 @@ namespace FirstPlayable_CalebWolthers_22012024
             {
                 var rand = new Random();
                 int dir = rand.Next(0, 800);
-
-
                 //Right Up
                 if (dir > 700)
                 {
@@ -178,16 +169,12 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     EnemyMove(ey, 1, 0, null);
                 }
-
-
-
             }
         }
 
         //Moves randomly diagonaly
         public static void MoveEnemyRandomDiagonal(Enemy ey)
         {
-
             if (ey.enemyChar != '`')
             {
                 var rand = new Random();
