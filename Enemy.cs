@@ -11,24 +11,39 @@ namespace FirstPlayable_CalebWolthers_22012024
     internal class Enemy : Entity
     {
 
-        public char enemyChar;
+        public char enemyChar = 'Q';
 
-        public int health;
+        public int health = 100;
 
-        public int enemyDamage;
+        public int enemyDamage = 20;
 
-        public string enemyDir;
+        public string enemyDir = "right";
 
-        public int moveTick;
+        public string enemyName = "Enemy";
 
-        public string enemyName;
+        static Random rand = new Random();
+        static int randomX;
+        static int randomY;
 
-        public static int enemyHealth;
+        /*public static void GetRandom()
+        { 
+            randomX = rand.Next(1, Map.width);
+            randomY = rand.Next(1, Map.height);
+        }
+        public static void SetRand()
+        {
+            while (Map.map[randomY, randomX] != '`')
+            {
+                GetRandom();
+            }
+            enemyPosX = randomX;
+            enemyPosY = randomY;
+        }*/
 
 
         //
-        public int enemyPosX;
-        public int enemyPosY;
+        public int enemyPosX = randomX;
+        public int enemyPosY = randomY;
         //
         public static int enemyNextPosX;
         public static int enemyNextPosY;
@@ -114,43 +129,63 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
         //Moves randomly
-        public static void MoveEnemyRandom2(Enemy ey)
+        public static void MoveEnemyRandomAll(Enemy ey)
         {
 
             if (ey.enemyChar != '`')
             {
                 var rand = new Random();
-                int dir = rand.Next(0, 400);
+                int dir = rand.Next(0, 800);
 
+
+                //Right Up
+                if (dir > 700)
+                {
+                    EnemyMove(ey, 1, -1, null);
+                }
+                //Down Right
+                if (dir > 600 && dir  <= 700)
+                {
+                    EnemyMove(ey, 1, 1, null);
+                }
+                //Left Down
+                if (dir > 500 && dir  <= 600)
+                {
+                    EnemyMove(ey, -1, 1, null);
+                }
+                //Up Left
+                if (dir > 400 && dir  <= 500)
+                {
+                    EnemyMove(ey, -1, -1, null);
+                }
                 //Up
-                if  (dir > 300)
+                if  (dir > 300 && dir  <= 400)
                 {
                     EnemyMove(ey, 0, -1, null);
                 }
-
                 //Left
                 else if (dir > 200 && dir <= 300)
                 {
                     EnemyMove(ey, -1, 0, null);
                 }
-
                 //Down
                 else if (dir > 100 && dir <= 200)
                 {
                     EnemyMove(ey, 0, 1, null);
                 }
-
                 //Right
                 else if (dir <= 100)
                 {
                     EnemyMove(ey, 1, 0, null);
                 }
 
+
+
             }
         }
 
-        //Moves randomly diagnolly
-        public static void MoveEnemyRandomDiagonol(Enemy ey)
+        //Moves randomly diagonaly
+        public static void MoveEnemyRandomDiagonal(Enemy ey)
         {
 
             if (ey.enemyChar != '`')
@@ -158,28 +193,28 @@ namespace FirstPlayable_CalebWolthers_22012024
                 var rand = new Random();
                 int dir = rand.Next(0, 400);
 
-                //Up
+                //Up Left
                 if (dir > 300)
                 {
-
+                    EnemyMove(ey, -1, -1, null);
                 }
 
-                //Left
+                //Left Down
                 else if (dir > 200 && dir <= 300)
                 {
-
+                    EnemyMove(ey, -1, 1, null);
                 }
 
-                //Down
+                //Down Right
                 else if (dir > 100 && dir <= 200)
                 {
-
+                    EnemyMove(ey, 1, 1, null);
                 }
 
-                //Right
+                //Right Up
                 else if (dir <= 100)
                 {
-
+                    EnemyMove(ey, 1, -1, null);
                 }
             }
         }
@@ -198,13 +233,11 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     EnemyMove(ey, 0, -1, "left");
                 }
-
                 //Left
                 else if (ey.enemyDir == "left")
                 {
                     EnemyMove(ey, -1, 0, "down");
                 }
-
                 //Down
                 else if (ey.enemyDir == "down")
                 {
@@ -221,7 +254,6 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
 
-
         public static void EnemyMove(Enemy ey, int nextX, int nextY, string nextDir)
         {
             enemyNextPosX = ey.enemyPosX + nextX;
@@ -230,45 +262,46 @@ namespace FirstPlayable_CalebWolthers_22012024
             enemyLastPosY = ey.enemyPosY;
             enemyLastPosX = ey.enemyPosX;
 
+            EnemyCheckNextMove(ey, nextDir);
+
+            ey.enemyPosX = enemyNextPosX;
+            ey.enemyPosY = enemyNextPosY;
+            Map.map[enemyLastPosY, enemyLastPosX] = '`';
+            Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
+
+        }
+
+
+        public static void EnemyCheckNextMove(Enemy ey, string nextDir)
+        {
             if (Map.map[enemyNextPosY, ey.enemyPosX] == '`' || Map.map[ey.enemyPosY, enemyNextPosX] == '`')
             {
-                ey.enemyPosX += nextX;
-                ey.enemyPosY += nextY;
-                EnemyAfterMove(ey);
+                // :D
             }
+
             else if (Map.map[enemyNextPosY, ey.enemyPosX] == Player.gameChar || Map.map[ey.enemyPosY, enemyNextPosX] == Player.gameChar && ey.enemyChar != '`')
             {
-                EnemyHitsPlayer(ey);
+                if (ey.health >= 0)
+                {
+                    EnemyCantMove();
+                    HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
+                    Map.UpdateHUD(ey);
+                }
             }
-            else
+
+            else 
             {
+                EnemyCantMove();
                 ey.enemyDir = nextDir;
             }
-
         }
 
 
-
-        //If player isnt deat, hit player
-        static void EnemyHitsPlayer(Enemy ey)
+        public static void EnemyCantMove()
         {
-            if (ey.health >= 0)
-            {
-                HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
-                Map.UpdateHUD(ey);
-            }
+            enemyNextPosY = enemyLastPosY;
+            enemyNextPosX = enemyLastPosX;
         }
-
-
-
-        //Move enemy and replace last position
-        static void EnemyAfterMove(Enemy ey)
-        {
-            Map.map[enemyLastPosY, enemyLastPosX] = '`';
-
-            Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
-        }
-
 
 
 

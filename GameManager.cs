@@ -41,7 +41,6 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Map.StartMap();
 
-
             //Give setting in order:
             //Instance, Name, X Position, Y Position, Icon Char, Health, Damage, Current Direction(Unless enemy moves randomly)
             Enemy.SetEnemy(slime, "Slime", 12, 12, '0', 100, 10, "down");
@@ -60,8 +59,6 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Enemy.SetEnemy(guardian, "Royal Guardian", 6, 12, '!', 350, 150, "up");
 
-
-
             Player.GetInput();
 
         }
@@ -70,17 +67,14 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void MoveAllEnemies()
         {
-
             Enemy.MoveEnemyVert(slime);
             Enemy.MoveEnemyVert(goblin);
             Enemy.MoveEnemyRandom(bones);
             Enemy.MoveEnemyRandom(rockGolem);
             Enemy.MoveEnemySquare(minotaur);
             Enemy.MoveEnemySquare(skele);
-            Enemy.MoveEnemyRandom2(dragon);
+            Enemy.MoveEnemyRandom(dragon);
             Enemy.MoveEnemySquare(guardian);
-
-
 
             Map.DisplayMap();
         }
@@ -88,7 +82,6 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void CheckForAllEnemies()
         {
-
             Player.PlayerHitEnemy(slime);
             Player.PlayerHitEnemy(goblin);
             Player.PlayerHitEnemy(bones);
@@ -97,7 +90,6 @@ namespace FirstPlayable_CalebWolthers_22012024
             Player.PlayerHitEnemy(skele);
             Player.PlayerHitEnemy(dragon);
             Player.PlayerHitEnemy(guardian);
-
         }
 
 

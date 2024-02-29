@@ -20,8 +20,6 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static int playerPosX;
         public static int playerPosY;
 
-        public static string dir;
-
         public static int nextPosX;
         public static int nextPosY;
 
@@ -61,22 +59,18 @@ namespace FirstPlayable_CalebWolthers_22012024
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.W:
-                        dir = "up";
                         MovePlayer(0, -1);
                         break;
 
                     case ConsoleKey.A:
-                        dir = "left";
                         MovePlayer(-1, 0);
                         break;
 
                     case ConsoleKey.S:
-                        dir = "down";
                         MovePlayer(0, 1);
                         break;
 
                     case ConsoleKey.D:
-                        dir = "right";
                         MovePlayer(1, 0);
                         break;
 
@@ -129,14 +123,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void CantMove()
         {
-            if (dir == "up" || dir == "down")
-            {
                 nextPosY = lastPosY;
-            }
-            else if (dir == "left" || dir == "right")
-            {
                 nextPosX = lastPosX;
-            }
         }
 
 
