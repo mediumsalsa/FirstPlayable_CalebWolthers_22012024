@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FirstPlayable_CalebWolthers_22012024
 {
@@ -44,11 +45,31 @@ namespace FirstPlayable_CalebWolthers_22012024
             for (int i = 0; i < 25; i++)
             {
                 orcs[i] = new EnemyOrc();
-                EnemyOrc.SetEnemy(orcs[i], "orc", 7 + i, 15, 'O', 200, 36, null);
+                RandomlyPlaceEnemyOrc(orcs[i], 'O', 200, 36);
             }
 
             Player.GetInput();
         }
+
+
+        //Places the orcs randomly on the map
+        private static void RandomlyPlaceEnemyOrc(EnemyOrc orc, char icon, int health, int damage)
+        {
+            Random random = new Random();
+
+            while (true)
+            {
+                int x = random.Next(2, Map.width - 2); 
+                int y = random.Next(2, Map.height - 2); 
+
+                if (Map.map[y, x] == '`')
+                {
+                    EnemyOrc.SetEnemy(orc, "orc", x, y, icon, health, damage, null);
+                    break;
+                }
+            }
+        }
+
 
         public static void MoveAllEnemies()
         {
