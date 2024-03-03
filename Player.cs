@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FirstPlayable_CalebWolthers_22012024
 {
-    internal class Player : Entity
+    internal class Player
     {
-
+        public static char gameChar;
 
         public static int health = 100000;
         public static int shield = 0;
@@ -150,8 +150,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
                 else if (Map.map[playerPosY, nextPosX] == '@' || Map.map[nextPosY, playerPosX] == '@')
                 {
-                    Map.lastItem = "Health Potion(+60 health)";
-                    HealthSystem.Heal(40, ref health);
+                    ItemHealth.HealPlayer();
                 }
                 else if (Map.map[playerPosY, nextPosX] == '$' || Map.map[nextPosY, playerPosX] == '$')
                 {

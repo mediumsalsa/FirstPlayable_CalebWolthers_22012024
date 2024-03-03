@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace FirstPlayable_CalebWolthers_22012024
 {
-    internal class Enemy : Entity
+    internal class Enemy
     {
 
         public char enemyChar;
@@ -45,7 +45,27 @@ namespace FirstPlayable_CalebWolthers_22012024
             Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
         }
 
- 
+        //Places the orcs randomly on the map
+        public static void RandomlyPlaceEnemy(Enemy enemy, string name, char icon, int health, int damage, string dir, int minX, int maxX, int minY, int maxY)
+        {
+            Random random = new Random();
+
+            while (true)
+            {
+                int x = random.Next(minX, maxX);
+                int y = random.Next(minY, maxY);
+
+                if (Map.map[y, x] == '`')
+                {
+                    Enemy.SetEnemy(enemy, name, x, y, icon, health, damage, dir);
+                    break;
+                }
+            }
+        }
+
+
+
+
 
         //Bounce in a square
         public static void MoveEnemySquare(Enemy ey)

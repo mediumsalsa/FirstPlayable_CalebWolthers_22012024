@@ -49,11 +49,11 @@
     <Compile Include="EnemyGoblin.cs" />
     <Compile Include="EnemyManager.cs" />
     <Compile Include="EnemyOrc.cs" />
-    <Compile Include="Entity.cs" />
     <Compile Include="GameManager.cs" />
-    <Compile Include="GameObjects.cs" />
     <Compile Include="HealthSystem.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="ItemHealth.cs" />
+    <Compile Include="ItemManager.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />

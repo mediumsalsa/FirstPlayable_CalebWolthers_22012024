@@ -51,15 +51,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             map[Player.playerPosX, Player.playerPosY] = Player.gameChar;
 
-            //DisplayMap();
         }
-
-
-        public static void AddDirection(int dir)
-        { 
-            
-        }
-
 
 
         public static void MakeMap()
@@ -74,142 +66,146 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
+
         public static void DisplayMap()
         {
             Console.SetCursorPosition(0, 0);
+            Console.CursorVisible = false;
 
-            Console.CursorVisible = !true;
-            //Console.Clear();
+            int cameraWidth = 20;
+            int cameraHeight = 10;
 
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("+");
-            for (int i = 0; i < width; i++)
+            int startX = Math.Max(0, Player.playerPosX - cameraWidth / 2);
+            int startY = Math.Max(0, Player.playerPosY - cameraHeight / 2);
+
+            char[,] tempMap = new char[cameraHeight, cameraWidth];
+
+            for (int row = 0; row < cameraHeight; row++)
             {
-                Console.Write("-");
-            }
-            Console.WriteLine("+");
-
-            while (currentCol < width)
-            {
-                if (currentCol == 0)
+                for (int col = 0; col < cameraWidth; col++)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("|");
-                }
+                    int mapRow = startY + row;
+                    int mapCol = startX + col;
 
-                DrawTile();
-                currentCol++;
-
-                if (currentCol >= width)
-                {
-                    currentRow++;
-                    if (currentRow < height)
+                    if (mapRow < height && mapCol < width)
                     {
-                        currentCol = 0;
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("|");
-                        Console.WriteLine();
+                        tempMap[row, col] = map[mapRow, mapCol];
                     }
                     else
                     {
-                        currentCol = width + 2;
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("|");
+                        tempMap[row, col] = ' ';
                     }
                 }
-
             }
-            Console.WriteLine("");
+
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("+");
-            for (int i = 0; i < width; i++)
+            for (int i = 0; i < cameraWidth; i++)
             {
                 Console.Write("-");
             }
             Console.WriteLine("+");
 
-            currentCol = 0;
-            currentRow = 0;
+            for (int row = 0; row < cameraHeight; row++)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("|");
 
-            Console.CursorVisible = !true;
+                for (int col = 0; col < cameraWidth; col++)
+                {
+                    Console.CursorLeft = col + 1;
+                    Console.CursorTop = row + 1;
 
+                    DrawTile(tempMap[row, col]);
+                }
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("|");
+                Console.WriteLine();
+            }
+
+            Console.Write("+");
+            for (int i = 0; i < cameraWidth; i++)
+            {
+                Console.Write("-");
+            }
+            Console.WriteLine("+");
+
+            Console.CursorVisible = false;
             ShowHUD();
         }
 
 
-        static void DrawTile()
+
+
+        static void DrawTile(char tile)
         {
-            if (map[currentRow, currentCol] == '`')
+            if (tile == '`')
             {
                 Console.ForegroundColor = ConsoleColor.Black;
             }
-            else if (map[currentRow, currentCol] == '~')
+            else if (tile == '~')
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
             }
-            else if (map[currentRow, currentCol] == 'P')
+            else if (tile == 'P')
             {
-
-                if (map[currentRow, currentCol] != map[Player.playerPosY, Player.playerPosX])
-                {
-                    map[currentRow, currentCol] = '`';
-                }
-
                 Console.ForegroundColor = ConsoleColor.Blue;
             }
-            else if (map[currentRow, currentCol] == '#')
+            else if (tile == '#')
             {
                 Console.ForegroundColor = ConsoleColor.Green;
             }
-            else if (map[currentRow, currentCol] == 'G')
+            else if (tile == 'G')
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
             }
-            else if (map[currentRow, currentCol] == 'D')
+            else if (tile == 'D')
             {
                 Console.ForegroundColor = ConsoleColor.Red;
             }
-            else if (map[currentRow, currentCol] == '!')
+            else if (tile == '!')
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
             }
-            else if (map[currentRow, currentCol] == '$')
+            else if (tile == '$')
             {
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
-            else if (map[currentRow, currentCol] == '§')
+            else if (tile == '§')
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
             }
-            else if (map[currentRow, currentCol] == '&')
+            else if (tile == '&')
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
             }
-            else if (map[currentRow, currentCol] == '*')
+            else if (tile == '*')
             {
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
-            else if (map[currentRow, currentCol] == '}')
+            else if (tile == '}')
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
             }
-            else if (map[currentRow, currentCol] == '7')
+            else if (tile == '7')
             {
                 Console.ForegroundColor = ConsoleColor.White;
             }
-            else if (map[currentRow, currentCol] == 'O')
+            else if (tile == 'O')
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
             }
-            else if (map[currentRow, currentCol] == '^')
+            else if (tile == '^')
             {
                 Console.ForegroundColor = ConsoleColor.DarkGray;
             }
-            else if (map[currentRow, currentCol] == '@')
+            else if (tile == '@')
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
             }
 
-            Console.Write(map[currentRow, currentCol]);
+            Console.Write(tile);
         }
 
         public static void UpdateHUD(Enemy enemy)

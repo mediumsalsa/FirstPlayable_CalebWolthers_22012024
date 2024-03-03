@@ -27,6 +27,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             EnemyManager.StartEnemies();
 
+            ItemManager.StartItems();
+
             Player.GetInput();
 
             Console.Clear();

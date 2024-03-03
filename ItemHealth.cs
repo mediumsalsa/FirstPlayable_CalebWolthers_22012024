@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace FirstPlayable_CalebWolthers_22012024
 {
-    internal class Entity : GameObjects
+    internal class ItemHealth : Item
     {
-
-        public HealthSystem healthSystem;
-
-        public Entity()
+        public static void HealPlayer()
         {
-            healthSystem = new HealthSystem();
+            Map.lastItem = "Health Potion(+30 health)";
+            HealthSystem.Heal(30, ref Player.health);
         }
-
     }
 }
