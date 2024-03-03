@@ -43,7 +43,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void MoveAllEnemies()
         {
-            Enemy.MoveEnemySquare(minotaur);
+            Enemy.MoveEnemyChase(minotaur);
             EnemyOrc.MoveEnemyRandom(dragon);
 
 

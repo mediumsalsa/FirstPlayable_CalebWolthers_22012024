@@ -23,13 +23,9 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static string lastItem;
 
-        public static int[] up = {-1, 0};
-        public static int[] left = {0, -1};
-        public static int[] down = {1, 0};
-        public static int[] right = {0, 1};
 
-        static int currentRow = 0;
-        static int currentCol = 0;
+        public static int cameraWidth;
+        public static int cameraHeight;
 
         public static int width;
         public static int height;
@@ -46,6 +42,9 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             width = map.GetLength(1);
             height = map.GetLength(0);
+
+            cameraWidth = 60;
+            cameraHeight = 20;
 
             MakeMap();
 
@@ -66,14 +65,11 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
-
+        //Draws map, and creates a temporary, smaller map that displays based on the players position
         public static void DisplayMap()
         {
             Console.SetCursorPosition(0, 0);
             Console.CursorVisible = false;
-
-            int cameraWidth = 20;
-            int cameraHeight = 10;
 
             int startX = Math.Max(0, Player.playerPosX - cameraWidth / 2);
             int startY = Math.Max(0, Player.playerPosY - cameraHeight / 2);
@@ -93,7 +89,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                     }
                     else
                     {
-                        tempMap[row, col] = ' ';
+                        tempMap[row, col] = '^';
                     }
                 }
             }
@@ -143,66 +139,77 @@ namespace FirstPlayable_CalebWolthers_22012024
             if (tile == '`')
             {
                 Console.ForegroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == '~')
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == 'P')
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == '#')
             {
                 Console.ForegroundColor = ConsoleColor.Green;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == 'G')
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == 'D')
             {
                 Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == '!')
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == '$')
             {
                 Console.ForegroundColor = ConsoleColor.Gray;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == '§')
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-            }
-            else if (tile == '&')
-            {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == '*')
             {
                 Console.ForegroundColor = ConsoleColor.Gray;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == '}')
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == '7')
             {
                 Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == 'O')
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == '^')
             {
                 Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
             else if (tile == '@')
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
 
             Console.Write(tile);
@@ -257,8 +264,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine("                                                        ");
             Console.WriteLine("                                                        ");
             Console.WriteLine("                                                        ");
-            Console.SetCursorPosition(0, height + 2
-                );
+            Console.SetCursorPosition(0, height - 2);
 
 
 

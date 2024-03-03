@@ -63,7 +63,21 @@ namespace FirstPlayable_CalebWolthers_22012024
             }
         }
 
+        public static void MoveEnemyChase(Enemy ey)
+        {
+            int chaseDistance = 8;
 
+            int diffX = Player.playerPosX - ey.enemyPosX;
+            int diffY = Player.playerPosY - ey.enemyPosY;
+
+            if (Math.Abs(diffX) <= chaseDistance && Math.Abs(diffY) <= chaseDistance)
+            {
+                string nextDir = (Math.Abs(diffX) > Math.Abs(diffY)) ? ((diffX > 0) ? "right" : "left") : ((diffY > 0) ? "down" : "up");
+
+                EnemyMove(ey, (nextDir == "left") ? -1 : ((nextDir == "right") ? 1 : 0), (nextDir == "up") ? -1 : ((nextDir == "down") ? 1 : 0), null);
+            }
+
+        }
 
 
 
@@ -114,7 +128,6 @@ namespace FirstPlayable_CalebWolthers_22012024
             ey.enemyPosY = enemyNextPosY;
             Map.map[enemyLastPosY, enemyLastPosX] = '`';
             Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
-
         }
 
 
