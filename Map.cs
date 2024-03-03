@@ -51,7 +51,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             map[Player.playerPosX, Player.playerPosY] = Player.gameChar;
 
-            DisplayMap();
+            //DisplayMap();
         }
 
 
@@ -167,6 +167,14 @@ namespace FirstPlayable_CalebWolthers_22012024
             else if (map[currentRow, currentCol] == 'D')
             {
                 Console.ForegroundColor = ConsoleColor.Red;
+            }
+            else if (map[currentRow, currentCol] == '!')
+            {
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            }
+            else if (map[currentRow, currentCol] == '$')
+            {
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             else if (map[currentRow, currentCol] == '§')
             {

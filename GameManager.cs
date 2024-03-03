@@ -17,8 +17,6 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
 
-            Console.Clear();
-
             Console.SetCursorPosition(0, 0);
 
             Console.CursorVisible = !true;
@@ -30,6 +28,8 @@ namespace FirstPlayable_CalebWolthers_22012024
             EnemyManager.StartEnemies();
 
             Player.GetInput();
+
+            Console.Clear();
         }
 
 

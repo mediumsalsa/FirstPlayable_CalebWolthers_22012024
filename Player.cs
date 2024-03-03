@@ -77,6 +77,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                     case ConsoleKey.R:
                         GameManager.StartGame();
+                        Map.DisplayMap();
+                        Map.DisplayMap();
                         break;
 
                     default:
@@ -150,6 +152,16 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     Map.lastItem = "Health Potion(+60 health)";
                     HealthSystem.Heal(40, ref health);
+                }
+                else if (Map.map[playerPosY, nextPosX] == '$' || Map.map[nextPosY, playerPosX] == '$')
+                {
+                    Map.lastItem = "Divine Armour(+20,000 Shield)";
+                    HealthSystem.Heal(3000, ref shield);
+                }
+                else if (Map.map[playerPosY, nextPosX] == '!' || Map.map[nextPosY, playerPosX] == '!')
+                {
+                    Map.lastItem = "Dragon Killer(+1000 Attack)";
+                    playerAttack += 1000;
                 }
                 else if (Map.map[playerPosY, nextPosX] == '7' || Map.map[nextPosY, playerPosX] == '7')
                 {

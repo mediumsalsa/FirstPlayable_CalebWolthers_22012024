@@ -11,24 +11,19 @@ namespace FirstPlayable_CalebWolthers_22012024
     internal class Enemy : Entity
     {
 
-        public char enemyChar = 'Q';
+        public char enemyChar;
 
-        public int health = 100;
+        public int health;
 
-        public int enemyDamage = 20;
+        public int enemyDamage;
 
-        public string enemyDir = "right";
+        public string enemyDir;
 
-        public string enemyName = "Enemy";
-
-        private static Random rd = new Random();
-
-        static int randomX;
-        static int randomY;
+        public string enemyName;
 
         //
-        public int enemyPosX = randomX;
-        public int enemyPosY = randomY;
+        public int enemyPosX;
+        public int enemyPosY;
         //
         public static int enemyNextPosX;
         public static int enemyNextPosY;
@@ -50,7 +45,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
         }
 
-
+ 
 
         //Bounce in a square
         public static void MoveEnemySquare(Enemy ey)

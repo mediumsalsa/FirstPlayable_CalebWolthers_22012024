@@ -31,7 +31,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Enemy.SetEnemy(minotaur, "Purple Minotaur", 40, 9, '}', 500, 30, "up");
 
-            Enemy.SetEnemy(dragon, "Kinda Mighty Dragon", 92, 1, 'D', 1000, 40, null);
+            Enemy.SetEnemy(dragon, "Kinda Mighty Dragon", 92, 1, 'D', 20000, 200, null);
 
             for (int i = 0; i < numberOfGoblins; i++)
             {
