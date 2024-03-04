@@ -113,20 +113,22 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             EnemyCheckNextMove(ey, nextDir);
 
-            ey.enemyPosX = enemyNextPosX;
-            ey.enemyPosY = enemyNextPosY;
-            Map.map[enemyLastPosY, enemyLastPosX] = '`';
-            Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
         }
 
 
         public static void EnemyCheckNextMove(Enemy ey, string nextDir)
         {
-            if (Map.map[enemyNextPosY, ey.enemyPosX] == '`' || Map.map[ey.enemyPosY, enemyNextPosX] == '`')
+
+            bool isWithinBounds = enemyNextPosX >= 0 && enemyNextPosX < Map.width && enemyNextPosY >= 0 && enemyNextPosY < Map.height;
+
+            if (isWithinBounds && Map.map[enemyNextPosY, enemyNextPosX] == '`')
             {
-                // :D
+                ey.enemyPosX = enemyNextPosX;
+                ey.enemyPosY = enemyNextPosY;
+                Map.map[enemyLastPosY, enemyLastPosX] = '`';
+                Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
             }
-            else if (Map.map[enemyNextPosY, ey.enemyPosX] == Player.gameChar || Map.map[ey.enemyPosY, enemyNextPosX] == Player.gameChar && ey.enemyChar != '`')
+            else if (isWithinBounds && Map.map[enemyNextPosY, enemyNextPosX] == Player.gameChar && ey.enemyChar != '`')
             {
                 if (ey.health >= 0)
                 {

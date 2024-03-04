@@ -16,7 +16,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         static int numberOfMinotaurs = 6;
         static EnemyMinotaur[] minotaurs = new EnemyMinotaur[numberOfMinotaurs];
 
-        static Enemy dragon = new Enemy();
+        static EnemyDragon dragon = new EnemyDragon();
 
         static int numberOfOrcs = 25;
         static EnemyOrc[] orcs = new EnemyOrc[numberOfOrcs];
@@ -51,7 +51,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void MoveAllEnemies()
         {
-            EnemyOrc.MoveEnemyRandom(dragon);
+            EnemyDragon.MoveEnemyRandom(dragon);
 
             foreach (var minotaur in minotaurs)
             {

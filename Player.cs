@@ -181,7 +181,6 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         }
 
-
         //attacks the enemy
         public static void PlayerHitEnemy(Enemy ey)
         {

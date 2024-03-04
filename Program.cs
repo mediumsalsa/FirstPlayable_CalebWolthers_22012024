@@ -29,6 +29,11 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.Write("dragon");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(" and destroy him");
+            Console.WriteLine(" Your attack power increases with every kill.");
+            Console.Write(" Defeat as many enemies as you can before reaching the ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("dragon");
+            Console.ForegroundColor = ConsoleColor.Blue;
             GameManager.StartGame();
 
         }
