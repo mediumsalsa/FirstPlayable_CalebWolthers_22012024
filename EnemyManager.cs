@@ -13,7 +13,8 @@ namespace FirstPlayable_CalebWolthers_22012024
         static int numberOfGoblins = 5;
         static EnemyGoblin[] goblins = new EnemyGoblin[numberOfGoblins];
 
-        static Enemy minotaur = new Enemy();
+        static int numberOfMinotaurs = 6;
+        static EnemyMinotaur[] minotaurs = new EnemyMinotaur[numberOfMinotaurs];
 
         static Enemy dragon = new Enemy();
 
@@ -24,9 +25,16 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void StartEnemies()
         {
-            Enemy.SetEnemy(minotaur, "Purple Minotaur", 40, 9, '}', 500, 30, "up");
+            Enemy.enemyCount = numberOfMinotaurs + numberOfOrcs + numberOfGoblins + 1;
 
-            Enemy.SetEnemy(dragon, "Kinda Mighty Dragon", 92, 1, 'D', 20000, 400, null);
+
+            Enemy.SetEnemy(dragon, "Kinda Mighty Dragon", 92, 1, 'D', 10000, 100, null);
+
+            for (int i = 0; i < numberOfMinotaurs; i++)
+            {
+                minotaurs[i] = new EnemyMinotaur();
+                Enemy.RandomlyPlaceEnemy(minotaurs[i], "Minotaur", '}', 400, 50, null, 2, Map.width - 30, 2, Map.height - 13);
+            }
 
             for (int i = 0; i < numberOfGoblins; i++)
             {
@@ -43,10 +51,12 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void MoveAllEnemies()
         {
-            Enemy.MoveEnemyChase(minotaur);
             EnemyOrc.MoveEnemyRandom(dragon);
 
-
+            foreach (var minotaur in minotaurs)
+            {
+                EnemyMinotaur.MoveEnemyChase(minotaur);
+            }
             foreach (var goblin in goblins)
             {
                 EnemyGoblin.MoveEnemyVert(goblin);
@@ -61,9 +71,12 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void CheckForAllEnemies()
         {
-            Player.PlayerHitEnemy(minotaur);
             Player.PlayerHitEnemy(dragon);
 
+            foreach (var minotaur in minotaurs)
+            {
+                Player.PlayerHitEnemy(minotaur);
+            }
             foreach (var goblin in goblins)
             {
                 Player.PlayerHitEnemy(goblin);

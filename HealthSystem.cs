@@ -78,6 +78,8 @@ namespace FirstPlayable_CalebWolthers_22012024
                     Map.map[enemy.enemyPosY, enemy.enemyPosX] = '`';
                     enemy.enemyChar = '`';
                     Map.DisplayMap();
+                    Player.playerAttack += enemy.enemyDamage;
+                    Enemy.enemyCount--;
                 }
             }
 

@@ -48,6 +48,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyGoblin.cs" />
     <Compile Include="EnemyManager.cs" />
+    <Compile Include="EnemyMinotaur.cs" />
     <Compile Include="EnemyOrc.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="HealthSystem.cs" />

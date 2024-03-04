@@ -15,11 +15,15 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public int health;
 
+        public int maxHealth;
+
         public int enemyDamage;
 
         public string enemyDir;
 
         public string enemyName;
+
+        public static int enemyCount;
 
         //
         public int enemyPosX;
@@ -39,8 +43,10 @@ namespace FirstPlayable_CalebWolthers_22012024
             ey.enemyPosY = posY;
             ey.enemyChar = icon;
             ey.health = health;
+            ey.maxHealth = health;
             ey.enemyDamage = dmg;
             ey.enemyDir = direction;
+
 
             Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
         }
@@ -62,23 +68,6 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
             }
         }
-
-        public static void MoveEnemyChase(Enemy ey)
-        {
-            int chaseDistance = 8;
-
-            int diffX = Player.playerPosX - ey.enemyPosX;
-            int diffY = Player.playerPosY - ey.enemyPosY;
-
-            if (Math.Abs(diffX) <= chaseDistance && Math.Abs(diffY) <= chaseDistance)
-            {
-                string nextDir = (Math.Abs(diffX) > Math.Abs(diffY)) ? ((diffX > 0) ? "right" : "left") : ((diffY > 0) ? "down" : "up");
-
-                EnemyMove(ey, (nextDir == "left") ? -1 : ((nextDir == "right") ? 1 : 0), (nextDir == "up") ? -1 : ((nextDir == "down") ? 1 : 0), null);
-            }
-
-        }
-
 
 
         //Bounce in a square
