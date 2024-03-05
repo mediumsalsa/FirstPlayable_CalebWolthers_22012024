@@ -10,7 +10,7 @@ namespace FirstPlayable_CalebWolthers_22012024
     {
 
         //Bounces vertically
-        public static void MoveEnemyVert(Enemy ey)
+        public override void MoveEnemy(Enemy ey)
         {
             if (ey.enemyChar != '`')
             {

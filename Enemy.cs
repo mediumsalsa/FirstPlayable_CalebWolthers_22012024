@@ -115,6 +115,23 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         }
 
+        public virtual void MoveEnemy(Enemy ey)
+        {
+            if (ey.enemyChar != '`')
+            {
+                //Up
+                if (ey.enemyDir == "up")
+                {
+                    EnemyMove(ey, 0, -1, "down");
+                }
+                //Down
+                else if (ey.enemyDir == "down")
+                {
+                    EnemyMove(ey, 0, 1, "up");
+                }
+            }
+        }
+
 
         public static void EnemyCheckNextMove(Enemy ey, string nextDir)
         {

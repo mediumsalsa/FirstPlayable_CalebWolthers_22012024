@@ -12,7 +12,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         private static Random rd = new Random();
 
 
-        public static void MoveEnemyRandom(Enemy ey)
+        public override void MoveEnemy(Enemy ey)
         {
             if (ey.enemyChar != '`')
             {

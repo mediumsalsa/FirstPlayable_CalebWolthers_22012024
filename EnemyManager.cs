@@ -25,7 +25,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void StartEnemies()
         {
-            Enemy.enemyCount = numberOfMinotaurs + numberOfOrcs + numberOfGoblins + 1;
+            Enemy.enemyCount = GetAllEnemies().Count();
 
 
             Enemy.SetEnemy(dragon, "Kinda Mighty Dragon", 92, 1, 'D', 10000, 100, null);
@@ -51,19 +51,9 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void MoveAllEnemies()
         {
-            EnemyDragon.MoveEnemyRandom(dragon);
-
-            foreach (var minotaur in minotaurs)
+            foreach (var enemy in GetAllEnemies())
             {
-                EnemyMinotaur.MoveEnemyChase(minotaur);
-            }
-            foreach (var goblin in goblins)
-            {
-                EnemyGoblin.MoveEnemyVert(goblin);
-            }
-            foreach (var orc in orcs)
-            {
-                EnemyOrc.MoveEnemyRandom(orc);
+                enemy.MoveEnemy(enemy);
             }
 
             Map.DisplayMap();
@@ -71,22 +61,20 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void CheckForAllEnemies()
         {
-            Player.PlayerHitEnemy(dragon);
-
-            foreach (var minotaur in minotaurs)
+            foreach (var enemy in GetAllEnemies())
             {
-                Player.PlayerHitEnemy(minotaur);
-            }
-            foreach (var goblin in goblins)
-            {
-                Player.PlayerHitEnemy(goblin);
-            }
-            foreach (var orc in orcs)
-            {
-                Player.PlayerHitEnemy(orc);
+                Player.PlayerHitEnemy(enemy);
             }
         }
 
+
+        private static IEnumerable<Enemy> GetAllEnemies()
+        {
+            yield return dragon;
+            foreach (var minotaur in minotaurs) yield return minotaur;
+            foreach (var goblin in goblins) yield return goblin;
+            foreach (var orc in orcs) yield return orc;
+        }
 
 
 

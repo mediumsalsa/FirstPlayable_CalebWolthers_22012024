@@ -43,8 +43,8 @@ namespace FirstPlayable_CalebWolthers_22012024
             width = map.GetLength(1);
             height = map.GetLength(0);
 
-            cameraWidth = 40;  
-            cameraHeight = 15;
+            cameraWidth = 400;  
+            cameraHeight = 150;
 
             if (cameraWidth > width)
             {

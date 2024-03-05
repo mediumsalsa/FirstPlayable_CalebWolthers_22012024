@@ -11,7 +11,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static int chaseDistance = 5;
 
 
-        public static void MoveEnemyChase(Enemy ey)
+        public override void MoveEnemy(Enemy ey)
         {
             if (ey.enemyChar != '`')
             { 
