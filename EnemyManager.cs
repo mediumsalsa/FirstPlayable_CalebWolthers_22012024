@@ -28,7 +28,13 @@ namespace FirstPlayable_CalebWolthers_22012024
             Enemy.enemyCount = GetAllEnemies().Count();
 
 
-            Enemy.SetEnemy(dragon, "Kinda Mighty Dragon", 92, 1, 'D', 10000, 100, null);
+            Enemy.SetEnemy(dragon, EnemyDragon.enemyName, EnemyDragon.enemyPosX, EnemyDragon.enemyPosY, EnemyDragon.enemyChar, EnemyDragon.enemyHealth, EnemyDragon.enemyDamage, EnemyDragon.enemyDir);
+
+            //foreach (var enemy in GetAllEnemies())
+            //{
+            //    Enemy.RandomlyPlaceEnemy(enemy, enemy.enemyName, enemy.enemyChar ,enemy.enemyHealth, enemy.enemyDamage, enemy.enemyDir, enemy.enemyMinX, enemy.enemyMaxX, enemy.enemyMinY, enemy.enemyMaxY);
+           // }
+
 
             for (int i = 0; i < numberOfMinotaurs; i++)
             {
@@ -47,6 +53,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 orcs[i] = new EnemyOrc();
                 Enemy.RandomlyPlaceEnemy(orcs[i], "Orc", 'O', 200, 40, null, 60, Map.width - 2, 10, Map.height - 2);
             }
+
         }
 
         public static void MoveAllEnemies()

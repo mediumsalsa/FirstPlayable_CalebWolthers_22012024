@@ -8,9 +8,24 @@ namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class EnemyDragon : Enemy
     {
+        public static new string enemyName = "Dragon";
+        public static new char enemyChar = 'D';
+        public static new int enemyHealth = 10000;
+        public static new int enemyDamage = 100;
+        public static new string enemyDir;
+
+        public static new int enemyPosX = 92;
+        public static new int enemyPosY = 1;
+
+        public static new int enemyMinX = 2;
+        public static new int enemyMaxX = Map.width - 85;
+        public static new int enemyMinY = 1;
+        public static new int enemyMaxY = Map.height - 24;
+
+
+
 
         private static Random rd = new Random();
-
 
         public override void MoveEnemy(Enemy ey)
         {

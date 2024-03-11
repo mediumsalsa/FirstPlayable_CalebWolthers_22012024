@@ -9,8 +9,19 @@ namespace FirstPlayable_CalebWolthers_22012024
     internal class EnemyOrc : Enemy
     {
 
-        private static Random rd = new Random();
+        public static new string enemyName = "Orc";
+        public static new char enemyChar = 'O';
+        public static new int enemyHealth = 200;
+        public static new int enemyDamage = 40;
+        public static new string enemyDir;
 
+        public static new int enemyMinX = 60;
+        public static new int enemyMaxX = Map.width - 2;
+        public static new int enemyMinY = 10;
+        public static new int enemyMaxY = Map.height - 2; 
+
+
+        private static Random rd = new Random();
 
         //Moves randomly
         public override void MoveEnemy(Enemy ey)

@@ -10,12 +10,12 @@ namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class Player
     {
-        public static char gameChar;
+        public static char playerChar;
 
-        public static int health = 100000;
-        public static int shield = 0;
+        public static int health;
+        public static int shield;
 
-        public static int playerAttack = 100;
+        public static int playerAttack;
 
         public static int playerPosX;
         public static int playerPosY;
@@ -29,16 +29,16 @@ namespace FirstPlayable_CalebWolthers_22012024
         //Sets the player up for the start of the game
         public static void SetPlayer()
         {
-            health = 100;
+            health = Settings.playerHealth;
 
-            shield = 0;
+            shield = Settings.playerShield;
 
-            playerAttack = 50;
+            playerAttack = Settings.playerAttack;
 
-            gameChar = 'P';
+            playerChar = Settings.playerChar;
 
-            playerPosX = 4;
-            playerPosY = 20;  
+            playerPosX = Settings.playerStartPosX;
+            playerPosY = Settings.playerStartPosY;  
         }
 
 
@@ -113,7 +113,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Map.map[lastPosY, lastPosX] = '`';
 
-            Map.map[playerPosY, playerPosX] = Player.gameChar;
+            Map.map[playerPosY, playerPosX] = playerChar;
 
             EnemyManager.MoveAllEnemies();
         }
@@ -186,11 +186,11 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             if ((playerPosY == ey.enemyPosY && nextPosX == ey.enemyPosX) || (nextPosY == ey.enemyPosY && playerPosX == ey.enemyPosX))
             {
-                if (ey.health > 0)
+                if (ey.enemyHealth > 0)
                 {
                     CantMove();
 
-                    HealthSystem.TakeDamage("enemy", Player.playerAttack, ref ey.health, ey);
+                    HealthSystem.TakeDamage("enemy", Player.playerAttack, ref ey.enemyHealth, ey);
 
                     Map.UpdateHUD(ey);
                 }

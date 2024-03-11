@@ -23,9 +23,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static string lastItem;
 
-
-        public static int cameraWidth;
-        public static int cameraHeight;
+        public static int cameraWidth = Settings.cameraWidth;
+        public static int cameraHeight = Settings.cameraHeight;
 
         public static int width;
         public static int height;
@@ -43,9 +42,6 @@ namespace FirstPlayable_CalebWolthers_22012024
             width = map.GetLength(1);
             height = map.GetLength(0);
 
-            cameraWidth = 400;  
-            cameraHeight = 150;
-
             if (cameraWidth > width)
             {
                 cameraWidth = width;
@@ -57,8 +53,11 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             MakeMap();
 
-            map[Player.playerPosX, Player.playerPosY] = Player.gameChar;
+            map[Player.playerPosX, Player.playerPosY] = Player.playerChar;
 
+
+            Console.SetCursorPosition(0, 0);
+            Console.Clear();
         }
 
 
@@ -304,7 +303,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 Console.WriteLine("Number of Enemies: " + Enemy.enemyCount);
                 Console.WriteLine("");
                 Console.WriteLine("Last enemy encountered: " + enemy.enemyName);
-                Console.WriteLine("Health: " + enemy.health + "/" + enemy.maxHealth);
+                Console.WriteLine("Health: " + enemy.enemyHealth + "/" + enemy.maxHealth);
                 Console.WriteLine("Attack power: " + enemy.enemyDamage);
                 Console.WriteLine(Map.breaker);
                 Console.WriteLine("");

@@ -13,7 +13,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public char enemyChar;
 
-        public int health;
+        public int enemyHealth;
 
         public int maxHealth;
 
@@ -24,6 +24,11 @@ namespace FirstPlayable_CalebWolthers_22012024
         public string enemyName;
 
         public static int enemyCount;
+
+        public int enemyMinX;
+        public int enemyMaxX;
+        public int enemyMinY;
+        public int enemyMaxY;
 
         //
         public int enemyPosX;
@@ -42,7 +47,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             ey.enemyPosX = posX;
             ey.enemyPosY = posY;
             ey.enemyChar = icon;
-            ey.health = health;
+            ey.enemyHealth = health;
             ey.maxHealth = health;
             ey.enemyDamage = dmg;
             ey.enemyDir = direction;
@@ -145,9 +150,9 @@ namespace FirstPlayable_CalebWolthers_22012024
                 Map.map[enemyLastPosY, enemyLastPosX] = '`';
                 Map.map[ey.enemyPosY, ey.enemyPosX] = ey.enemyChar;
             }
-            else if (isWithinBounds && Map.map[enemyNextPosY, enemyNextPosX] == Player.gameChar && ey.enemyChar != '`')
+            else if (isWithinBounds && Map.map[enemyNextPosY, enemyNextPosX] == Player.playerChar && ey.enemyChar != '`')
             {
-                if (ey.health >= 0)
+                if (ey.enemyHealth >= 0)
                 {
                     EnemyCantMove();
                     HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
