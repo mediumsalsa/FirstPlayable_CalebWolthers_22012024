@@ -11,16 +11,15 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public EnemyOrc()
         {
-            enemyName = "Orc";
-            enemyChar = 'O';
-            enemyHealth = 200;
-            enemyDamage = 40;
-            enemyDir = null;
+            enemyName = Settings.orcName;
+            enemyChar = Settings.orcChar;
+            enemyHealth = Settings.orcHealth;
+            enemyDamage = Settings.orcDamage;
 
-            enemyMinX = 60;
-            enemyMaxX = Map.width - 2;
-            enemyMinY = 10;
-            enemyMaxY = Map.height - 2;
+            enemyMinX = Settings.orcMinX;
+            enemyMaxX = Settings.orcMaxX;
+            enemyMinY = Settings.orcMinY;
+            enemyMaxY = Settings.orcMaxY;
 
         }
 

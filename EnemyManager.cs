@@ -41,6 +41,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         private static void InitializeEnemies()
         {
+
+
             for (int i = 0; i < numberOfGoblins; i++)
             {
                 goblins[i] = new EnemyGoblin();

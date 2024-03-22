@@ -11,19 +11,15 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public EnemyDragon()
         {
-            enemyName = "Dragon";
-            enemyChar = 'D';
-            enemyHealth = 10000;
-            enemyDamage = 100;
-            enemyDir = null;
-
-            enemyPosX = 92;
-            enemyPosY = 1;
-
-            enemyMinX = 2;
-            enemyMaxX = Map.width - 80;
-            enemyMinY = 2;
-            enemyMaxY = Map.height - 20;
+            enemyName = Settings.dragonName;
+            enemyChar = Settings.dragonChar;
+            enemyHealth = Settings.dragonHealth;
+            enemyDamage = Settings.dragonDamage;
+            
+            enemyMinX = Settings.dragonMinX;
+            enemyMaxX = Settings.dragonMaxX;
+            enemyMinY = Settings.dragonMinY;
+            enemyMaxY = Settings.dragonMaxY;
         }
 
 

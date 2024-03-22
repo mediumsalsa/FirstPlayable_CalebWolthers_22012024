@@ -63,6 +63,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             while (true)
             {
+
                 int x = random.Next(minX, maxX);
                 int y = random.Next(minY, maxY);
 

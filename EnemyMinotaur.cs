@@ -11,16 +11,15 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public EnemyMinotaur() 
         {
-            enemyName = "Minotaur";
-            enemyChar = '}';
-            enemyHealth = 400;
-            enemyDamage = 50;
-            enemyDir = null;
+            enemyName = Settings.minotaurName;
+            enemyChar = Settings.minotaurChar;
+            enemyHealth = Settings.minotaurHealth;
+            enemyDamage = Settings.minotaurDamage;
 
-            enemyMinX = 2;
-            enemyMaxX = Map.width - 30;
-            enemyMinY = 2;
-            enemyMaxY = Map.height - 13;
+            enemyMinX = Settings.minotaurMinX;
+            enemyMaxX = Settings.minotaurMaxX;
+            enemyMinY = Settings.minotaurMinY;
+            enemyMaxY = Settings.minotaurMaxY;
         }
 
 

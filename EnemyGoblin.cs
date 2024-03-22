@@ -11,16 +11,16 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public EnemyGoblin()
         {
-            enemyName = "Goblin";
-            enemyChar = 'G';
-            enemyHealth = 150;
-            enemyDamage = 20;
-            enemyDir = "down";
+            enemyName = Settings.goblinName;
+            enemyChar = Settings.goblinChar;
+            enemyHealth = Settings.goblinHealth;
+            enemyDamage = Settings.goblinDamage;
+            enemyDir = Settings.goblinDir;
 
-            enemyMinX = 8;
-            enemyMaxX = Map.width - 70;
-            enemyMinY = 16;
-            enemyMaxY = Map.height - 2;
+            enemyMinX = Settings.goblinMinX;
+            enemyMaxX = Settings.goblinMaxX;
+            enemyMinY = Settings.goblinMinY;
+            enemyMaxY = Settings.goblinMaxY;
 
 
         }
