@@ -25,36 +25,46 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void StartEnemies()
         {
+            InitializeEnemies();
+
             Enemy.enemyCount = GetAllEnemies().Count();
 
+            foreach (var enemy in GetAllEnemies())
+            {
+                if (enemy != null)
+                {
+                    Enemy.RandomlyPlaceEnemy(enemy, enemy.enemyName, enemy.enemyChar, enemy.enemyHealth, enemy.enemyDamage, enemy.enemyDir, enemy.enemyMinX, enemy.enemyMaxX, enemy.enemyMinY, enemy.enemyMaxY);
+                }
+            }
+        }
 
-            Enemy.SetEnemy(dragon, EnemyDragon.enemyName, EnemyDragon.enemyPosX, EnemyDragon.enemyPosY, EnemyDragon.enemyChar, EnemyDragon.enemyHealth, EnemyDragon.enemyDamage, EnemyDragon.enemyDir);
 
-            //foreach (var enemy in GetAllEnemies())
-            //{
-            //    Enemy.RandomlyPlaceEnemy(enemy, enemy.enemyName, enemy.enemyChar ,enemy.enemyHealth, enemy.enemyDamage, enemy.enemyDir, enemy.enemyMinX, enemy.enemyMaxX, enemy.enemyMinY, enemy.enemyMaxY);
-           // }
-
+        private static void InitializeEnemies()
+        {
+            for (int i = 0; i < numberOfGoblins; i++)
+            {
+                goblins[i] = new EnemyGoblin();
+            }
 
             for (int i = 0; i < numberOfMinotaurs; i++)
             {
                 minotaurs[i] = new EnemyMinotaur();
-                Enemy.RandomlyPlaceEnemy(minotaurs[i], "Minotaur", '}', 400, 50, null, 2, Map.width - 30, 2, Map.height - 13);
-            }
-
-            for (int i = 0; i < numberOfGoblins; i++)
-            {
-                goblins[i] = new EnemyGoblin();
-                Enemy.RandomlyPlaceEnemy(goblins[i], "Goblin", 'G', 100, 20, "down", 8, Map.width - 70, 16, Map.height - 2);
             }
 
             for (int i = 0; i < numberOfOrcs; i++)
             {
                 orcs[i] = new EnemyOrc();
-                Enemy.RandomlyPlaceEnemy(orcs[i], "Orc", 'O', 200, 40, null, 60, Map.width - 2, 10, Map.height - 2);
             }
-
         }
+        private static IEnumerable<Enemy> GetAllEnemies()
+        {
+            yield return dragon;
+            foreach (var minotaur in minotaurs) yield return minotaur;
+            foreach (var goblin in goblins) yield return goblin;
+            foreach (var orc in orcs) yield return orc;
+        }
+
+
 
         public static void MoveAllEnemies()
         {
@@ -75,13 +85,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
-        private static IEnumerable<Enemy> GetAllEnemies()
-        {
-            yield return dragon;
-            foreach (var minotaur in minotaurs) yield return minotaur;
-            foreach (var goblin in goblins) yield return goblin;
-            foreach (var orc in orcs) yield return orc;
-        }
+
 
 
 

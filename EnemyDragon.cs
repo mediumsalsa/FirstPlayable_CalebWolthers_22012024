@@ -8,21 +8,23 @@ namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class EnemyDragon : Enemy
     {
-        public static new string enemyName = "Dragon";
-        public static new char enemyChar = 'D';
-        public static new int enemyHealth = 10000;
-        public static new int enemyDamage = 100;
-        public static new string enemyDir;
 
-        public static new int enemyPosX = 92;
-        public static new int enemyPosY = 1;
+        public EnemyDragon()
+        {
+            enemyName = "Dragon";
+            enemyChar = 'D';
+            enemyHealth = 10000;
+            enemyDamage = 100;
+            enemyDir = null;
 
-        public static new int enemyMinX = 2;
-        public static new int enemyMaxX = Map.width - 85;
-        public static new int enemyMinY = 1;
-        public static new int enemyMaxY = Map.height - 24;
+            enemyPosX = 92;
+            enemyPosY = 1;
 
-
+            enemyMinX = 2;
+            enemyMaxX = Map.width - 80;
+            enemyMinY = 2;
+            enemyMaxY = Map.height - 20;
+        }
 
 
         private static Random rd = new Random();
@@ -76,6 +78,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
             }
         }
+
 
     }
 }

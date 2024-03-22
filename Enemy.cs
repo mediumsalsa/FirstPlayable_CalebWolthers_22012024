@@ -68,7 +68,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                 if (Map.map[y, x] == '`')
                 {
-                    Enemy.SetEnemy(enemy, name, x, y, icon, health, damage, dir);
+                    SetEnemy(enemy, name, x, y, icon, health, damage, dir);
                     break;
                 }
             }
@@ -76,7 +76,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
         //Bounce in a square
-        public static void MoveEnemySquare(Enemy ey)
+        public virtual void MoveEnemySquare(Enemy ey)
         {
 
             if (ey.enemyChar != '`')

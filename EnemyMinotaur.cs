@@ -8,17 +8,20 @@ namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class EnemyMinotaur : Enemy
     {
-        public static new string enemyName = "Minotaur";
-        public static new char enemyChar = '}';
-        public static new int enemyHealth = 400;
-        public static new int enemyDamage = 50;
-        public static new string enemyDir;
 
-        public static new int enemyMinX = 2;
-        public static new int enemyMaxX = Map.width - 30;
-        public static new int enemyMinY = 2;
-        public static new int enemyMaxY = Map.height - 13;
+        public EnemyMinotaur() 
+        {
+            enemyName = "Minotaur";
+            enemyChar = '}';
+            enemyHealth = 400;
+            enemyDamage = 50;
+            enemyDir = null;
 
+            enemyMinX = 2;
+            enemyMaxX = Map.width - 30;
+            enemyMinY = 2;
+            enemyMaxY = Map.height - 13;
+        }
 
 
         public static int chaseDistance = 5;

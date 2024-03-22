@@ -18,7 +18,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             for (int i = 0; i < numberOfHealthPotions; i++)
             {
                 healthPotions[i] = new ItemHealth();
-                Item.RandomlyPlaceItem(healthPotions[i], "Health Potion", '@', 2, Map.width - 2, 2, Map.height - 2);
+                Item.RandomlyPlaceItem(healthPotions[i], "Health Potion", ItemHealth.itemChar, 2, Map.width - 2, 2, Map.height - 2);
             }
         }
 

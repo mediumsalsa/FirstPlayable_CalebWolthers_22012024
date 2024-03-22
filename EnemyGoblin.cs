@@ -8,16 +8,22 @@ namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class EnemyGoblin : Enemy
     {
-        public static new string enemyName = "Goblin";
-        public static new char enemyChar = 'G';
-        public static new int enemyHealth = 150;
-        public static new int enemyDamage = 20;
-        public static new string enemyDir = "down";
 
-        public static new int enemyMinX = 8;
-        public static new int enemyMaxX = Map.width - 70;
-        public static new int enemyMinY = 16;
-        public static new int enemyMaxY = Map.height - 2;
+        public EnemyGoblin()
+        {
+            enemyName = "Goblin";
+            enemyChar = 'G';
+            enemyHealth = 150;
+            enemyDamage = 20;
+            enemyDir = "down";
+
+            enemyMinX = 8;
+            enemyMaxX = Map.width - 70;
+            enemyMinY = 16;
+            enemyMaxY = Map.height - 2;
+
+
+        }
 
 
         //Bounces vertically
@@ -37,6 +43,8 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
             }
         }
+
+
 
     }
 }

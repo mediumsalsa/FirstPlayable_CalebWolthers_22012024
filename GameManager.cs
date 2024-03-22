@@ -25,6 +25,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Map.StartMap();
 
+            UI.LoadStartingScreen();
+
             UI.StartHUD();
 
             EnemyManager.StartEnemies();
@@ -34,6 +36,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             Player.GetInput();
 
             Console.Clear();
+            
         }
 
 

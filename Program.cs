@@ -20,20 +20,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("");
-            Console.WriteLine(" Walk Of Legends");
-            Console.WriteLine("");
-            Console.Write(" Reach the "); 
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("dragon");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(" and destroy him");
-            Console.WriteLine(" Your attack power increases with every kill.");
-            Console.Write(" Defeat as many enemies as you can before reaching the ");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("dragon");
-            Console.ForegroundColor = ConsoleColor.Blue;
+
             GameManager.StartGame();
 
         }
