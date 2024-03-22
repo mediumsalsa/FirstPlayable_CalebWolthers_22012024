@@ -10,7 +10,7 @@ namespace FirstPlayable_CalebWolthers_22012024
     {
         public static void HealPlayer()
         {
-            Map.lastItem = "Health Potion(+30 health)";
+            UI.lastItem = "Health Potion(+30 health)";
             HealthSystem.Heal(30, ref Player.health);
         }
     }

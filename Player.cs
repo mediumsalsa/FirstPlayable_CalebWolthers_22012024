@@ -154,22 +154,22 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
                 else if (Map.map[playerPosY, nextPosX] == '$' || Map.map[nextPosY, playerPosX] == '$')
                 {
-                    Map.lastItem = "Divine Armour(+20,000 Shield)";
+                    UI.lastItem = "Divine Armour(+20,000 Shield)";
                     HealthSystem.Heal(3000, ref shield);
                 }
                 else if (Map.map[playerPosY, nextPosX] == '!' || Map.map[nextPosY, playerPosX] == '!')
                 {
-                    Map.lastItem = "Dragon Killer(+1000 Attack)";
+                    UI.lastItem = "Dragon Killer(+1000 Attack)";
                     playerAttack += 1000;
                 }
                 else if (Map.map[playerPosY, nextPosX] == '7' || Map.map[nextPosY, playerPosX] == '7')
                 {
-                    Map.lastItem = "Golems Greatsword(+50 attack)";
+                    UI.lastItem = "Golems Greatsword(+50 attack)";
                     playerAttack += 50;
                 }
                 if (Map.map[playerPosY, nextPosX] == '*' || Map.map[nextPosY, playerPosX] == '*')
                 {
-                    Map.lastItem = "Helmet of immortality";
+                    UI.lastItem = "Helmet of immortality";
                     HealthSystem.Heal(200, ref shield);
                 }
 
@@ -192,7 +192,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                     HealthSystem.TakeDamage("enemy", Player.playerAttack, ref ey.enemyHealth, ey);
 
-                    Map.UpdateHUD(ey);
+                    UI.UpdateHUD(ey);
                 }
             }
         }

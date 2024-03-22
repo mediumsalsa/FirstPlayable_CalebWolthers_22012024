@@ -156,7 +156,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 {
                     EnemyCantMove();
                     HealthSystem.TakeDamage("player", ey.enemyDamage, ref Player.health, null);
-                    Map.UpdateHUD(ey);
+                    UI.UpdateHUD(ey);
                 }
             }
             else 

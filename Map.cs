@@ -17,19 +17,13 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static char[,] map;
 
-        public static string breaker = "------------------------";
-
-        public static string healthStatus;
-
-        public static string lastItem;
-
         public static int cameraWidth = Settings.cameraWidth;
         public static int cameraHeight = Settings.cameraHeight;
 
         public static int width;
         public static int height;
 
-        public static Enemy ey = new Enemy();
+        
 
 
         public static void StartMap()
@@ -76,39 +70,18 @@ namespace FirstPlayable_CalebWolthers_22012024
         //Draws map, and creates a temporary, smaller map that displays based on the players position
         public static void DisplayMap()
         {
-            Console.SetCursorPosition(0, 0);
             Console.CursorVisible = false;
 
             int startX = Math.Max(0, Player.playerPosX - cameraWidth / 2);
             int startY = Math.Max(0, Player.playerPosY - cameraHeight / 2);
 
+            ConsoleColor[,] colors = new ConsoleColor[cameraHeight, cameraWidth];
             char[,] tempMap = new char[cameraHeight, cameraWidth];
 
-            for (int row = 0; row < cameraHeight; row++)
-            {
-                for (int col = 0; col < cameraWidth; col++)
-                {
-                    int mapRow = startY + row;
-                    int mapCol = startX + col;
-
-                    if (mapRow < height && mapCol < width)
-                    {
-                        tempMap[row, col] = map[mapRow, mapCol];
-                    }
-                    else
-                    {
-                        tempMap[row, col] = '^';
-                    }
-                }
-            }
-
+            Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("+");
-            for (int i = 0; i < cameraWidth; i++)
-            {
-                Console.Write("-");
-            }
-            Console.WriteLine("+");
+            Console.WriteLine(new string('-', cameraWidth) + "+");
 
             for (int row = 0; row < cameraHeight; row++)
             {
@@ -117,10 +90,22 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                 for (int col = 0; col < cameraWidth; col++)
                 {
-                    Console.CursorLeft = col + 1;
-                    Console.CursorTop = row + 1;
+                    int mapRow = startY + row;
+                    int mapCol = startX + col;
 
-                    DrawTile(tempMap[row, col]);
+                    if (mapRow >= 0 && mapRow < height && mapCol >= 0 && mapCol < width)
+                    {
+                        tempMap[row, col] = map[mapRow, mapCol];
+                        colors[row, col] = GetTileColor(map[mapRow, mapCol]);
+                    }
+                    else
+                    {
+                        tempMap[row, col] = '^';
+                        colors[row, col] = ConsoleColor.White;
+                    }
+
+                    Console.ForegroundColor = colors[row, col];
+                    Console.Write(tempMap[row, col]);
                 }
 
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -128,188 +113,41 @@ namespace FirstPlayable_CalebWolthers_22012024
                 Console.WriteLine();
             }
 
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("+");
-            for (int i = 0; i < cameraWidth; i++)
-            {
-                Console.Write("-");
-            }
-            Console.WriteLine("+");
+            Console.WriteLine(new string('-', cameraWidth) + "+");
 
-            Console.CursorVisible = false;
-            ShowHUD();
+            UI.ShowHUD();
         }
 
 
 
 
-        static void DrawTile(char tile)
+        public static ConsoleColor GetTileColor(char tile)
         {
-            if (tile == '`')
+            switch (tile)
             {
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == '~')
-            {
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == 'P')
-            {
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == '#')
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == 'G')
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == 'D')
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == '!')
-            {
-                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == '$')
-            {
-                Console.ForegroundColor = ConsoleColor.Gray;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == '§')
-            {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == '*')
-            {
-                Console.ForegroundColor = ConsoleColor.Gray;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == '}')
-            {
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == '7')
-            {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == 'O')
-            {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == '^')
-            {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-            else if (tile == '@')
-            {
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.BackgroundColor = ConsoleColor.Black;
-            }
-
-            Console.Write(tile);
-        }
-
-        public static void UpdateHUD(Enemy enemy)
-        {
-            ey = enemy;
-        }
-
-
-        static void ShowHUD()
-        {
-            if (Player.health >= 100)
-            { healthStatus = "Perfect Health"; }
-
-            else if (Player.health < 99 && Player.health >= 90)
-            { healthStatus = "Healthy"; }
-
-            else if (Player.health < 89 && Player.health >= 75)
-            { healthStatus = "Hurt"; }
-
-            else if (Player.health < 74 && Player.health >= 50)
-            { healthStatus = "Badly Hurt"; }
-
-            else if (Player.health < 49 && Player.health >= 20)
-            { healthStatus = "Danger"; }
-
-            else if (Player.health < 19 && Player.health > 0)
-            { healthStatus = "ALMOST DEAD"; }
-
-            else { healthStatus = "Dead"; }
-
-
-            Console.SetCursorPosition(0, height + 2);
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.WriteLine("                                                        ");
-            Console.SetCursorPosition(0, cameraHeight + 2);
-
-
-
-            Console.WriteLine("");
-            Console.WriteLine(breaker);
-            Console.WriteLine("Player Stats");
-            Console.WriteLine("");
-            Console.WriteLine("Shield: " + Player.shield);
-            Console.WriteLine("Health: " + Player.health);
-            Console.WriteLine("Health Status: " + healthStatus);
-            Console.WriteLine("Attack Power: " + Player.playerAttack);
-            Console.WriteLine("last Item Aquired: " + lastItem);
-
-            Console.WriteLine(breaker);
-            Console.WriteLine("");
-            ShowEnemyHUD(ey);
-
-            Console.CursorVisible = !true;
-        }
-
-        public static void ShowEnemyHUD(Enemy enemy)
-        {
-
-            if (enemy != null)
-            {
-
-                Console.WriteLine(Map.breaker);
-                Console.WriteLine("Number of Enemies: " + Enemy.enemyCount);
-                Console.WriteLine("");
-                Console.WriteLine("Last enemy encountered: " + enemy.enemyName);
-                Console.WriteLine("Health: " + enemy.enemyHealth + "/" + enemy.maxHealth);
-                Console.WriteLine("Attack power: " + enemy.enemyDamage);
-                Console.WriteLine(Map.breaker);
-                Console.WriteLine("");
-
+                case '`': return ConsoleColor.Black;
+                case '~': return ConsoleColor.Cyan;
+                case 'P': return ConsoleColor.Blue;
+                case '#': return ConsoleColor.Green;
+                case 'G': return ConsoleColor.Yellow;
+                case 'D': return ConsoleColor.Red;
+                case '!': return ConsoleColor.DarkMagenta;
+                case '$': return ConsoleColor.Gray;
+                case '§': return ConsoleColor.DarkRed;
+                case '*': return ConsoleColor.Gray;
+                case '}': return ConsoleColor.Magenta;
+                case '7': return ConsoleColor.White;
+                case 'O': return ConsoleColor.DarkYellow;
+                case '^': return ConsoleColor.DarkGray;
+                case '@': return ConsoleColor.Blue;
+                default: return ConsoleColor.White; 
             }
         }
+
+
+
 
 
 

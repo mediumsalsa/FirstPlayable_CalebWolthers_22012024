@@ -9,8 +9,8 @@ namespace FirstPlayable_CalebWolthers_22012024
     internal class Settings
     {
         //Camera Settings
-        public static int cameraWidth = 400;
-        public static int cameraHeight = 150;
+        public static int cameraWidth = 40;
+        public static int cameraHeight = 15;
 
 
         //Player Settings

@@ -25,6 +25,8 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Map.StartMap();
 
+            UI.StartHUD();
+
             EnemyManager.StartEnemies();
 
             ItemManager.StartItems();
