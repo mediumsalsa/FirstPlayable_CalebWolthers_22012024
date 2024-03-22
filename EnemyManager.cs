@@ -56,6 +56,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 orcs[i] = new EnemyOrc();
             }
         }
+
         private static IEnumerable<Enemy> GetAllEnemies()
         {
             yield return dragon;
