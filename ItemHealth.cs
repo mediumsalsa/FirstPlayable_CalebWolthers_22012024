@@ -8,7 +8,10 @@ namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class ItemHealth : Item
     {
-        public static new char itemChar = '@';
+        public static new char itemChar = Settings.healthPotionChar;
+        public static int healAmount = Settings.healthPotionHealAmount;
+
+        public static string name = Settings.healthPotionName;
 
         public static void HealPlayer()
         {

@@ -133,7 +133,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 case '#': return ConsoleColor.Green;
                 case 'G': return ConsoleColor.Yellow;
                 case 'D': return ConsoleColor.Red;
-                case '!': return ConsoleColor.DarkMagenta;
+                case '!': return ConsoleColor.DarkRed;
                 case '$': return ConsoleColor.Gray;
                 case '§': return ConsoleColor.DarkRed;
                 case '*': return ConsoleColor.Gray;

@@ -11,6 +11,7 @@ namespace FirstPlayable_CalebWolthers_22012024
     internal class Player
     {
         public static char playerChar;
+        public static int moves;
 
         public static int health;
         public static int shield;
@@ -29,6 +30,8 @@ namespace FirstPlayable_CalebWolthers_22012024
         //Sets the player up for the start of the game
         public static void SetPlayer()
         {
+            moves = 0;
+
             health = Settings.playerHealth;
 
             shield = Settings.playerShield;
@@ -97,7 +100,10 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         //Moves the player
         public static void MovePlayer(int nextX, int nextY)
-        { 
+        {
+
+            moves++;
+
             nextPosX = playerPosX + nextX; 
             nextPosY = playerPosY + nextY;
 
@@ -152,13 +158,11 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
                 else if (Map.map[playerPosY, nextPosX] == '$' || Map.map[nextPosY, playerPosX] == '$')
                 {
-                    UI.lastItem = "Divine Armour(+20,000 Shield)";
-                    HealthSystem.Heal(3000, ref shield);
+                    ItemShield.GainShield();
                 }
                 else if (Map.map[playerPosY, nextPosX] == '!' || Map.map[nextPosY, playerPosX] == '!')
                 {
-                    UI.lastItem = "Dragon Killer(+1000 Attack)";
-                    playerAttack += 1000;
+                    ItemInvincible.Invincibility();
                 }
                 else if (Map.map[playerPosY, nextPosX] == '7' || Map.map[nextPosY, playerPosX] == '7')
                 {

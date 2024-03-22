@@ -16,8 +16,8 @@ namespace FirstPlayable_CalebWolthers_22012024
         //---------------
         //Camera Settings
         //---------------
-        public static int cameraWidth = 400;
-        public static int cameraHeight = 150;
+        public static int cameraWidth = 40;
+        public static int cameraHeight = 15;
 
         //---------------
         //Player Settings
@@ -36,8 +36,19 @@ namespace FirstPlayable_CalebWolthers_22012024
         //-------------
 
         //Health Potion Settings
+        public static char healthPotionChar = '@';
+        public static string healthPotionName = "Health Potion";
+        public static int healthPotionHealAmount = 30;
 
+        //Invincibility Settings
+        public static char invincibilityChar = '!';
+        public static string invincibilityName = "Invincibility";
+        public static int invincibilityEffectTime = 4000;
 
+        //Health Potion Settings
+        public static char shieldChar = '$';
+        public static string shieldName = "Shield";
+        public static int shieldAmount = 50;
 
         //--------------
         //Enemy Settings

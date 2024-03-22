@@ -179,14 +179,18 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 6);
             Console.WriteLine(ItemHealth.itemChar + " - Health Potion");
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 7);
-            Console.WriteLine("G - Goblin");
+            Console.WriteLine(ItemInvincible.itemChar + " - Invincibility");
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 8);
-            Console.WriteLine("O - Orc");
+            Console.WriteLine(ItemShield.itemChar + " - Shield");
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 9);
-            Console.WriteLine("{ - Minotaur");
+            Console.WriteLine("G - Goblin");
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 10);
+            Console.WriteLine("O - Orc");
+            Console.SetCursorPosition(legendStartPosX, legendStartPosY + 11);
+            Console.WriteLine("{ - Minotaur");
+            Console.SetCursorPosition(legendStartPosX, legendStartPosY + 12);
             Console.WriteLine("D - Dragon");
-            Console.SetCursorPosition(legendStartPosX, legendStartPosY + 16);
+            Console.SetCursorPosition(legendStartPosX, legendStartPosY + 14);
             Console.WriteLine(breaker);
 
 
