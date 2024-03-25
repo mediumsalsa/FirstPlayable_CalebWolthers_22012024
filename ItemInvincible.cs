@@ -8,7 +8,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class ItemInvincible : Item
     {
-        public static int originalHealth = Player.health;
+        public static int originalShield = Player.shield;
 
         public static new char itemChar = Settings.invincibilityChar;
 
@@ -18,15 +18,15 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static async Task Invincibility()
         {
-            int originalHealth = Player.health;
+            int originalHealth = Player.shield;
 
-            Player.health = 99999999;
+            Player.shield = 99999999;
 
             UI.lastItem = "Invincibility";
 
             await Task.Delay(effectTime);
 
-            Player.health = originalHealth;
+            Player.shield = originalShield;
         }
     }
 }
