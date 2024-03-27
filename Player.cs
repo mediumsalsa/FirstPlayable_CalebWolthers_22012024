@@ -79,7 +79,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                         break;
 
                     case ConsoleKey.R:
-                        GameManager.StartGame();
+                        GameManager.GameplayLoop();
                         Map.DisplayMap();
                         Map.DisplayMap();
                         break;
@@ -163,16 +163,6 @@ namespace FirstPlayable_CalebWolthers_22012024
                 else if (Map.map[playerPosY, nextPosX] == '!' || Map.map[nextPosY, playerPosX] == '!')
                 {
                     ItemInvincible.Invincibility();
-                }
-                else if (Map.map[playerPosY, nextPosX] == '7' || Map.map[nextPosY, playerPosX] == '7')
-                {
-                    UI.lastItem = "Golems Greatsword(+50 attack)";
-                    playerAttack += 50;
-                }
-                if (Map.map[playerPosY, nextPosX] == '*' || Map.map[nextPosY, playerPosX] == '*')
-                {
-                    UI.lastItem = "Helmet of immortality";
-                    HealthSystem.Heal(200, ref shield);
                 }
 
 

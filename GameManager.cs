@@ -11,9 +11,19 @@ namespace FirstPlayable_CalebWolthers_22012024
     {
 
 
+        public static void GameplayLoop()
+        {
+            InitObjects();
+
+            while (true) 
+            {
+                Update();
+            }
+        }
 
 
-        public static void StartGame()
+
+        public static void InitObjects()
         {
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
 
@@ -33,10 +43,11 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             ItemManager.StartItems();
 
-            Player.GetInput();
+        }
 
-            Console.Clear();
-            
+        public static void Update() 
+        {
+            Player.GetInput();
         }
 
 

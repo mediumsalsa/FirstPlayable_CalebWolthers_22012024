@@ -32,7 +32,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                             if (health <= 0)
                             {
-                                GameManager.StartGame();
+                                GameManager.GameplayLoop();
                             }
 
                         }
@@ -43,7 +43,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                         if (health <= 0)
                         {
-                            GameManager.StartGame();
+                            GameManager.GameplayLoop();
                         }
 
                     }
@@ -55,7 +55,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                     if (health <= 0)
                     {
                         health = 0;
-                        GameManager.StartGame();
+                        GameManager.GameplayLoop();
                     }
 
                 }
