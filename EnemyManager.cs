@@ -22,6 +22,15 @@ namespace FirstPlayable_CalebWolthers_22012024
         static EnemyOrc[] orcs = new EnemyOrc[numberOfOrcs];
 
 
+        private static IEnumerable<Enemy> GetAllEnemies()
+        {
+            yield return dragon;
+            foreach (var minotaur in minotaurs) yield return minotaur;
+            foreach (var goblin in goblins) yield return goblin;
+            foreach (var orc in orcs) yield return orc;
+        }
+
+
 
         public static void StartEnemies()
         {
@@ -42,7 +51,6 @@ namespace FirstPlayable_CalebWolthers_22012024
         private static void InitializeEnemies()
         {
 
-
             for (int i = 0; i < numberOfGoblins; i++)
             {
                 goblins[i] = new EnemyGoblin();
@@ -58,15 +66,6 @@ namespace FirstPlayable_CalebWolthers_22012024
                 orcs[i] = new EnemyOrc();
             }
         }
-
-        private static IEnumerable<Enemy> GetAllEnemies()
-        {
-            yield return dragon;
-            foreach (var minotaur in minotaurs) yield return minotaur;
-            foreach (var goblin in goblins) yield return goblin;
-            foreach (var orc in orcs) yield return orc;
-        }
-
 
 
         public static void MoveAllEnemies()
