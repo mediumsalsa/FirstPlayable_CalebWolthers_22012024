@@ -21,13 +21,11 @@ namespace FirstPlayable_CalebWolthers_22012024
             enemyMaxX = Settings.goblinMaxX;
             enemyMinY = Settings.goblinMinY;
             enemyMaxY = Settings.goblinMaxY;
-
-
         }
 
 
         //Bounces vertically
-        public override void MoveEnemy(Enemy ey)
+        public override void Update(Enemy ey)
         {
             if (ey.enemyChar != '`')
             {

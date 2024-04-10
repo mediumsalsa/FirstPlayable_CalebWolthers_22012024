@@ -101,7 +101,6 @@ namespace FirstPlayable_CalebWolthers_22012024
         //Moves the player
         public static void MovePlayer(int nextX, int nextY)
         {
-
             moves++;
 
             nextPosX = playerPosX + nextX; 
@@ -119,7 +118,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Map.map[playerPosY, playerPosX] = playerChar;
 
-            EnemyManager.MoveAllEnemies();
+            EnemyManager.UpdateEnemies();
         }
 
 

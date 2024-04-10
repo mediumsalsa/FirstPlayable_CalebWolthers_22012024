@@ -9,36 +9,21 @@ namespace FirstPlayable_CalebWolthers_22012024
     internal class EnemyManager
     {
 
-        //Enemy Holding zone
-        static int numberOfGoblins = 5;
-        static EnemyGoblin[] goblins = new EnemyGoblin[numberOfGoblins];
-
-        static int numberOfMinotaurs = 6;
-        static EnemyMinotaur[] minotaurs = new EnemyMinotaur[numberOfMinotaurs];
-
-        static EnemyDragon dragon = new EnemyDragon();
-
-        static int numberOfOrcs = 25;
-        static EnemyOrc[] orcs = new EnemyOrc[numberOfOrcs];
 
 
-        private static IEnumerable<Enemy> GetAllEnemies()
-        {
-            yield return dragon;
-            foreach (var minotaur in minotaurs) yield return minotaur;
-            foreach (var goblin in goblins) yield return goblin;
-            foreach (var orc in orcs) yield return orc;
-        }
+        private static List<Enemy> enemies;
+        
 
+        //static Enemy[] enemies = new Enemy[] { new EnemyGoblin(), new EnemyOrc(), new EnemyMinotaur(), new EnemyDragon() }; 
 
 
         public static void StartEnemies()
         {
             InitializeEnemies();
 
-            Enemy.enemyCount = GetAllEnemies().Count();
+            //Enemy.enemyCount = enemies.Length;
 
-            foreach (var enemy in GetAllEnemies())
+            foreach (Enemy enemy in enemies)
             {
                 if (enemy != null)
                 {
@@ -50,29 +35,31 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         private static void InitializeEnemies()
         {
+            enemies.Add(new EnemyGoblin());
+            enemies.Add(new EnemyOrc());
+            enemies.Add(new EnemyMinotaur());
+            enemies.Add(new EnemyDragon());
 
-            for (int i = 0; i < numberOfGoblins; i++)
+            /* for (int i = 0; i < numberOfGoblins; i++)
             {
                 goblins[i] = new EnemyGoblin();
             }
-
             for (int i = 0; i < numberOfMinotaurs; i++)
             {
                 minotaurs[i] = new EnemyMinotaur();
             }
-
             for (int i = 0; i < numberOfOrcs; i++)
             {
                 orcs[i] = new EnemyOrc();
-            }
+            } */
         }
 
 
-        public static void MoveAllEnemies()
+        public static void UpdateEnemies()
         {
-            foreach (var enemy in GetAllEnemies())
+            foreach (Enemy enemy in enemies)
             {
-                enemy.MoveEnemy(enemy);
+                enemy.Update(enemy);
             }
 
             Map.DisplayMap();
@@ -80,7 +67,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static void CheckForAllEnemies()
         {
-            foreach (var enemy in GetAllEnemies())
+            foreach (Enemy enemy in enemies)
             {
                 Player.PlayerHitEnemy(enemy);
             }
