@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
 
+/*
 namespace FirstPlayable_CalebWolthers_22012024
 {
-    internal abstract class Enemy
+    
+    internal class Enemy
     {
 
         public char enemyChar;
@@ -121,7 +123,10 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         }
 
-        public abstract void Update(Enemy ey);
+        public virtual void Update(Enemy ey)
+        {
+
+        }
 
 
 
@@ -164,3 +169,4 @@ namespace FirstPlayable_CalebWolthers_22012024
 
     }
 }
+*/

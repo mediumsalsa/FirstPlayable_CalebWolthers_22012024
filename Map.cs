@@ -15,20 +15,23 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         static string[] mapFile;
 
-        public static char[,] map;
+        public char[,] map;
 
-        public static int cameraWidth = Settings.cameraWidth;
-        public static int cameraHeight = Settings.cameraHeight;
+        public int cameraWidth = 100;
+        public static int cameraHeight = 100;
 
-        public static int width;
-        public static int height;
+        public int width;
+        public int height;
 
+        private Player player;
         
-
-
-        public static void StartMap()
+        public Map(Player player)
         {
+            this.player = player;
+        }
 
+        public void StartMap()
+        {
             mapFile = File.ReadAllLines(@"Map1.txt");
 
             map = new char[mapFile.Length, mapFile[0].Length];
@@ -47,15 +50,14 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             MakeMap();
 
-            map[Player.playerPosX, Player.playerPosY] = Player.playerChar;
-
+            map[player.playerPosX, player.playerPosY] = player.playerChar;
 
             Console.SetCursorPosition(0, 0);
             Console.Clear();
         }
 
 
-        public static void MakeMap()
+        public void MakeMap()
         {
             for (int i = 0; i < mapFile.Length; i++)
             {
@@ -68,12 +70,12 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
         //Draws map, and creates a temporary, smaller map that displays based on the players position
-        public static void DisplayMap()
+        public void DisplayMap()
         {
             Console.CursorVisible = false;
 
-            int startX = Math.Max(0, Player.playerPosX - cameraWidth / 2);
-            int startY = Math.Max(0, Player.playerPosY - cameraHeight / 2);
+            int startX = Math.Max(0, width / 2 - cameraWidth / 2);
+            int startY = Math.Max(0, height / 2 - cameraHeight / 2);
 
             ConsoleColor[,] colors = new ConsoleColor[cameraHeight, cameraWidth];
             char[,] tempMap = new char[cameraHeight, cameraWidth];
@@ -117,13 +119,10 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.Write("+");
             Console.WriteLine(new string('-', cameraWidth) + "+");
 
-            UI.ShowHUD();
+            //UI.ShowHUD();
         }
 
-
-
-
-        public static ConsoleColor GetTileColor(char tile)
+        public ConsoleColor GetTileColor(char tile)
         {
             switch (tile)
             {
@@ -145,8 +144,6 @@ namespace FirstPlayable_CalebWolthers_22012024
                 default: return ConsoleColor.White; 
             }
         }
-
-
 
 
     }

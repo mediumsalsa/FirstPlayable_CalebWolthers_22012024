@@ -10,53 +10,100 @@ namespace FirstPlayable_CalebWolthers_22012024
     internal class GameManager
     {
 
+        public static Map map;
+        public static Player player;
 
-        public static void GameplayLoop()
+        public static bool gameOver;
+        public static ConsoleKeyInfo input;
+
+
+        public void Play()
         {
-            InitObjects();
+            //Init
+            player = new Player();
+            map = new Map(player);
+            gameOver = false;
 
-            while (true) 
+            player.SetMap(map);
+
+            player.SetPlayer();
+
+            map.StartMap();
+
+            map.DisplayMap();
+
+            while (gameOver == false)
             {
-                Update();
+                GetInput();
+
+                //Update
+                player.Update(input);
+
+
+                //Draw
+                player.Draw();
+
             }
         }
 
-
-
-        public static void InitObjects()
+        public void GetInput()
         {
-            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
-
-            Console.SetCursorPosition(0, 0);
-
-            Console.CursorVisible = !true;
-
-            Player.SetPlayer();
-
-            Map.StartMap();
-
-            UI.LoadStartingScreen();
-
-            UI.StartHUD();
-
-            EnemyManager.StartEnemies();
-
-            ItemManager.StartItems();
-
+            input = Console.ReadKey(true);
         }
-
-        public static void Update() 
-        {
-            Player.GetInput();
-        }
-
-
-
-
-
-
-
 
 
     }
+
 }
+
+
+/*public static void GameplayLoop()
+{
+    InitObjects();
+
+    while (true) 
+    {
+        Update();
+    }
+}
+
+
+
+public static void InitObjects()
+{
+    Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+
+    Console.SetCursorPosition(0, 0);
+
+    Console.CursorVisible = !true;
+
+    Player.SetPlayer();
+
+    Map.StartMap();
+
+    UI.LoadStartingScreen();
+
+    UI.StartHUD();
+
+    //EnemyManager.StartEnemies();
+
+    ItemManager.StartItems();
+
+}
+
+public static void Update() 
+{
+    Player.GetInput();
+}
+
+
+
+
+
+
+
+
+
+}
+}
+*/

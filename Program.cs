@@ -16,12 +16,13 @@ namespace FirstPlayable_CalebWolthers_22012024
     internal class Program
     {
 
-
+        static GameManager gameManager = new GameManager();
 
         static void Main(string[] args)
         {
 
-            GameManager.GameplayLoop();
+            gameManager.Play();
+            Console.ReadKey();
 
         }
 
