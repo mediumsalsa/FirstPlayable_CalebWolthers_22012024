@@ -12,13 +12,11 @@ namespace FirstPlayable_CalebWolthers_22012024
         private Player player;
         private Map map;
         public List<Enemy> enemies;
-        public HealthSystem healthSystem;
 
         public EnemyManager(Player player, Map map)
         {
             this.player = player;
             this.map = map;
-            this.healthSystem = healthSystem;
             enemies = new List<Enemy>();
             
         }

@@ -3,49 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-/*
+
 namespace FirstPlayable_CalebWolthers_22012024
 {
-    internal class Item
+    internal abstract class Item
     {
 
-        public char itemChar;
+        private Map map;
+        private Player player;
+        public char Char;
+        public string name;
+        public int posX;
+        public int posY;
+        public bool delete;
 
-        public string itemName;
-
-        public int itemPosX;
-        public int itemPosY;
-
-
-        public static void SetItem(Item it, string name, int posX, int posY, char icon)
+        public Item(Map map, Player player)
         {
-            it.itemName = name;
-            it.itemPosX = posX;
-            it.itemPosY = posY;
-            it.itemChar = icon;
-
-            Map.map[it.itemPosY, it.itemPosX] = it.itemChar;
+            this.map = map;
+            this.player = player;
         }
 
-        public static void RandomlyPlaceItem(Item it, string name, char icon, int minX, int maxX, int minY, int maxY)
-        {
-            Random random = new Random();
+        public abstract void DoYourJob();
 
-            while (true)
-            {
-                int x = random.Next(minX, maxX);
-                int y = random.Next(minY, maxY);
+        public abstract void Update();
 
-                if (Map.map[y, x] == '`')
-                {
-                    SetItem(it, name, x, y, icon);
-                    break;
-                }
-            }
-        }
-
-
+        public abstract void Draw();
 
     }
 }
-*/
