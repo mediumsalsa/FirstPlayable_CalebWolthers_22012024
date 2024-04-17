@@ -33,6 +33,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             enemyManager.PlaceGoblins(5);
             enemyManager.PlaceOrcs(25);
+            enemyManager.PlaceMinotaurs(5);
 
 
             while (gameOver == false)

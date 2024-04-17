@@ -24,11 +24,11 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
 
-        public void PlaceGoblins(int goblinNum)
+        public void PlaceGoblins(int num)
         {
             Random random = new Random();
 
-            for (int i = 0; i < goblinNum; i++)
+            for (int i = 0; i < num; i++)
             {
                 while (true)
                 {
@@ -47,11 +47,12 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
             }
         }
-        public void PlaceOrcs(int orcNum)
+
+        public void PlaceOrcs(int num)
         {
             Random random = new Random();
 
-            for (int i = 0; i < orcNum; i++)
+            for (int i = 0; i < num; i++)
             {
                 while (true)
                 {
@@ -65,6 +66,54 @@ namespace FirstPlayable_CalebWolthers_22012024
                         orc.posY = y;
                         map.map[y, x] = orc.Char;
                         enemies.Add(orc);
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void PlaceMinotaurs(int num)
+        {
+            Random random = new Random();
+
+            for (int i = 0; i < num; i++)
+            {
+                while (true)
+                {
+                    int x = random.Next(2, map.width - 30);
+                    int y = random.Next(2, map.height - 13);
+
+                    if (map.map[y, x] == '`')
+                    {
+                        EnemyMinotaur minotaur = new EnemyMinotaur(map, player);
+                        minotaur.posX = x;
+                        minotaur.posY = y;
+                        map.map[y, x] = minotaur.Char;
+                        enemies.Add(minotaur);
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void PlaceDragons(int num)
+        {
+            Random random = new Random();
+
+            for (int i = 0; i < num; i++)
+            {
+                while (true)
+                {
+                    int x = random.Next(2, map.width - 30);
+                    int y = random.Next(2, map.height - 13);
+
+                    if (map.map[y, x] == '`')
+                    {
+                        EnemyDragon dragon = new EnemyDragon(map, player);
+                        dragon.posX = x;
+                        dragon.posY = y;
+                        map.map[y, x] = dragon.Char;
+                        enemies.Add(dragon);
                         break;
                     }
                 }
@@ -91,91 +140,3 @@ namespace FirstPlayable_CalebWolthers_22012024
 
     }
 }
-/*
-        //Enemy Holding zone
-        static int numberOfGoblins = 5;
-        static EnemyGoblin[] goblins = new EnemyGoblin[numberOfGoblins];
-
-        static int numberOfMinotaurs = 6;
-        static EnemyMinotaur[] minotaurs = new EnemyMinotaur[numberOfMinotaurs];
-
-        static EnemyDragon dragon = new EnemyDragon();
-
-        static int numberOfOrcs = 25;
-        static EnemyOrc[] orcs = new EnemyOrc[numberOfOrcs];
-
-
-
-        public static void StartEnemies()
-        {
-            InitializeEnemies();
-
-            Enemy.enemyCount = GetAllEnemies().Count();
-
-            foreach (var enemy in GetAllEnemies())
-            {
-                if (enemy != null)
-                {
-                    Enemy.RandomlyPlaceEnemy(enemy, enemy.enemyName, enemy.enemyChar, enemy.enemyHealth, enemy.enemyDamage, enemy.enemyDir, enemy.enemyMinX, enemy.enemyMaxX, enemy.enemyMinY, enemy.enemyMaxY);
-                }
-            }
-        }
-
-
-        private static void InitializeEnemies()
-        {
-
-
-            for (int i = 0; i < numberOfGoblins; i++)
-            {
-                goblins[i] = new EnemyGoblin();
-            }
-
-            for (int i = 0; i < numberOfMinotaurs; i++)
-            {
-                minotaurs[i] = new EnemyMinotaur();
-            }
-
-            for (int i = 0; i < numberOfOrcs; i++)
-            {
-                orcs[i] = new EnemyOrc();
-            }
-        }
-
-        private static IEnumerable<Enemy> GetAllEnemies()
-        {
-            yield return dragon;
-            foreach (var minotaur in minotaurs) yield return minotaur;
-            foreach (var goblin in goblins) yield return goblin;
-            foreach (var orc in orcs) yield return orc;
-        }
-
-
-
-        public static void UpdateEnemies()
-        {
-            foreach (var enemy in GetAllEnemies())
-            {
-                enemy.Update(enemy);
-            }
-
-            Map.DisplayMap();
-        }
-
-        public static void CheckForAllEnemies()
-        {
-            foreach (var enemy in GetAllEnemies())
-            {
-                Player.PlayerHitEnemy(enemy);
-            }
-        }
-
-
-
-
-
-
-
-
-    }
-}*/

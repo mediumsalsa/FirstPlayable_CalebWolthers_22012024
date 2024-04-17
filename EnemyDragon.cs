@@ -3,31 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-/*
+
 namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class EnemyDragon : Enemy
     {
 
-        public EnemyDragon()
+        private int nextPosX;
+        private int nextPosY;
+        private int lastPosX;
+        private int lastPosY;
+        private Player player;
+        private Map map;
+        public HealthSystem healthSystem;
+
+        public EnemyDragon(Map map, Player player) : base(map, player)
         {
-            enemyName = Settings.dragonName;
-            enemyChar = Settings.dragonChar;
-            enemyHealth = Settings.dragonHealth;
-            enemyDamage = Settings.dragonDamage;
-            
-            enemyMinX = Settings.dragonMinX;
-            enemyMaxX = Settings.dragonMaxX;
-            enemyMinY = Settings.dragonMinY;
-            enemyMaxY = Settings.dragonMaxY;
+            this.map = map;
+            this.player = player;
+            maxHealth = 10000;
+            health = maxHealth;
+            name = "Dragon";
+            Char = 'D';
+            damage = 100;
+            dir = "down";
+            isDead = false;
+            healthSystem = new HealthSystem(health);
         }
 
 
         private static Random rd = new Random();
 
-        public override void Update(Enemy ey)
+        public override void Update()
         {
-            if (ey.enemyChar != '`')
+            if (Char != '`')
             {
 
                 int dir = rd.Next(0, 800);
@@ -35,47 +44,107 @@ namespace FirstPlayable_CalebWolthers_22012024
                 //Up
                 if (dir <= 100)
                 {
-                    EnemyMove(ey, 0, -1, null);
+                    Move(0, -1, null);
                 }
                 //Left
                 else if (dir > 100 && dir <= 200)
                 {
-                    EnemyMove(ey, -1, 0, null);
+                    Move(-1, 0, null);
                 }
                 //Down
                 else if (dir > 200 && dir <= 300)
                 {
-                    EnemyMove(ey, 0, 1, null);
+                    Move(0, 1, null);
                 }
                 //Right
                 else if (dir > 300 && dir <= 400)
                 {
-                    EnemyMove(ey, 1, 0, null);
+                    Move(1, 0, null);
                 }
                 //Up Left
                 else if (dir > 400 && dir <= 500)
                 {
-                    EnemyMove(ey, -2, -2, null);
+                    Move(-2, -2, null);
                 }
                 //Left Down
                 else if (dir > 500 && dir <= 600)
                 {
-                    EnemyMove(ey, -2, 2, null);
+                    Move(-2, 2, null);
                 }
                 //Down Right
                 else if (dir > 600 && dir <= 700)
                 {
-                    EnemyMove(ey, 2, 2, null);
+                    Move(2, 2, null);
                 }
                 //Right Up
                 else if (dir > 800)
                 {
-                    EnemyMove(ey, 2, -2, null);
+                    Move(2, -2, null);
                 }
             }
+        }
+
+        public override void Draw()
+        {
+            map.map[lastPosY, lastPosX] = '`';
+            map.map[posY, posX] = Char;
+        }
+
+
+        public void Move(int nextX, int nextY, string nextDir)
+        {
+            nextPosX = posX + nextX;
+            nextPosY = posY + nextY;
+            bool isWithinBounds = nextPosX >= 0 && nextPosX < map.width && nextPosY >= 0 && nextPosY < map.height;
+            lastPosY = posY;
+            lastPosX = posX;
+
+            if (isWithinBounds)
+            {
+                if (health >  0)
+                {
+                    //Colides with player 
+                    if (nextPosX == player.posX && nextPosY == player.posY)
+                    {
+                        player.healthSystem.TakeDamage(damage);
+                        nextPosY = lastPosY;
+                        nextPosX = lastPosX;
+                    }
+                    else if (map.map[nextPosY, nextPosX] == '`')
+                    {
+                        posX = nextPosX;
+                        posY = nextPosY;
+                    }
+                    else
+                    {
+                        nextPosY = lastPosY;
+                        nextPosX = lastPosX;
+                        dir = nextDir;
+                    }
+                }
+                else
+                {
+                    Die();
+                }
+            }
+        }
+
+        public void Die()
+        {
+            if (isDead = false)
+            {
+                player.attack += damage;
+            }
+            health = 0;
+            map.map[posY, posX] = '`';
+            posY = 0;
+            posX = 0;
+            Char = '#';
+            map.DisplayMap();
+            isDead = true;
+            //enemyCount--;
         }
 
 
     }
 }
-*/

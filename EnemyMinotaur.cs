@@ -3,46 +3,114 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-/*
+
 namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class EnemyMinotaur : Enemy
     {
 
-        public EnemyMinotaur() 
-        {
-            enemyName = Settings.minotaurName;
-            enemyChar = Settings.minotaurChar;
-            enemyHealth = Settings.minotaurHealth;
-            enemyDamage = Settings.minotaurDamage;
+        private int nextPosX;
+        private int nextPosY;
+        private int lastPosX;
+        private int lastPosY;
+        private Player player;
+        private Map map;
+        public HealthSystem healthSystem;
 
-            enemyMinX = Settings.minotaurMinX;
-            enemyMaxX = Settings.minotaurMaxX;
-            enemyMinY = Settings.minotaurMinY;
-            enemyMaxY = Settings.minotaurMaxY;
+        public EnemyMinotaur(Map map, Player player) : base(map, player)
+        {
+            this.map = map;
+            this.player = player;
+            maxHealth = 400;
+            health = maxHealth;
+            name = "Minotaur";
+            Char = 'M';
+            damage = 50;
+            dir = "down";
+            isDead = false;
+            healthSystem = new HealthSystem(health);
         }
 
 
         public static int chaseDistance = 5;
-
-        public override void Update(Enemy ey)
+        public override void Update()
         {
-            if (ey.enemyChar != '`')
-            { 
-                int diffX = Player.playerPosX - ey.enemyPosX;
-                int diffY = Player.playerPosY - ey.enemyPosY;
+            if (Char != '`')
+            {
+                int diffX = player.posX - posX;
+                int diffY = player.posY - posY;
 
                 if (Math.Abs(diffX) <= chaseDistance && Math.Abs(diffY) <= chaseDistance)
                 {
                     string nextDir = (Math.Abs(diffX) > Math.Abs(diffY)) ? ((diffX > 0) ? "right" : "left") : ((diffY > 0) ? "down" : "up");
 
-                    EnemyMove(ey, (nextDir == "left") ? -1 : ((nextDir == "right") ? 1 : 0), (nextDir == "up") ? -1 : ((nextDir == "down") ? 1 : 0), null);
+                    Move((nextDir == "left") ? -1 : ((nextDir == "right") ? 1 : 0), (nextDir == "up") ? -1 : ((nextDir == "down") ? 1 : 0), null);
                 }
             }
 
         }
 
+        public override void Draw()
+        {
+            map.map[lastPosY, lastPosX] = '`';
+            map.map[posY, posX] = Char;
+        }
+
+
+        public void Move(int nextX, int nextY, string nextDir)
+        {
+            nextPosX = posX + nextX;
+            nextPosY = posY + nextY;
+            bool isWithinBounds = nextPosX >= 0 && nextPosX < map.width && nextPosY >= 0 && nextPosY < map.height;
+            lastPosY = posY;
+            lastPosX = posX;
+
+            if (isWithinBounds)
+            {
+                if (health >  0)
+                {
+                    //Colides with player 
+                    if (nextPosX == player.posX && nextPosY == player.posY)
+                    {
+                        player.healthSystem.TakeDamage(damage);
+                        nextPosY = lastPosY;
+                        nextPosX = lastPosX;
+                    }
+                    else if (map.map[nextPosY, nextPosX] == '`')
+                    {
+                        posX = nextPosX;
+                        posY = nextPosY;
+                    }
+                    else
+                    {
+                        nextPosY = lastPosY;
+                        nextPosX = lastPosX;
+                        dir = nextDir;
+                    }
+                }
+                else
+                {
+                    Die();
+                }
+            }
+        }
+
+        public void Die()
+        {
+            if (isDead = false)
+            {
+                player.attack += damage;
+            }
+            health = 0;
+            map.map[posY, posX] = '`';
+            posY = 0;
+            posX = 0;
+            Char = '#';
+            map.DisplayMap();
+            isDead = true;
+            //enemyCount--;
+        }
+
 
     }
 }
-*/
