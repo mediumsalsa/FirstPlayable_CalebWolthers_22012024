@@ -14,82 +14,35 @@ namespace FirstPlayable_CalebWolthers_22012024
         public int moves;
         public int health;
         public int shield;
-        public int playerAttack;
-        public int playerPosX;
-        public int playerPosY;
+        public int attack;
+        public int posX;
+        public int posY;
         public int nextPosX;
         public int nextPosY;
         public int lastPosX;
         public int lastPosY;
         private Map map;
-        //Sets the player up for the start of the game
-
+        private EnemyManager enemyManager;
+        public HealthSystem healthSystem;
 
         public void SetPlayer()
         {
             moves = 0;
             health = 100;
             shield = 0;
-            playerAttack = 50;
+            attack = 50;
             playerChar = 'P';
-            playerPosX = 4;
-            playerPosY = 20;  
+            posX = 4;
+            posY = 20;  
         }
 
-        public void SetMap(Map map)
+        public void SetStuff(Map map, EnemyManager enemyManager)
         {
             this.map = map;
+            this.enemyManager = enemyManager;
+            healthSystem = new HealthSystem(health);
         }
 
-        //Gets input
-        public void GetInput()
-        { 
-            var exit = false;
-            ConsoleKeyInfo keyInfo;
-            do
-            {
-                keyInfo = Console.ReadKey(true);
-
-                Console.WriteLine();
-
-                switch (keyInfo.Key)
-                {
-                    case ConsoleKey.W:
-                        Move(0, -1);
-                        break;
-
-                    case ConsoleKey.A:
-                        Move(-1, 0);
-                        break;
-
-                    case ConsoleKey.S:
-                        Move(0, 1);
-                        break;
-
-                    case ConsoleKey.D:
-                        Move(1, 0);
-                        break;
-
-                    case ConsoleKey.Escape:
-                        Environment.Exit(0);
-                        break;
-
-                    case ConsoleKey.R:
-
-                        break;
-
-                    default:
-
-                        break;
-
-                }
-      
-            }
-
-
-            while (exit == false);
-
-        }
 
         public void Update(ConsoleKeyInfo input)
         {
@@ -117,16 +70,16 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             moves++;
 
-            nextPosX = playerPosX + nextX; 
-            nextPosY = playerPosY + nextY;
+            nextPosX = posX + nextX; 
+            nextPosY = posY + nextY;
 
-            lastPosY = playerPosY;
-            lastPosX = playerPosX;
+            lastPosY = posY;
+            lastPosX = posX;
 
             CheckNextMove();
 
-            playerPosY = nextPosY;
-            playerPosX = nextPosX;
+            posY = nextPosY;
+            posX = nextPosX;
 
             //EnemyManager.UpdateEnemies();
         }
@@ -135,9 +88,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             map.map[lastPosY, lastPosX] = '`';
 
-            map.map[playerPosY, playerPosX] = playerChar;
-
-            map.DisplayMap();
+            map.map[posY, posX] = playerChar;
         }
 
 
@@ -154,58 +105,48 @@ namespace FirstPlayable_CalebWolthers_22012024
         public void CheckNextMove()
         {
 
-            if (playerPosX != map.width - 1 && playerPosY != map.height - 1 && playerPosX != 0 && playerPosY != 0)
+            if (posX != map.width - 1 && posY != map.height - 1 && posX != 0 && posY != 0)
             {
 
-                if (map.map[playerPosY, nextPosX] == '^' || map.map[nextPosY, playerPosX] == '^')
+                if (map.map[posY, nextPosX] == '^' || map.map[nextPosY, posX] == '^')
                 {
                     CantMove();
                 }
-                else if (map.map[playerPosY, nextPosX] == '~' || map.map[nextPosY, playerPosX] == '~')
+                else if (map.map[posY, nextPosX] == '~' || map.map[nextPosY, posX] == '~')
                 {
                     CantMove();
                 }
-                else if (map.map[playerPosY, nextPosX] == '#' || map.map[nextPosY, playerPosX] == '#')
+                else if (map.map[posY, nextPosX] == '#' || map.map[nextPosY, posX] == '#')
                 {
                     CantMove();
                 }
-                /*
-                else if (map.map[playerPosY, nextPosX] == '@' || map.map[nextPosY, playerPosX] == '@')
-                {
-                    ItemHealth.HealPlayer();
-                }
-                else if (map.map[playerPosY, nextPosX] == '$' || map.map[nextPosY, playerPosX] == '$')
-                {
-                    ItemShield.GainShield();
-                }
-                else if (map.map[playerPosY, nextPosX] == '!' || map.map[nextPosY, playerPosX] == '!')
-                {
-                    ItemInvincible.Invincibility();
-                }*/
 
-
-                //EnemyManager.CheckForAllEnemies();
-
+                CheckForEnemies();
 
             }
-
         }
 
-        //attacks the enemy
-        /*public void PlayerHitEnemy(Enemy ey)
+        public void CheckForEnemies()
         {
-            if ((playerPosY == ey.enemyPosY && nextPosX == ey.enemyPosX) || (nextPosY == ey.enemyPosY && playerPosX == ey.enemyPosX))
+            foreach (var enemy in enemyManager.enemies)
             {
-                if (ey.enemyHealth > 0)
+                if ((posY == enemy.posY && nextPosX == enemy.posX) || (nextPosY == enemy.posY && posX == enemy.posX))
                 {
-                    CantMove();
-
-                    HealthSystem.TakeDamage("enemy", Player.playerAttack, ref ey.enemyHealth, ey);
-
-                    UI.UpdateHUD(ey);
+                    if (enemy.health > 0)
+                    {
+                        CantMove();
+                        enemy.healthSystem.health = 0;
+                        enemy.healthSystem.TakeDamage(attack);
+                        enemy.health += enemy.healthSystem.health;
+                        Console.SetCursorPosition(0, Map.cameraHeight + 5);
+                        Console.WriteLine("You hit " + enemy.name + ", their health: " + enemy.health);
+                        Console.WriteLine(attack);
+                        //UI.UpdateHUD(ey);
+                    }
                 }
             }
-        }*/
+        }
+
 
 
     }

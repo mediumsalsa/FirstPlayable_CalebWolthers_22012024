@@ -12,9 +12,9 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public static Map map;
         public static Player player;
-
+        public static EnemyManager enemyManager;
         public static bool gameOver;
-        public static ConsoleKeyInfo input;
+
 
 
         public void Play()
@@ -22,15 +22,17 @@ namespace FirstPlayable_CalebWolthers_22012024
             //Init
             player = new Player();
             map = new Map(player);
+            enemyManager = new EnemyManager(player, map);
             gameOver = false;
-
-            player.SetMap(map);
-
+            player.SetStuff(map, enemyManager);
             player.SetPlayer();
-
             map.StartMap();
-
             map.DisplayMap();
+
+            //EnemyGoblin goblin = new EnemyGoblin(map, player);
+
+            enemyManager.PlaceGoblins(5);
+
 
             while (gameOver == false)
             {
@@ -38,11 +40,12 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                 //Update
                 player.Update(input);
-
+                enemyManager.UpdateEnemies();
 
                 //Draw
                 player.Draw();
-
+                enemyManager.DrawEnemies();
+                map.DisplayMap();
             }
         }
 
@@ -51,7 +54,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             input = Console.ReadKey(true);
         }
 
-
+        private ConsoleKeyInfo input;
     }
 
 }

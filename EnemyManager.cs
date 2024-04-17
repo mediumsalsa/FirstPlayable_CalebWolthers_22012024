@@ -3,12 +3,73 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-/*
+
 namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class EnemyManager
     {
 
+        private Player player;
+        private Map map;
+        public List<Enemy> enemies;
+        public HealthSystem healthSystem;
+
+        public EnemyManager(Player player, Map map)
+        {
+            this.player = player;
+            this.map = map;
+            this.healthSystem = healthSystem;
+            enemies = new List<Enemy>();
+            
+        }
+
+
+        public void PlaceGoblins(int goblinNum)
+        {
+            Random random = new Random();
+
+            for (int i = 0; i < goblinNum; i++)
+            {
+                while (true)
+                {
+                    int x = random.Next(8, map.width - 70);
+                    int y = random.Next(16, map.height - 2);
+
+                    if (map.map[y, x] == '`')
+                    {
+                        EnemyGoblin goblin = new EnemyGoblin(map, player);
+                        goblin.posX = x;
+                        goblin.posY = y;
+                        goblin.health = 150;
+                        map.map[y, x] = goblin.Char;
+                        enemies.Add(goblin);
+                        break;
+                    }
+                }
+            }
+        }
+
+
+        public void UpdateEnemies()
+        {
+            foreach (Enemy enemy in enemies) 
+            {
+                enemy.Update();
+            }
+        }
+
+        public void DrawEnemies()
+        {
+            foreach(Enemy enemy in enemies) 
+            {
+                enemy.Draw();
+            }
+        }
+
+
+    }
+}
+/*
         //Enemy Holding zone
         static int numberOfGoblins = 5;
         static EnemyGoblin[] goblins = new EnemyGoblin[numberOfGoblins];

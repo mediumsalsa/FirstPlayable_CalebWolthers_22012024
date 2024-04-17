@@ -12,17 +12,12 @@ namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class Map
     {
-
         static string[] mapFile;
-
         public char[,] map;
-
-        public int cameraWidth = 100;
-        public static int cameraHeight = 100;
-
+        public int cameraWidth = 40;
+        public static int cameraHeight = 14;
         public int width;
         public int height;
-
         private Player player;
         
         public Map(Player player)
@@ -50,7 +45,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             MakeMap();
 
-            map[player.playerPosX, player.playerPosY] = player.playerChar;
+            map[player.posX, player.posY] = player.playerChar;
 
             Console.SetCursorPosition(0, 0);
             Console.Clear();
@@ -74,8 +69,8 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             Console.CursorVisible = false;
 
-            int startX = Math.Max(0, width / 2 - cameraWidth / 2);
-            int startY = Math.Max(0, height / 2 - cameraHeight / 2);
+            int startX = Math.Max(0, player.posX - cameraWidth / 2);
+            int startY = Math.Max(0, player.posY - cameraHeight / 2);
 
             ConsoleColor[,] colors = new ConsoleColor[cameraHeight, cameraWidth];
             char[,] tempMap = new char[cameraHeight, cameraWidth];
