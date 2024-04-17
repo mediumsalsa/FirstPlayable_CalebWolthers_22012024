@@ -26,8 +26,11 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public override void DoYourJob()
         {
-            player.healthSystem.Heal(healAmount);
-            delete = true;
+            if (delete == false)
+            {
+                player.healthSystem.Heal(healAmount);
+                delete = true;
+            }
         }
 
         public override void Update()
@@ -35,10 +38,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             if (delete == true)
             {
                 map.map[posY, posX] = '`';
-                posY = 0;
-                posX = 0;
-                Char = '#';
-                map.DisplayMap();
+                Char = '`';
             }
         }
 
@@ -46,7 +46,6 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             map.map[posY, posX] = Char;
         }
-
 
     }
 }

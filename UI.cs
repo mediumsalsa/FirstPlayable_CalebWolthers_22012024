@@ -127,8 +127,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine("");
             Console.WriteLine(breaker);
             Console.WriteLine("Player Stats:");           
-            Console.WriteLine("");                                              
-            Console.WriteLine("Shield: " + player.shield);                      
+            Console.WriteLine("");                                                          
             Console.WriteLine("Health: " + player.healthSystem.health);                      
             Console.WriteLine("Health Status: " + healthStatus);
             Console.WriteLine("Attack Power: " + player.attack);

@@ -13,7 +13,6 @@ namespace FirstPlayable_CalebWolthers_22012024
         public char playerChar;
         public int moves;
         public int health;
-        public int shield;
         public int attack;
         public int posX;
         public int posY;
@@ -23,19 +22,20 @@ namespace FirstPlayable_CalebWolthers_22012024
         public int lastPosY;
         private Map map;
         private EnemyManager enemyManager;
+        private ItemManager itemManager;
         public HealthSystem healthSystem;
         private UI ui;
 
 
-        public void SetStuff(Map map, EnemyManager enemyManager, UI ui)
+        public void SetStuff(Map map, EnemyManager enemyManager, UI ui, ItemManager itemManager)
         {
             this.map = map;
             this.enemyManager = enemyManager;
+            this.itemManager = itemManager;
             this.ui = ui;
             health = 100;
             healthSystem = new HealthSystem(health);
             moves = 0;
-            shield = 0;
             attack = 100;
             playerChar = 'P';
             posX = 4;
@@ -121,6 +121,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 }
 
                 CheckForEnemies();
+                CheckForItems();
 
             }
         }
@@ -140,6 +141,17 @@ namespace FirstPlayable_CalebWolthers_22012024
                         Console.SetCursorPosition(0, map.cameraHeight + 22);
                         ui.UpdateHUD(enemy);
                     }
+                }
+            }
+        }
+
+        public void CheckForItems()
+        {
+            foreach (var item in itemManager.items)
+            {
+                if ((posY == item.posY && nextPosX == item.posX) || (nextPosY == item.posY && posX == item.posX))
+                {
+                    item.DoYourJob();
                 }
             }
         }

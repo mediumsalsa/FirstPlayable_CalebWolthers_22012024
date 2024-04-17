@@ -3,11 +3,61 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-/*
+
 namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class ItemInvincible : Item
     {
+
+        private Player player;
+        private Map map;
+        private int effectTime;
+
+        public ItemInvincible(Map map, Player player) : base(map, player)
+        {
+            this.map = map;
+            this.player = player;
+            name = "Invincibility";
+            Char = '!';
+            delete = false;
+            effectTime = 4000;
+        }
+
+
+        public async override void DoYourJob()
+        {
+            if (delete == false)
+            {
+                delete = true;
+                if (player.healthSystem.health < 98999999)
+                {
+                    int originalHealth = player.healthSystem.health;
+                    player.healthSystem.health = 99999999;
+                    //UI.lastItem = "Invincibility";
+                    await Task.Delay(effectTime);
+                    player.healthSystem.health = originalHealth;
+                }
+            }
+        }
+
+        public override void Update()
+        {
+            if (delete == true)
+            {
+                map.map[posY, posX] = '`';
+                Char = '`';
+            }
+        }
+
+        public override void Draw()
+        {
+            map.map[posY, posX] = Char;
+        }
+
+    }
+}
+
+        /*
         public static int originalShield = Player.shield;
 
         public static new char itemChar = Settings.invincibilityChar;

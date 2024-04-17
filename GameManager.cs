@@ -13,6 +13,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static Map map;
         public static Player player;
         public static EnemyManager enemyManager;
+        public static ItemManager itemManager;
         public static UI ui;
         public static bool gameOver;
 
@@ -24,16 +25,20 @@ namespace FirstPlayable_CalebWolthers_22012024
             player = new Player();
             map = new Map(player);
             enemyManager = new EnemyManager(player, map);
+            itemManager = new ItemManager(player, map);
             gameOver = false;
             map.StartMap();
             ui = new UI(player, map, enemyManager);
             ui.LoadStartingScreen();
-            player.SetStuff(map, enemyManager, ui);
+            player.SetStuff(map, enemyManager, ui, itemManager);
             map.DisplayMap();
 
             enemyManager.PlaceGoblins(5);
             enemyManager.PlaceOrcs(25);
             enemyManager.PlaceMinotaurs(5);
+
+            itemManager.PlaceHealthPotions(25);
+            itemManager.PlaceInvincibility(10);
 
 
             while (gameOver == false)
@@ -46,12 +51,15 @@ namespace FirstPlayable_CalebWolthers_22012024
                 GetInput();
 
                 //Update
+                itemManager.UpdateItems();
                 player.Update(input);
                 enemyManager.UpdateEnemies();
 
+
                 //Draw
-                player.Draw();
                 enemyManager.DrawEnemies();
+                player.Draw();
+                itemManager.DrawItems();
                 map.DisplayMap();
                 ui.Draw();
             }

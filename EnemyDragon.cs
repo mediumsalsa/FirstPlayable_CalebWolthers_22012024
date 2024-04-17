@@ -137,9 +137,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             }
             health = 0;
             map.map[posY, posX] = '`';
-            posY = 0;
-            posX = 0;
-            Char = '#';
+            Char = '`';
             map.DisplayMap();
             isDead = true;
             //enemyCount--;
