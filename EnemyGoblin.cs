@@ -13,8 +13,6 @@ namespace FirstPlayable_CalebWolthers_22012024
         private int nextPosY;
         private int lastPosX;
         private int lastPosY;
-        private static int goblinCount = 0; 
-        private int goblinNumber;
         private Player player;
         private Map map;
         public HealthSystem healthSystem;
@@ -25,16 +23,11 @@ namespace FirstPlayable_CalebWolthers_22012024
             this.player = player;
             maxHealth = 150;
             health = maxHealth;
-            goblinCount++; 
-            goblinNumber = goblinCount;
-            name = "Goblin" + goblinNumber;
+            name = "Goblin";
             Char = 'G';
             damage = 20;
             dir = "down";
-            minX = 8;
-            maxX = map.width - 70;
-            minY = 16;
-            maxY = map.height - 2;
+            isDead = false;
             healthSystem = new HealthSystem(health);
         }
 
@@ -78,6 +71,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                     //Colides with player 
                     if (nextPosX == player.posX && nextPosY == player.posY)
                     {
+                        player.healthSystem.TakeDamage(damage);
                         nextPosY = lastPosY;
                         nextPosX = lastPosX;
                     }
@@ -102,13 +96,17 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public void Die()
         {
+            if (isDead = false)
+            {
+                player.attack += damage;
+            }
             health = 0;
             map.map[posY, posX] = '`';
             posY = 0;
             posX = 0;
             Char = '#';
             map.DisplayMap();
-            player.attack += damage;
+            isDead = true;
             //enemyCount--;
         }
 

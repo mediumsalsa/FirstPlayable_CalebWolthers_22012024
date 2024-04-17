@@ -69,24 +69,24 @@ namespace FirstPlayable_CalebWolthers_22012024
         }
 
         
-        public void ShowHUD()
+        public void Draw()
         {
-            if (player.health >= 100)
+            if (player.healthSystem.health >= 100)
             { healthStatus = "Perfect Health"; }
 
-            else if (player.health < 99 && player.health >= 90)
+            else if (player.healthSystem.health < 99 && player.healthSystem.health >= 90)
             { healthStatus = "Healthy"; }
 
-            else if (player.health < 89 && player.health >= 75)
+            else if (player.healthSystem.health < 89 && player.healthSystem.health >= 75)
             { healthStatus = "Hurt"; }
 
-            else if (player.health < 74 && player.health >= 50)
+            else if (player.healthSystem.health < 74 && player.healthSystem.health >= 50)
             { healthStatus = "Badly Hurt"; }
 
-            else if (player.health < 49 && player.health >= 20)
+            else if (player.healthSystem.health < 49 && player.healthSystem.health >= 20)
             { healthStatus = "Danger"; }
 
-            else if (player.health < 19 && player.health > 0)
+            else if (player.healthSystem.health < 19 && player.healthSystem.health > 0)
             { healthStatus = "ALMOST DEAD"; }
 
             else { healthStatus = "Dead"; }
@@ -122,8 +122,6 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine("                                                                                 ");
             Console.SetCursorPosition(0, map.cameraHeight + 2);
 
-            ShowEnemyHUD(enemy);
-
             //Player Stats
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("");
@@ -131,12 +129,14 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine("Player Stats:");           
             Console.WriteLine("");                                              
             Console.WriteLine("Shield: " + player.shield);                      
-            Console.WriteLine("Health: " + player.health);                      
+            Console.WriteLine("Health: " + player.healthSystem.health);                      
             Console.WriteLine("Health Status: " + healthStatus);
             Console.WriteLine("Attack Power: " + player.attack);
             Console.WriteLine("last Item Aquired: " + lastItem);
             Console.WriteLine(breaker);
             Console.WriteLine("");
+
+            ShowEnemyHUD(enemy);
 
             //Controls 
             Console.ForegroundColor = ConsoleColor.Red;

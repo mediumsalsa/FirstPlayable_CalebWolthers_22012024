@@ -32,11 +32,11 @@ namespace FirstPlayable_CalebWolthers_22012024
             this.map = map;
             this.enemyManager = enemyManager;
             this.ui = ui;
+            health = 100;
             healthSystem = new HealthSystem(health);
             moves = 0;
-            health = 100;
             shield = 0;
-            attack = 50;
+            attack = 100;
             playerChar = 'P';
             posX = 4;
             posY = 20;

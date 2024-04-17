@@ -31,13 +31,17 @@ namespace FirstPlayable_CalebWolthers_22012024
             player.SetStuff(map, enemyManager, ui);
             map.DisplayMap();
 
-            //EnemyGoblin goblin = new EnemyGoblin(map, player);
-
             enemyManager.PlaceGoblins(5);
+            enemyManager.PlaceOrcs(25);
 
 
             while (gameOver == false)
             {
+                if (player.healthSystem.health <= 0)
+                {
+                    gameOver = true;
+                }
+
                 GetInput();
 
                 //Update
@@ -48,8 +52,14 @@ namespace FirstPlayable_CalebWolthers_22012024
                 player.Draw();
                 enemyManager.DrawEnemies();
                 map.DisplayMap();
-                ui.ShowHUD();
+                ui.Draw();
             }
+            if (gameOver == true)
+            {
+                Console.Clear();
+                Console.WriteLine("Game Over, try again");
+            }
+
         }
 
         public void GetInput()

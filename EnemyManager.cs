@@ -40,9 +40,31 @@ namespace FirstPlayable_CalebWolthers_22012024
                         EnemyGoblin goblin = new EnemyGoblin(map, player);
                         goblin.posX = x;
                         goblin.posY = y;
-                        goblin.health = 150;
                         map.map[y, x] = goblin.Char;
                         enemies.Add(goblin);
+                        break;
+                    }
+                }
+            }
+        }
+        public void PlaceOrcs(int orcNum)
+        {
+            Random random = new Random();
+
+            for (int i = 0; i < orcNum; i++)
+            {
+                while (true)
+                {
+                    int x = random.Next(60, map.width - 2);
+                    int y = random.Next(10, map.height - 2);
+
+                    if (map.map[y, x] == '`')
+                    {
+                        EnemyOrc orc = new EnemyOrc(map, player);
+                        orc.posX = x;
+                        orc.posY = y;
+                        map.map[y, x] = orc.Char;
+                        enemies.Add(orc);
                         break;
                     }
                 }

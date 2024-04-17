@@ -20,12 +20,9 @@ namespace FirstPlayable_CalebWolthers_22012024
         public int damage;
         public string dir;
         public string name;
-        public int minX;
-        public int maxX;
-        public int minY;
-        public int maxY;
         public int posX;
         public int posY;
+        protected bool isDead;
         public static int enemyCount;
         private Map map;
         private Player player;
