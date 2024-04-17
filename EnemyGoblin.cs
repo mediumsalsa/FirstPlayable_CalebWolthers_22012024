@@ -23,7 +23,8 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             this.map = map;
             this.player = player;
-            health = 150;
+            maxHealth = 150;
+            health = maxHealth;
             goblinCount++; 
             goblinNumber = goblinCount;
             name = "Goblin" + goblinNumber;
@@ -108,9 +109,6 @@ namespace FirstPlayable_CalebWolthers_22012024
             Char = '#';
             map.DisplayMap();
             player.attack += damage;
-
-            Console.SetCursorPosition(0, Map.cameraHeight + 6);
-            Console.WriteLine("Goblin dead ");
             //enemyCount--;
         }
 

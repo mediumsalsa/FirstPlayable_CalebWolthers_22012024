@@ -3,24 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-/*
+
 namespace FirstPlayable_CalebWolthers_22012024
 {
     internal class UI
     {
 
-        public static string breaker = "------------------------";
+        private Player player;
+        private Map map;
+        private EnemyManager enemyManager;
+        public string breaker = "------------------------";
+        public string healthStatus;
+        public string lastItem;
+        public Enemy enemy; 
 
-        public static string healthStatus;
+        public UI(Player player, Map map, EnemyManager enemyManager)
+        {
+            this.player = player;
+            this.map = map;
+            this.enemyManager = enemyManager;
+        }
 
-        public static string lastItem;
 
-        public static Enemy ey; 
-
-
-
-
-        public static void LoadStartingScreen()
+        public void LoadStartingScreen()
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("{================================================================}");
@@ -63,43 +68,31 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.Clear();
         }
 
-
-        public static void StartHUD()
-        { 
-            ey = new Enemy();
-        }
-
-
-        public static void UpdateHUD(Enemy enemy)
+        
+        public void ShowHUD()
         {
-            ey = enemy;
-        }
-
-
-        public static void ShowHUD()
-        {
-            if (Player.health >= 100)
+            if (player.health >= 100)
             { healthStatus = "Perfect Health"; }
 
-            else if (Player.health < 99 && Player.health >= 90)
+            else if (player.health < 99 && player.health >= 90)
             { healthStatus = "Healthy"; }
 
-            else if (Player.health < 89 && Player.health >= 75)
+            else if (player.health < 89 && player.health >= 75)
             { healthStatus = "Hurt"; }
 
-            else if (Player.health < 74 && Player.health >= 50)
+            else if (player.health < 74 && player.health >= 50)
             { healthStatus = "Badly Hurt"; }
 
-            else if (Player.health < 49 && Player.health >= 20)
+            else if (player.health < 49 && player.health >= 20)
             { healthStatus = "Danger"; }
 
-            else if (Player.health < 19 && Player.health > 0)
+            else if (player.health < 19 && player.health > 0)
             { healthStatus = "ALMOST DEAD"; }
 
             else { healthStatus = "Dead"; }
 
 
-            Console.SetCursorPosition(0, Map.cameraHeight + 2);
+            Console.SetCursorPosition(0, map.cameraHeight + 2);
             Console.WriteLine("                                                                                 ");
             Console.WriteLine("                                                                                 ");
             Console.WriteLine("                                                                                 ");
@@ -127,8 +120,9 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine("                                                                                 ");
             Console.WriteLine("                                                                                 ");
             Console.WriteLine("                                                                                 ");
-            Console.SetCursorPosition(0, Map.cameraHeight + 2);
+            Console.SetCursorPosition(0, map.cameraHeight + 2);
 
+            ShowEnemyHUD(enemy);
 
             //Player Stats
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -136,19 +130,18 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.WriteLine(breaker);
             Console.WriteLine("Player Stats:");           
             Console.WriteLine("");                                              
-            Console.WriteLine("Shield: " + Player.shield);                      
-            Console.WriteLine("Health: " + Player.health);                      
+            Console.WriteLine("Shield: " + player.shield);                      
+            Console.WriteLine("Health: " + player.health);                      
             Console.WriteLine("Health Status: " + healthStatus);
-            Console.WriteLine("Attack Power: " + Player.playerAttack);
+            Console.WriteLine("Attack Power: " + player.attack);
             Console.WriteLine("last Item Aquired: " + lastItem);
             Console.WriteLine(breaker);
             Console.WriteLine("");
-            ShowEnemyHUD(ey);
 
             //Controls 
             Console.ForegroundColor = ConsoleColor.Red;
             int controlsStartPosY = 0;
-            int controlsStartPosX = Map.cameraWidth + 5;
+            int controlsStartPosX = map.cameraWidth + 5;
             Console.SetCursorPosition(controlsStartPosX, controlsStartPosY);
             Console.WriteLine(breaker);
             Console.SetCursorPosition(controlsStartPosX, controlsStartPosY + 1);
@@ -170,14 +163,14 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             //Legend
             Console.ForegroundColor = ConsoleColor.White;
-            int legendStartPosY = Map.cameraHeight + 3;
+            int legendStartPosY = map.cameraHeight + 3;
             int legendStartPosX = controlsStartPosX;
             Console.SetCursorPosition(legendStartPosX, legendStartPosY);
             Console.WriteLine(breaker);
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 1);
             Console.WriteLine("Legend:");
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 2);
-            Console.WriteLine(Player.playerChar + " - Player");
+            Console.WriteLine(player.playerChar + " - Player");
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 3);
             Console.WriteLine("^ - Mountains");
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 4);
@@ -185,11 +178,11 @@ namespace FirstPlayable_CalebWolthers_22012024
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 5);
             Console.WriteLine("~ - Water");
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 6);
-            Console.WriteLine(ItemHealth.itemChar + " - Health Potion");
+            //Console.WriteLine(ItemHealth.itemChar + " - Health Potion");
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 7);
-            Console.WriteLine(ItemInvincible.itemChar + " - Invincibility");
+            //Console.WriteLine(ItemInvincible.itemChar + " - Invincibility");
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 8);
-            Console.WriteLine(ItemShield.itemChar + " - Shield");
+            //Console.WriteLine(ItemShield.itemChar + " - Shield");
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 9);
             Console.WriteLine("G - Goblin");
             Console.SetCursorPosition(legendStartPosX, legendStartPosY + 10);
@@ -204,25 +197,32 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             Console.CursorVisible = !true;
         }
-
-        public static void ShowEnemyHUD(Enemy enemy)
+        public void ShowEnemyHUD(Enemy ey)
         {
 
-            if (enemy != null)
+            if (ey != null)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine(breaker);
                 Console.WriteLine("Number of Enemies: " + Enemy.enemyCount);
                 Console.WriteLine("");
-                Console.WriteLine("Last enemy encountered: " + enemy.enemyName);
-                Console.WriteLine("Health: " + enemy.enemyHealth + "/" + enemy.maxHealth);
-                Console.WriteLine("Attack power: " + enemy.enemyDamage);
+                Console.WriteLine("Last enemy encountered: " + ey.name);
+                Console.WriteLine("Health: " + ey.health + "/" + ey.maxHealth);
+                Console.WriteLine("Attack power: " + ey.damage);
                 Console.WriteLine(breaker);
                 Console.WriteLine("");
 
             }
         }
 
+
+        public void UpdateHUD(Enemy ey)
+        {
+            enemy = ey;
+        }
+
+
+
+
     }
 }
-*/

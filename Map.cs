@@ -15,7 +15,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         static string[] mapFile;
         public char[,] map;
         public int cameraWidth = 40;
-        public static int cameraHeight = 14;
+        public int cameraHeight = 14;
         public int width;
         public int height;
         private Player player;

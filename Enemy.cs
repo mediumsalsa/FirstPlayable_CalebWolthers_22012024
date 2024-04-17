@@ -16,9 +16,9 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public char Char;
         public int health;
-        protected int maxHealth;
-        protected int damage;
-        protected string dir;
+        public int maxHealth;
+        public int damage;
+        public string dir;
         public string name;
         public int minX;
         public int maxX;

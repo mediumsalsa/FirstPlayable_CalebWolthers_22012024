@@ -24,23 +24,22 @@ namespace FirstPlayable_CalebWolthers_22012024
         private Map map;
         private EnemyManager enemyManager;
         public HealthSystem healthSystem;
+        private UI ui;
 
-        public void SetPlayer()
+
+        public void SetStuff(Map map, EnemyManager enemyManager, UI ui)
         {
+            this.map = map;
+            this.enemyManager = enemyManager;
+            this.ui = ui;
+            healthSystem = new HealthSystem(health);
             moves = 0;
             health = 100;
             shield = 0;
             attack = 50;
             playerChar = 'P';
             posX = 4;
-            posY = 20;  
-        }
-
-        public void SetStuff(Map map, EnemyManager enemyManager)
-        {
-            this.map = map;
-            this.enemyManager = enemyManager;
-            healthSystem = new HealthSystem(health);
+            posY = 20;
         }
 
 
@@ -138,10 +137,8 @@ namespace FirstPlayable_CalebWolthers_22012024
                         enemy.healthSystem.health = 0;
                         enemy.healthSystem.TakeDamage(attack);
                         enemy.health += enemy.healthSystem.health;
-                        Console.SetCursorPosition(0, Map.cameraHeight + 5);
-                        Console.WriteLine("You hit " + enemy.name + ", their health: " + enemy.health);
-                        Console.WriteLine(attack);
-                        //UI.UpdateHUD(ey);
+                        Console.SetCursorPosition(0, map.cameraHeight + 22);
+                        ui.UpdateHUD(enemy);
                     }
                 }
             }
