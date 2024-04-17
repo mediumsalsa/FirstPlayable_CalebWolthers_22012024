@@ -54,10 +54,10 @@
     <Compile Include="GameManager.cs" />
     <Compile Include="HealthSystem.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="ItemFreeze.cs" />
     <Compile Include="ItemHealth.cs" />
     <Compile Include="ItemInvincible.cs" />
     <Compile Include="ItemManager.cs" />
-    <Compile Include="ItemShield.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />

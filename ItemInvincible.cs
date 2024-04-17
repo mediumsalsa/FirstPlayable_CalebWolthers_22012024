@@ -11,12 +11,14 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         private Player player;
         private Map map;
+        private UI ui;
         private int effectTime;
 
-        public ItemInvincible(Map map, Player player) : base(map, player)
+        public ItemInvincible(Map map, Player player, UI ui) : base(map, player, ui)
         {
             this.map = map;
             this.player = player;
+            this.ui = ui;
             name = "Invincibility";
             Char = '!';
             delete = false;
@@ -31,6 +33,7 @@ namespace FirstPlayable_CalebWolthers_22012024
                 delete = true;
                 if (player.healthSystem.health < 98999999)
                 {
+                    ui.lastItem = name;
                     int originalHealth = player.healthSystem.health;
                     player.healthSystem.health = 99999999;
                     //UI.lastItem = "Invincibility";

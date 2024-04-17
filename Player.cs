@@ -20,6 +20,7 @@ namespace FirstPlayable_CalebWolthers_22012024
         public int nextPosY;
         public int lastPosX;
         public int lastPosY;
+        public bool freezeEnemies;
         private Map map;
         private EnemyManager enemyManager;
         private ItemManager itemManager;
@@ -40,6 +41,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             playerChar = 'P';
             posX = 4;
             posY = 20;
+            freezeEnemies = false;
         }
 
 

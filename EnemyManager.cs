@@ -18,7 +18,6 @@ namespace FirstPlayable_CalebWolthers_22012024
             this.player = player;
             this.map = map;
             enemies = new List<Enemy>();
-            
         }
 
 
@@ -121,9 +120,12 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public void UpdateEnemies()
         {
-            foreach (Enemy enemy in enemies) 
+            if (player.freezeEnemies == false)
             {
-                enemy.Update();
+                foreach (Enemy enemy in enemies)
+                {
+                    enemy.Update();
+                }
             }
         }
 

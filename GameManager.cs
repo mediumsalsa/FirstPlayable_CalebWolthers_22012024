@@ -17,19 +17,17 @@ namespace FirstPlayable_CalebWolthers_22012024
         public static UI ui;
         public static bool gameOver;
 
-
-
         public void Play()
         {
             //Init
             player = new Player();
             map = new Map(player);
             enemyManager = new EnemyManager(player, map);
-            itemManager = new ItemManager(player, map);
             gameOver = false;
             map.StartMap();
             ui = new UI(player, map, enemyManager);
             ui.LoadStartingScreen();
+            itemManager = new ItemManager(player, map, ui);
             player.SetStuff(map, enemyManager, ui, itemManager);
             map.DisplayMap();
 
@@ -39,6 +37,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
             itemManager.PlaceHealthPotions(25);
             itemManager.PlaceInvincibility(10);
+            itemManager.PlaceFreeze(10);
 
 
             while (gameOver == false)

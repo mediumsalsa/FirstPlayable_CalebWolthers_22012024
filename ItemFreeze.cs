@@ -3,36 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace FirstPlayable_CalebWolthers_22012024
 {
-    internal class ItemHealth : Item
+    internal class ItemFreeze : Item
     {
 
         private Player player;
         private Map map;
         private UI ui;
-        private int healAmount;
+        private int effectTime;
 
-        public ItemHealth(Map map, Player player, UI ui) : base(map, player, ui)
+        public ItemFreeze(Map map, Player player, UI ui) : base(map, player, ui)
         {
             this.map = map;
             this.player = player;
             this.ui = ui;
-            name = "Health Potion";
-            Char = '@';
-            healAmount = 30;
+            name = "Freeze";
+            Char = '*';
             delete = false;
+            effectTime = 4000;
         }
 
 
-        public override void DoYourJob()
+        public async override void DoYourJob()
         {
             if (delete == false)
             {
                 ui.lastItem = name;
-                player.healthSystem.Heal(healAmount);
                 delete = true;
+                player.freezeEnemies = true;
+                //UI.lastItem = "Invincibility";
+                await Task.Delay(effectTime);
+                player.freezeEnemies = false;
             }
         }
 

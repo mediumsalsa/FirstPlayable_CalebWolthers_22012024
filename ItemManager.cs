@@ -11,12 +11,14 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         private Player player;
         private Map map;
+        private UI ui;
         public List<Item> items;
 
-        public ItemManager(Player player, Map map)
+        public ItemManager(Player player, Map map, UI ui)
         {
             this.player = player;
             this.map = map;
+            this.ui = ui;
             items = new List<Item>();
         }
 
@@ -34,7 +36,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                     if (map.map[y, x] == '`')
                     {
-                        ItemHealth healthPotion = new ItemHealth(map, player);
+                        ItemHealth healthPotion = new ItemHealth(map, player, ui);
                         healthPotion.posX = x;
                         healthPotion.posY = y;
                         map.map[y, x] = healthPotion.Char;
@@ -58,11 +60,35 @@ namespace FirstPlayable_CalebWolthers_22012024
 
                     if (map.map[y, x] == '`')
                     {
-                        ItemInvincible invincible = new ItemInvincible(map, player);
+                        ItemInvincible invincible = new ItemInvincible(map, player, ui);
                         invincible.posX = x;
                         invincible.posY = y;
                         map.map[y, x] = invincible.Char;
                         items.Add(invincible);
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void PlaceFreeze(int num)
+        {
+            Random random = new Random();
+
+            for (int i = 0; i < num; i++)
+            {
+                while (true)
+                {
+                    int x = random.Next(2, map.width - 2);
+                    int y = random.Next(2, map.height - 2);
+
+                    if (map.map[y, x] == '`')
+                    {
+                        ItemFreeze freeze = new ItemFreeze(map, player, ui);
+                        freeze.posX = x;
+                        freeze.posY = y;
+                        map.map[y, x] = freeze.Char;
+                        items.Add(freeze);
                         break;
                     }
                 }
