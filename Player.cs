@@ -34,13 +34,13 @@ namespace FirstPlayable_CalebWolthers_22012024
             this.enemyManager = enemyManager;
             this.itemManager = itemManager;
             this.ui = ui;
-            health = 100;
+            health = Settings.playerHealth;
             healthSystem = new HealthSystem(health);
             moves = 0;
-            attack = 100;
-            playerChar = 'P';
-            posX = 4;
-            posY = 20;
+            attack = Settings.playerAttack;
+            playerChar = Settings.playerChar;
+            posX = Settings.playerStartPosX;
+            posY = Settings.playerStartPosY;
             freezeEnemies = false;
         }
 

@@ -21,11 +21,11 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             this.map = map;
             this.player = player;
-            maxHealth = 400;
+            maxHealth = Settings.minotaurHealth;
             health = maxHealth;
-            name = "Minotaur";
-            Char = 'M';
-            damage = 50;
+            name = Settings.minotaurName;
+            Char = Settings.minotaurChar;
+            damage = Settings.minotaurDamage;
             dir = "down";
             isDead = false;
             healthSystem = new HealthSystem(health);

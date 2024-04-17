@@ -19,10 +19,10 @@ namespace FirstPlayable_CalebWolthers_22012024
             this.map = map;
             this.player = player;
             this.ui = ui;
-            name = "Invincibility";
-            Char = '!';
+            name = Settings.invincibilityName;
+            Char = Settings.invincibilityChar;
             delete = false;
-            effectTime = 4000;
+            effectTime = Settings.invincibilityEffectTime;
         }
 
 

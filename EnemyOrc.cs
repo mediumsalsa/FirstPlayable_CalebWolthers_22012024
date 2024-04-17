@@ -21,11 +21,11 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             this.map = map;
             this.player = player;
-            maxHealth = 200;
+            maxHealth = Settings.orcHealth;
             health = maxHealth;
-            name = "Orc";
-            Char = 'O';
-            damage = 40;
+            name = Settings.orcName;
+            Char = Settings.orcChar;
+            damage = Settings.orcDamage;
             dir = "down";
             isDead = false;
             healthSystem = new HealthSystem(health);

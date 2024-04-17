@@ -21,11 +21,11 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             this.map = map;
             this.player = player;
-            maxHealth = 150;
+            maxHealth = Settings.goblinHealth;
             health = maxHealth;
-            name = "Goblin";
-            Char = 'G';
-            damage = 20;
+            name = Settings.goblinName;
+            Char = Settings.goblinChar;
+            damage = Settings.goblinDamage;
             dir = "down";
             isDead = false;
             healthSystem = new HealthSystem(health);

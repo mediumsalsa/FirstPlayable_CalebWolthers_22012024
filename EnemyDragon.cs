@@ -21,11 +21,11 @@ namespace FirstPlayable_CalebWolthers_22012024
         {
             this.map = map;
             this.player = player;
-            maxHealth = 10000;
+            maxHealth = Settings.dragonHealth;
             health = maxHealth;
-            name = "Dragon";
-            Char = 'D';
-            damage = 100;
+            name = Settings.dragonName;
+            Char = Settings.dragonChar;
+            damage = Settings.dragonDamage;
             dir = "down";
             isDead = false;
             healthSystem = new HealthSystem(health);

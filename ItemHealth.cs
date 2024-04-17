@@ -19,9 +19,9 @@ namespace FirstPlayable_CalebWolthers_22012024
             this.map = map;
             this.player = player;
             this.ui = ui;
-            name = "Health Potion";
-            Char = '@';
-            healAmount = 30;
+            name = Settings.healthPotionName;
+            Char = Settings.healthPotionChar;
+            healAmount = Settings.healthPotionHealAmount;
             delete = false;
         }
 

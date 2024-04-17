@@ -20,10 +20,10 @@ namespace FirstPlayable_CalebWolthers_22012024
             this.map = map;
             this.player = player;
             this.ui = ui;
-            name = "Freeze";
-            Char = '*';
+            name = Settings.freezeName;
+            Char = Settings.freezeChar;
             delete = false;
-            effectTime = 4000;
+            effectTime = Settings.freezeEffectTime;
         }
 
 
