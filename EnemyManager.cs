@@ -101,8 +101,8 @@ namespace FirstPlayable_CalebWolthers_22012024
             {
                 while (true)
                 {
-                    int x = random.Next(2, map.width - 30);
-                    int y = random.Next(2, map.height - 13);
+                    int x = random.Next(80, map.width - 2);
+                    int y = random.Next(2, map.height - 2);
 
                     if (map.map[y, x] == '`')
                     {

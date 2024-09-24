@@ -96,7 +96,7 @@ namespace FirstPlayable_CalebWolthers_22012024
 
         public void Die()
         {
-            if (isDead = false)
+            if (isDead == false)
             {
                 player.attack += damage;
             }

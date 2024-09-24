@@ -34,6 +34,7 @@ namespace FirstPlayable_CalebWolthers_22012024
             enemyManager.PlaceGoblins(5);
             enemyManager.PlaceOrcs(25);
             enemyManager.PlaceMinotaurs(5);
+            enemyManager.PlaceDragons(1);
 
             itemManager.PlaceHealthPotions(25);
             itemManager.PlaceInvincibility(10);
@@ -56,9 +57,9 @@ namespace FirstPlayable_CalebWolthers_22012024
 
 
                 //Draw
+                itemManager.DrawItems();
                 enemyManager.DrawEnemies();
                 player.Draw();
-                itemManager.DrawItems();
                 map.DisplayMap();
                 ui.Draw();
             }
